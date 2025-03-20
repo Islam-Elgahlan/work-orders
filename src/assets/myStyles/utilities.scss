@@ -1,0 +1,37 @@
+
+.sec-color{
+    color: #EF9B28;
+  }
+.auth-card {
+    background-color: #005b85;
+    padding: 2rem 1rem;
+    border-radius: 16px;
+  
+    .title {
+      padding: 10px 0px;
+  
+      span {
+        color: white;
+        font-size: 16px;
+      }
+  
+      h3 {
+        color: #ef9b28;
+        position: relative;
+  
+        &::after {
+          content: "";
+          width: 20px;
+          height: 5px;
+          background-color: #ef9b28;
+          position: absolute;
+          left: 0px;
+          bottom: -5px;
+          z-index: 33;
+        }
+      }
+    }
+  }
+  a{
+    text-decoration: none;
+}  

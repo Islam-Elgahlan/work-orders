@@ -1,0 +1,142 @@
+<section class="register">
+    <div class="container my-4">
+
+        <div class="row">
+            <div class="col-md-10 mx-auto">
+                <div class="p-4 auth-card">
+
+                    <form [formGroup]="editProfileForm" (ngSubmit)="onEdit(editProfileForm)">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="title mb-2">
+                                    <span>Welcome To Work Order System</span>
+                                    <h3 class="fs-3">Create new Account </h3>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <!-- User_Name -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100"
+                                    [hideRequiredMarker]="hideRequiredMarker">
+                                    <mat-label>User Name</mat-label>
+                                    <input formControlName="user_name" matInput placeholder="Enter User Name" />
+                                    <mat-error *ngIf="editProfileForm.controls.user_name.hasError('required')">
+                                        User Name required
+                                    </mat-error>
+                                    <mat-error *ngIf="editProfileForm.controls.user_name.hasError('pattern')">
+                                        The User name must contain characters and end with numbers without spaces
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!-- Mail -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100"
+                                    [hideRequiredMarker]="hideRequiredMarker">
+                                    <mat-label>Email</mat-label>
+                                    <input formControlName="email" matInput placeholder="Enter Your E-mail" />
+                                    <mat-error *ngIf="editProfileForm.controls.email.hasError('pattern')">
+                                        ex:test@abc.dc
+                                    </mat-error>
+                                    <mat-error *ngIf="editProfileForm.controls.email.hasError('required')">
+                                        Email required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!--  name -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100"
+                                    [hideRequiredMarker]="hideRequiredMarker">
+                                    <mat-label> Name</mat-label>
+                                    <input formControlName="name" matInput placeholder="Enter Your Name" />
+                                    <mat-error *ngIf="editProfileForm.controls.name.hasError('required')">
+                                        Name required
+                                    </mat-error>
+                                    <mat-error *ngIf="editProfileForm.controls.name.hasError('pattern')">
+                                        Name must contain characters and end with numbers without spaces
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!-- Password -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100"
+                                    [hideRequiredMarker]="hideRequiredMarker">
+                                    <mat-label>Password</mat-label>
+                                    <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" />
+                                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
+                                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                        <mat-icon>{{
+                                            hide ? "visibility_off" : "visibility"
+                                            }}</mat-icon>
+                                    </button>
+                                    <mat-error *ngIf="editProfileForm.controls.password.hasError('required')">
+                                        Password required
+                                    </mat-error>
+                                    <mat-error *ngIf="editProfileForm.controls.password.hasError('pattern')">
+                                        A password must contains at least eight characters, including at least one
+                                        number and includes both lower and uppercase letters and special characters
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!-- ConfirmPassword -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100"
+                                    [hideRequiredMarker]="hideRequiredMarker">
+                                    <mat-label>Confirm Password</mat-label>
+                                    <input formControlName="password_confirmation" matInput
+                                        [type]="confirmHide ? 'password' : 'text'" />
+                                    <button type="button" mat-icon-button matSuffix (click)="confirmHide = !confirmHide"
+                                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                        <mat-icon>{{
+                                            confirmHide ? "visibility_off" : "visibility"
+                                            }}</mat-icon>
+                                    </button>
+                                    <mat-error *ngIf="editProfileForm.controls.password_confirmation.hasError('required')">
+                                        Confirmed Password required
+                                    </mat-error>
+                                    <mat-error *ngIf="editProfileForm.controls.password_confirmation.hasError('pattern')">
+                                        A password must contains at least eight characters, including at least one
+                                        number and includes both lower and uppercase letters and special characters
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="editProfileForm.controls.password_confirmation.hasError('confirmedValidator')">
+                                        Password not Matched
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!-- Mobile Number -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100"
+                                    [hideRequiredMarker]="hideRequiredMarker">
+                                    <mat-label>Phone Number</mat-label>
+                                    <input formControlName="phoneNumber" matInput placeholder="Enter Phone Number" />
+                                    <mat-error *ngIf="editProfileForm.controls.phoneNumber.hasError('required')">
+                                        Phone required
+                                    </mat-error>
+                                    <mat-error *ngIf="editProfileForm.controls.phoneNumber.hasError('minlength')">
+                                        Phone Number must be at least 11 numbers
+                                    </mat-error>
+                                    <mat-error *ngIf="editProfileForm.controls.phoneNumber.hasError('maxlength')">
+                                        Phone Number must be at most 13 numbers
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end my-3 text-white pt-2">
+
+
+                            <a routerLink="/auth/login" class="text-decoration-none text-white ">LogIn Now?</a>
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <button class="primary text-center w-100"
+                                [disabled]="editProfileForm.invalid">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

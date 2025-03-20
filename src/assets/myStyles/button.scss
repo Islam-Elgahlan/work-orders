@@ -1,0 +1,35 @@
+button {
+    font-size: 18px;
+    border: none;
+    padding: 0.5rem 1rem;
+  
+    &.primary {
+      border-radius: 96px;
+      color: white;
+      // width: 484px;
+      // height: 56px;
+      background-color: #ef9b28;
+      margin-top: 5px;
+  
+      &:hover {
+        opacity: 0.9;
+      }
+    } &.outline-secondary{
+      border-radius: 96px;
+      color: #0e382f;
+      border: 1px solid grey;
+      background-color: #fff;
+      margin-top: 5px;
+  
+      &:hover {
+        opacity: 0.9;
+        background-color: #0e382f;
+        color: #fff;
+      }
+    }
+  
+    &:disabled {
+      background-color: #ef9c28ca;
+    }
+  }
+  

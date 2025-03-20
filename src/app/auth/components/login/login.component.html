@@ -1,0 +1,62 @@
+<section class="login">
+    <div class="container">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="auth-card">
+                        <div class="title mb-2">
+                            <span>Welcome To Work Order System</span>
+                            <h3 class="fs-3 mt-2">Login</h3>
+                        </div>
+                        <mat-form-field appearance="fill" class="w-100" [hideRequiredMarker]="hideRequiredMarker">
+                            <mat-label>E-mail</mat-label>
+                            <input formControlName="email" matInput placeholder="Enter Your E-mail" />
+                        </mat-form-field>
+                        <div class="mb-1">
+                            <mat-error
+                                *ngIf="loginForm.controls.email.touched&&loginForm.controls.email.hasError('required')">
+                                Email required
+                            </mat-error>
+                            <mat-error
+                                *ngIf="loginForm.controls.email.touched&&loginForm.controls.email.hasError('pattern')">
+                                ex: abc@cde.ab
+                            </mat-error>
+                        </div>
+
+
+                        <mat-form-field appearance="fill" class="w-100" [hideRequiredMarker]="hideRequiredMarker">
+                            <mat-label>Password</mat-label>
+                            <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" />
+                            <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
+                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{
+                                    hide ? "visibility_off" : "visibility"
+                                    }}</mat-icon>
+                            </button>
+                        </mat-form-field>
+                        <div class="mb-1">
+                            <mat-error
+                                *ngIf="loginForm.controls.password.touched&&loginForm.controls.password.hasError('required')">
+                                Password required
+                            </mat-error>
+                            <mat-error
+                                *ngIf="loginForm.controls.password.touched&&loginForm.controls.password.hasError('pattern')">
+                                A password must contains at least eight characters, including at least one number and
+                                includes both
+                                lower and uppercase letters and special characters
+                            </mat-error>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center my-3 text-white">
+                            <a routerLink="/auth/register" class="text-white text-decoration-none">Register Now?</a>
+              
+                            <a routerLink="/auth/forget-password" class="text-decoration-none text-white">Forget Password?</a>
+                          </div>
+                        <div class="text-center">
+                            <button class="primary text-center w-100">Login</button>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

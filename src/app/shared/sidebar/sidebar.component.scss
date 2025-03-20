@@ -1,0 +1,58 @@
+section {
+    background-color: #005b85;
+    color: white;
+    height: 100%;
+    min-height: 90vh;
+    // height: 90vh;
+
+    a {
+        display: block;
+
+    }
+
+    button {
+        transition: all 1s;
+    }
+
+    .content {
+
+        &-li {
+            color: white;
+            font-size: 1.2rem;
+            padding: 6px 0 6px 1rem;
+            margin: 1rem 0;
+
+            span {
+                margin-left: 10px;
+                text-transform: capitalize;
+                transition: all .5s;
+            }
+
+        }
+    }
+
+    .toggle-btn {
+        background-color: #ef9b28;
+        border-radius: 8px 0 0px 8px;
+        padding: 10px 5px;
+        position: absolute;
+        right: 0;
+
+    }
+
+    .reverse-btn {
+        background-color: #ef9b28;
+        border-radius: 8px 0 0px 8px;
+        padding: 10px 5px;
+        transform: scale(-1.1);
+        z-index: 5555;
+        position: absolute;
+        left: 100%
+    }
+}
+
+.active {
+    background-color: rgba(239, 155, 40, .3);
+    border-radius: 8px;
+
+}
