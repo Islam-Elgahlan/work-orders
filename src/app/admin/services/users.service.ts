@@ -18,6 +18,6 @@ export class UsersService {
     return this._HttpClient.get(`profile/get_user_by_id/${id}`);
   }
   onBlockOrUnblockUser(id: number): Observable<any> {
-    return this._HttpClient.put(`Users/${id}`,{})
+    return this._HttpClient.put(`auth/change_status/${id}`,{})
   }
 }

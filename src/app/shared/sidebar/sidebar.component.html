@@ -1,10 +1,14 @@
 <section class="overflow-auto ">
-    <div class=" py-4">
+    <div class=" py-4 ">
         <button  (click)="toggleSidebar()" [ngClass]="isOpened?'toggle-btn':'reverse-btn'">
             <i class="fa-solid fa-angle-left"></i>
         </button>
     </div>
-       <div  [ngClass]="isOpened?'text-start':'text-center'">
+    <div  [ngClass]="{
+        'text-start':isOpened && _HelperService.translate.currentLang =='en',
+        'text-end':isOpened && _HelperService.translate.currentLang =='ar',
+        'text-center':!isOpened 
+       }">
         <ng-container *ngFor="let item of menu">
             <a [routerLink]="item.link"  routerLinkActive="active"  class="mt-2">
                 <div class="content">

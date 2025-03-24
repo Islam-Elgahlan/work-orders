@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { HelperService } from 'src/app/services/helper.service';
 
 
 interface Imenu{
-  title:string,
+  title:any,
   icon:string,
   link:string
 }
@@ -13,6 +15,7 @@ interface Imenu{
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
+  constructor(public translate: TranslateService , public _HelperService:HelperService){}
   @Output() isOpenedflag = new EventEmitter<boolean>();
   isOpened:boolean=true;
 
@@ -23,36 +26,36 @@ export class SidebarComponent {
   }
 
 
-  menu:Imenu[]=[
+  menu:any[]=[
     { icon:'fa-solid fa-house fs-4',
-    title:'home',
+    title:this.translate.instant('sidebar.home'),
     link:'/dashboard/admin/home',
     // isActive: this.isManager()
   },
     { icon:'fa-solid fa-house fs-4',
-    title:'home',
+    title:this.translate.instant('sidebar.home'),
     link:'/dashboard/employee/home',
     // isActive: this.isEmployee()
   },
     { icon:'fa-solid fa-layer-group fs-4',
-    title:'Work Orders',
+    title:this.translate.instant('sidebar.workOrders'),
     link:'/dashboard/admin/work-orders',
     // isActive:this.isManager()
   },
   
     { icon:'fa-solid fa-users fs-4',
-    title:'users',
+    title:this.translate.instant('sidebar.users'),
     link:'/dashboard/admin/users',
     // isActive:this.isManager()
   },
   { icon:'fa-solid fa-users fs-4',
-    title:'Department',
+    title:this.translate.instant('sidebar.departments'),
     link:'/dashboard/admin/departments',
     // isActive:this.isManager()
   },
    
     { icon:'fa-solid fa-layer-group fs-4',
-    title:'My Work Orders',
+    title:this.translate.instant('sidebar.myorders'),
     link:'/dashboard/employee/projects',
     // isActive:this.isEmployee()
   },

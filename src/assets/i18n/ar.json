@@ -1,0 +1,44 @@
+{
+    "spinner":"نظام إدارة أوامر العمل",
+    "home": {
+        "hellow": "مرحبا ",
+        "pannerWelcome" : "يمكنك إضافة أوامر عمل هنا ",
+        "workOrders": "أوامر العمل",
+        "ActivatedUsers": "المستخدمين المفعلين",
+        "DeactivatedUsers": "المستخدمين المعلقين",
+        "totalWorkOrders":"أجمالي أوامر العمل",
+        "totalDepartments":"أجمالي الأقسام",
+        "Progress":"العمليات"
+
+        
+    },
+    "sidebar" : {
+        "home" : "الرئيسية",
+        "users" : "إدارة المستخدمين",
+        "workOrders":"أوامر العمل",
+        "departments": "الأقسام",
+        "myorders" : "أوامر العمل خاصتي"
+    },
+    "users": {
+        "users": "المستخدمين",
+        "user" : "الأسم",
+        "mobile":"جوال",
+        "status": "الحالة",
+        "email": "البريد",
+        "actions": "تحكم",
+        "view": "معاينة",
+        "block": "حظر",
+        "unBlock": "إلغاء الحظر",
+        "active" : "فعال",
+        "notActive" : "غير فعال",
+        "block_unblock": "حظر | إلغاء الحظر",
+        "blockmsg":"هل بالتأكيد ترغب في "
+    },
+    "cancel" : "أغلاق",
+    "logOut" : "تسجيل خروج",
+    "logOutmsg" : " هل تريد تسجيل الخروج؟ ",
+    "profile" :"الملف الشخصي",
+    "changePass": "تغيير الرقم السري"
+
+
+}

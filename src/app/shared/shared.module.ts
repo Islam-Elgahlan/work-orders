@@ -9,8 +9,13 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LogoutComponent } from './navbar/logout/logout.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 @NgModule({
   declarations: [
     NotFoundComponent,
@@ -24,7 +29,8 @@ import { LogoutComponent } from './navbar/logout/logout.component';
     MaterialModule,
     ToastrModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    TranslateModule
 
   ],
   exports:[
@@ -35,7 +41,9 @@ import { LogoutComponent } from './navbar/logout/logout.component';
     ReactiveFormsModule,
     FormsModule,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    TranslateModule
+   
   ]
 })
 export class SharedModule { }

@@ -91,7 +91,7 @@ export class UsersComponent implements OnInit {
 
       },
       error: (err) => {
-        this._ToastrService.error('Can’tBlock this User', 'Error');
+        this._ToastrService.error('Can’t Block this User', 'Error');
       },
       complete: () => {
         this.onGetAllUsers();

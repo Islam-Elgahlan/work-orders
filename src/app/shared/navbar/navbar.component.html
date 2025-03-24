@@ -4,6 +4,16 @@
             <div class="col-md-2">
                 <div class="logo-img">
                     <img src=""alt="">
+                    <div>
+                        <div style="cursor: pointer" *ngIf="_HelperService.translate.currentLang=='ar'" (click)="onChangeLang('en')">
+                            <span class="px-2">English</span>
+                             <img  src="../../../assets/images/en-flag.png"class="lang-img">
+                        </div>
+                        <div style="cursor: pointer" *ngIf="_HelperService.translate.currentLang=='en'" (click)="onChangeLang('ar')" >
+                            <img src="../../../assets/images/ar-flag.png"class="lang-img">
+                            <span class="px-2">العربية</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-10 d-flex justify-content-end">
@@ -15,6 +25,7 @@
                         <h3  class="m-0">{{name}}</h3>
                         <span class="text-muted">{{email}}</span>
                     </div>
+                 
                     <div>
                         <button  (click)="toggleBadgeVisibility()" mat-icon-button>
                             <mat-icon [matBadgeHidden]="hidden" matBadge="7" >notifications</mat-icon>
@@ -28,15 +39,15 @@
 
                             <button routerLink="/dashboard/admin/edit-profile" mat-menu-item>
                               <mat-icon>person</mat-icon>
-                              <span>Profile</span>
+                              <span>{{'profile' | translate}}</span>
                             </button>
                             <button  mat-menu-item>
                               <mat-icon >visibility</mat-icon>
-                              <span>Change Password</span>
+                              <span>{{'changePass' | translate}}</span>
                             </button>
                             <button (click)="logOut()" mat-menu-item>
                               <mat-icon>logout</mat-icon>
-                              <span>Logout</span>
+                              <span>{{'logOut' | translate}}</span>
                             </button>
                           </mat-menu>
                           

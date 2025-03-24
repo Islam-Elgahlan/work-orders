@@ -1,0 +1,40 @@
+{   
+    "spinner":"Work Orders Sys",
+    "home": {
+        "hellow": "hellow ",
+        "pannerWelcome" : "You can add Departments and assign Work Orders Here!",
+        "workOrders": "Work Orders",
+        "ActivatedUsers": "Activated Users",
+        "DeactivatedUsers": "Deactivated Users",
+        "totalWorkOrders":"Total Work Orders",
+        "totalDepartments":"Total Departments",
+        "Progress":"Progress"
+    },
+    "sidebar": {
+        "home": "Home",
+        "users": "Users",
+        "workOrders": "Work Orders",
+        "departments": "Departments",
+        "myorders": "My Work Orders"
+    },
+    "users": {
+        "users": "Users",
+        "user": "name",
+        "mobile": "mobile",
+        "status": "Status",
+        "email": "Mail",
+        "actions": "Actions",
+        "view": "View",
+        "block": "Block",
+        "unBlock": "Un Block",
+        "active": "Active",
+        "notActive": "Not Active",
+        "block_unblock": "Block | Unblock User",
+        "blockmsg":" Are you sure you want to"
+    },
+    "cancel" : "Cancel",
+    "logOut" : "Logout",
+    "logOutmsg" : " Are you sure you want to logout?",
+    "profile" :"Profile",
+    "changePass": "Change Password"
+}

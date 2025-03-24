@@ -6,10 +6,15 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { GlobalInterceptor } from './interceptors/global.interceptor';
 import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 @NgModule({
   declarations: [
     AppComponent
@@ -20,10 +25,19 @@ import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
     BrowserAnimationsModule,
     HttpClientModule,
 
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    }),
+
     ToastrModule.forRoot({
-      closeButton	: true ,
+      closeButton: true,
       timeOut: 2000
     }),
+
     NgxSpinnerModule,
   ],
   providers: [
@@ -37,7 +51,7 @@ import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
       useClass: SpinnerInterceptor,
       multi: true,
     },
-  
+
   ],
   bootstrap: [AppComponent]
 })

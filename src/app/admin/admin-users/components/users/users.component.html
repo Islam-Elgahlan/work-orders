@@ -3,16 +3,16 @@
  
     <div class="table-card container py-5">
       <div class="page-header shadow-lg">
-        <h1>Users</h1>
+        <h1>{{'users.users' | translate}}</h1>
       </div>
      
       <table class="custom-table">
         <thead class="text-capitalize">
-          <th class="px-2 alone">User</th>
-          <th class="alone">Status</th>
-          <th class="alone">PhoneNumber</th>
-          <th class="alone">Email</th>
-          <th class="alone">Actions</th>
+          <th class="px-2 alone">{{'users.user' | translate}}</th>
+          <th class="alone">{{'users.status' | translate}}</th>
+          <th class="alone">{{'users.mobile' | translate}}</th>
+          <th class="alone">{{'users.email' | translate}}</th>
+          <th class="alone">{{'users.actions' | translate}}</th>
         </thead>
         <tbody>
           <tr
@@ -24,7 +24,7 @@
               <span
                 class="status"
                 [class]="item.is_active ? 'active' : 'notActive'"
-                >{{ item.is_active ? "Active" : "Not Active" }}</span
+                >{{ item.is_active==1 ? ('users.active' | translate) : ('users.notActive'| translate) }}</span
               >
             </td>
             <td>{{ item.phoneNumber }}</td>
@@ -38,14 +38,14 @@
                 <mat-icon>more_vert</mat-icon>
               </button> 
                <mat-menu #menu="matMenu">
-                <button  mat-menu-item>
+                <button  mat-menu-item (click)="openBlockDialog(item)">
                   <mat-icon>block</mat-icon>
-                  <span>{{ item.is_active ==1 ? "Block" : "Unblock" }} </span>
+                  <span>{{ item.is_active ==1 ? ('users.block' | translate) : ('users.unBlock' | translate) }} </span>
                 </button>
   
                 <button [routerLink]="['viewUser', item.id]" mat-menu-item>
                   <mat-icon>visibility</mat-icon>
-                  <span>View</span>
+                  <span>{{'users.view' | translate}}</span>
                 </button>
               </mat-menu>
             </td>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { UsersService } from '../../services/users.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,7 @@ export class HomeComponent implements OnInit {
   page = 1;
   
 
-  constructor(private _UsersService:UsersService){}
+  constructor(private _UsersService:UsersService , public translate: TranslateService){}
 
   ngOnInit(): void{
     this.getAllUsers();
@@ -26,7 +27,7 @@ export class HomeComponent implements OnInit {
     this.chart = new Chart('canvas', {
       type: 'doughnut',
       data: {
-        labels: ['Total Departments', 'Work Orders', 'Users'],
+        labels: [this.translate.instant('home.totalDepartments'), this.translate.instant('home.totalWorkOrders'), this.translate.instant('users.users')],
         datasets: [
           {
             label: 'Number',

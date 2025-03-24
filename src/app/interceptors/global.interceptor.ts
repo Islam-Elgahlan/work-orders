@@ -25,7 +25,8 @@ export class GlobalInterceptor implements HttpInterceptor {
     }
 
     let x=request.clone({
-      setHeaders:newRequest,url:baseUrl+request.url
+      setHeaders:newRequest,
+      url:request.url.includes('assets') ? request.url : baseUrl+request.url
     })
     return next.handle(x);
   }
