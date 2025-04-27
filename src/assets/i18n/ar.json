@@ -21,10 +21,8 @@
     },
     "users": {
         "users": "المستخدمين",
-        "user" : "الأسم",
-        "mobile":"جوال",
+        
         "status": "الحالة",
-        "email": "البريد",
         "actions": "تحكم",
         "view": "معاينة",
         "block": "حظر",
@@ -32,13 +30,82 @@
         "active" : "فعال",
         "notActive" : "غير فعال",
         "block_unblock": "حظر | إلغاء الحظر",
-        "blockmsg":"هل بالتأكيد ترغب في "
+        "blockmsg":"هل بالتأكيد ترغب في ",
+        "createnew": "إنشاء مستخدم جديد",
+        "editUser": "تعديل بيانات المستخدم",
+        "viewUser" : "تفاصيل المستخدم",
+        "user" : "الأسم",
+        "mobile":"جوال",
+        "mobile_place":"ادخل رقم الجوال",
+        "email": "البريد",
+        "username":"أسم المستخدم",
+        "password": "الرقم السري",
+        "confirmPass": "تأكيد الرقم السري",
+        "title": "الوظيفة",
+        "AccType": "نوع الحساب",
+        "username_pattern":" أسم المستخدم لابد أن يحتوي على ألاقام وحروف وبدون مسافات",
+        "username_place": "ادخل أسم المستخدم",
+        "email_pattern": "ex:test@abc.dc",
+        "email_place":"ادخل البريد",
+        "user_place":"ادخل الأسم",
+        "password_pattern":"الرقم السري لا يمكن أن يقل عن ثلاثة أحرف أو أرقام",
+        "match":"الرقم السري غير متطابق  "
+
+
+
+
+
+
+
     },
     "cancel" : "أغلاق",
     "logOut" : "تسجيل خروج",
     "logOutmsg" : " هل تريد تسجيل الخروج؟ ",
     "profile" :"الملف الشخصي",
-    "changePass": "تغيير الرقم السري"
+    "changePass": "تغيير الرقم السري",
+    "save":"حفظ",
+    "delete": "حذف",
+    "edit" : "تعديل",
+    "addnew":"إضافة جديد",
+    "required": "مطلوب",
+    "welcome": "مرحبا بك في نظام إدارة أوامر العمل",
+
+
+    "login":{
+        "login": "تسجيل دخول",
+        "register": "تسجيل جديد",
+        "email":"البريد الإلكتروني",
+        "password":"الرقم السري",
+        "forget":"نسيت كلمة السر ",
+        "welcome": "مرحبا بك في نظام إدارة أوامر العمل"
+        
+    },
+    "orders":{
+        "orders":"أوامر العمل",
+        "id": "رقم مسلسل",
+        "date": "تاريخ الإنشاء",
+        "building":"المبنى",
+        "department":"القسم",
+        "workType":"النوع ",
+        "floor": "الدور",
+        "room":"الغرفة",
+        "requestername": "مقدم الطلب",
+        "mobile": "رقم الهاتف",
+        "equipment" : "معده",
+        "source" : "المصدر",
+        "description":"الوصف",
+        "actions": "تحكم",
+        "view": "عرض",
+        "delete" : "حذف",
+        "details" :"تفاصيل أمر العمل",
+        "addOrder":"إضافة أمر عمل جديد",
+        "editOrder": "تعديل أمر عمل",
+        "engineer" : "المهندس",
+        "technician" : "الفني"
+
+
+
+    }
 
 
 }

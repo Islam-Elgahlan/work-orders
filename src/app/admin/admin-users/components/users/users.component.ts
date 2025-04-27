@@ -38,6 +38,7 @@ export class UsersComponent implements OnInit {
   pageSize: number | undefined = 5 ;
   page :number | undefined = 1;
   pageIndex: number = 0;
+  user_id : number = 0
   
   onGetAllUsers() {
     let params = {
@@ -70,16 +71,19 @@ export class UsersComponent implements OnInit {
     const dialogRef = this.dialog.open(BlockUsersComponent, {
       data: item,
     });
+   
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed', result);
+      // result = this.user_id
       if (result) {
-        this.onBlockUser(result);
+        this.onBlockUser({user_id:result});
       }
     });
   }
 
-  onBlockUser(id: number) {
+  onBlockUser(id: any) {
+    // let params = {user_id:id}
     this._UsersService.onBlockOrUnblockUser(id).subscribe({
       next: (res) => {
         this._ToastrService.success(

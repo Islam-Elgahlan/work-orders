@@ -1,0 +1,159 @@
+<section class="register">
+    <div class="container my-4">
+
+        <div class="row">
+            <div class="col-md-11 mx-auto">
+                <div class="p-4 ">
+
+                    <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="title mb-2">
+                                    <span>{{'welcome'|translate}}</span>
+                                    <h3 class="fs-3">{{ isUpdatePage ? ('users.editUser' | translate) : ('users.createnew' |
+                                        translate) }} </h3>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <!-- User_Name -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100"
+                                    [hideRequiredMarker]="hideRequiredMarker">
+                                    <mat-label>{{'users.username' | translate}}</mat-label>
+                                    <input formControlName="user_name" matInput placeholder="{{'users.username_place'|translate}}" />
+                                    <mat-error *ngIf="userForm.controls.user_name.hasError('required')">
+                                    {{'users.username' | translate}} {{'required' | translate}}
+                                    </mat-error>
+                                    <mat-error *ngIf="userForm.controls.user_name.hasError('pattern')">
+                                        {{'users.username_pattern' | translate}}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!-- Mail -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100"
+                                    [hideRequiredMarker]="hideRequiredMarker">
+                                    <mat-label>{{'users.email' | translate}}</mat-label>
+                                    <input formControlName="email" matInput placeholder=" {{'users.email_place' | translate}}" />
+                                    <mat-error *ngIf="userForm.controls.email.hasError('pattern')">
+                                        {{'users.email_pattern' | translate}}
+                                    </mat-error>
+                                    <mat-error *ngIf="userForm.controls.email.hasError('required')">
+                                        {{'users.email' | translate}} {{'required' | translate}}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!--  name -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100"
+                                    [hideRequiredMarker]="hideRequiredMarker">
+                                    <mat-label> {{'users.user' | translate}}</mat-label>
+                                    <input formControlName="name" matInput placeholder="{{'users.user_place' | translate}}" />
+                                    <mat-error *ngIf="userForm.controls.name.hasError('required')">
+                                        {{'users.user' | translate}} {{'required' | translate}}
+                                    </mat-error>
+                                    <mat-error *ngIf="userForm.controls.name.hasError('pattern')">
+                                        Name must contain characters and end with numbers without spaces
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!-- Title -->
+                            <div class="col-md-6">
+                                <mat-form-field class="w-100" [hideRequiredMarker]="hideRequiredMarker">
+                                    <mat-label >{{'users.title' | translate}}</mat-label>
+                                    <mat-select formControlName = "title_id" >
+                                        <mat-option *ngFor="let item of titles" [value]="item.id">
+                                            {{item.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <!-- Password -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100"
+                                    [hideRequiredMarker]="hideRequiredMarker">
+                                    <mat-label>{{'users.password' | translate}}</mat-label>
+                                    <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" />
+                                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
+                                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                        <mat-icon>{{
+                                            hide ? "visibility_off" : "visibility"
+                                            }}</mat-icon>
+                                    </button>
+                                    <mat-error *ngIf="userForm.controls.password.hasError('required')">
+                                        {{'users.password' | translate}} {{'required' | translate}}
+                                    </mat-error>
+                                    <mat-error *ngIf="userForm.controls.password.hasError('pattern')">
+                                        {{'users.password_pattern' | translate}}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!-- ConfirmPassword -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100"
+                                    [hideRequiredMarker]="hideRequiredMarker">
+                                    <mat-label>{{'users.confirmPass' | translate}}</mat-label>
+                                    <input formControlName="password_confirmation" matInput
+                                        [type]="confirmHide ? 'password' : 'text'" />
+                                    <button type="button" mat-icon-button matSuffix (click)="confirmHide = !confirmHide"
+                                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                        <mat-icon>{{
+                                            confirmHide ? "visibility_off" : "visibility"
+                                            }}</mat-icon>
+                                    </button>
+                                    <mat-error *ngIf="userForm.controls.password_confirmation.hasError('required')">
+                                        {{'users.confirmPass' | translate}} {{'required' | translate}}
+
+                                    </mat-error>
+                                    <mat-error *ngIf="userForm.controls.password_confirmation.hasError('pattern')">
+                                        A password must contains at least eight characters, including at least one
+                                        number and includes both lower and uppercase letters and special characters
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="userForm.controls.password_confirmation.hasError('confirmedValidator')">
+                                        {{'users.match' | translate}}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!-- Mobile Number -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="fill" class="w-100"
+                                    [hideRequiredMarker]="hideRequiredMarker">
+                                    <mat-label>{{'users.mobile' | translate}}</mat-label>
+                                    <input formControlName="mobile" matInput placeholder=" {{'users.mobile_place' | translate}}" />
+                                    <mat-error *ngIf="userForm.controls.mobile.hasError('required')">
+                                        {{'users.mobile' | translate}} {{'required' | translate}}
+                                    </mat-error>
+                                    <mat-error *ngIf="userForm.controls.mobile.hasError('minlength')">
+                                        Phone Number must be at least 11 numbers
+                                    </mat-error>
+                                    <mat-error *ngIf="userForm.controls.mobile.hasError('maxlength')">
+                                        Phone Number must be at most 13 numbers
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!-- Account Type -->
+                            <div class="col-md-6">
+                                <mat-form-field class="w-100" [hideRequiredMarker]="hideRequiredMarker">
+                                    <mat-label > {{'users.AccType' | translate}} </mat-label>
+                                    <mat-select formControlName = "account_type" >
+                                        <mat-option *ngFor="let item of types" [value]="item.value">
+                                            {{item.viewValue}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="text-center mt-3 d-flex justify-content-between">
+                            <button type="button" class="outline-secondary w-25" routerLink="/dashboard/admin/users">{{'cancel'|translate}}</button>
+                            <button class="primary text-center w-25" [disabled]="userForm.invalid">{{'save'|translate}}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

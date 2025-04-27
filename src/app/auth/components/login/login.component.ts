@@ -12,6 +12,9 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+  ngOnInit(){
+    localStorage.setItem('lang' , 'en')
+  }
   hide: boolean = true;
   hideRequiredMarker: boolean = true;
   data:any

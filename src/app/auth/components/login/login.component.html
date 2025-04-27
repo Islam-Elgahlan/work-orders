@@ -5,11 +5,11 @@
                 <div class="col-md-6 mx-auto">
                     <div class="auth-card">
                         <div class="title mb-2">
-                            <span>Welcome To Work Order System</span>
-                            <h3 class="fs-3 mt-2">Login</h3>
+                            <span>{{'login.welcome' |translate}}</span>
+                            <h3 class="fs-3 mt-2">{{'login.login' |translate}}</h3>
                         </div>
                         <mat-form-field appearance="fill" class="w-100" [hideRequiredMarker]="hideRequiredMarker">
-                            <mat-label>E-mail</mat-label>
+                            <mat-label>{{'login.email' |translate}}</mat-label>
                             <input formControlName="email" matInput placeholder="Enter Your E-mail" />
                         </mat-form-field>
                         <div class="mb-1">
@@ -25,7 +25,7 @@
 
 
                         <mat-form-field appearance="fill" class="w-100" [hideRequiredMarker]="hideRequiredMarker">
-                            <mat-label>Password</mat-label>
+                            <mat-label>{{'login.password' |translate}}</mat-label>
                             <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" />
                             <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
                                 [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
@@ -47,12 +47,12 @@
                             </mat-error>
                         </div>
                         <div class="d-flex justify-content-between align-items-center my-3 text-white">
-                            <a routerLink="/auth/register" class="text-white text-decoration-none">Register Now?</a>
+                            <a routerLink="/auth/register" class="text-white text-decoration-none"> {{'login.register' |translate}}</a>
               
-                            <a routerLink="/auth/forget-password" class="text-decoration-none text-white">Forget Password?</a>
+                            <a routerLink="/auth/forget-password" class="text-decoration-none text-white">{{'login.forget' |translate}}</a>
                           </div>
                         <div class="text-center">
-                            <button class="primary text-center w-100">Login</button>
+                            <button class="primary text-center w-100">{{'login.login' |translate}}</button>
                           </div>
                     </div>
                 </div>

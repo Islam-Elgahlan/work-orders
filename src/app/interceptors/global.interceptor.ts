@@ -10,23 +10,30 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class GlobalInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  constructor() { }
+  ngOnInit() {
+  }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-    const token=localStorage.getItem('token');
-    const baseUrl: string='http://vonnn.net/workorders/public/api/';
+    const token = localStorage.getItem('token');
+    const language = localStorage.getItem('lang')
+    const baseUrl: string = 'http://vonnn.net/workorders/public/api/';
 
-    let newRequest={};
-    if(token!==null){
-      newRequest= {
-        'Authorization':`Bearer ${token}`
+    let newRequest = {
+      'Authorization': `Bearer `,
+      'Accept-Language': `${language}`
+    };
+    if (token !== null) {
+      newRequest = {
+        'Authorization': `Bearer ${token}`,
+        'Accept-Language': `${language}`
       }
     }
 
-    let x=request.clone({
-      setHeaders:newRequest,
-      url:request.url.includes('assets') ? request.url : baseUrl+request.url
+    let x = request.clone({
+      setHeaders: newRequest,
+      url: request.url.includes('assets') ? request.url : baseUrl + request.url
     })
     return next.handle(x);
   }

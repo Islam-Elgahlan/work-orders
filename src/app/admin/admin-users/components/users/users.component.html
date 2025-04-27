@@ -1,70 +1,58 @@
 <section>
+  <div class="table-card container py-5">
+    <div class="page-header shadow-lg">
+      <h1>{{'users.users' | translate}}</h1>
+      <button routerLink="add-edit-user" class="primary px-3">
+        <span class="fa-solid fa-plus mx-2"></span>
+        <span>{{'addnew'|translate}}</span>
+      </button>
+    </div>
 
- 
-    <div class="table-card container py-5">
-      <div class="page-header shadow-lg">
-        <h1>{{'users.users' | translate}}</h1>
-      </div>
-     
-      <table class="custom-table">
-        <thead class="text-capitalize">
-          <th class="px-2 alone">{{'users.user' | translate}}</th>
-          <th class="alone">{{'users.status' | translate}}</th>
-          <th class="alone">{{'users.mobile' | translate}}</th>
-          <th class="alone">{{'users.email' | translate}}</th>
-          <th class="alone">{{'users.actions' | translate}}</th>
-        </thead>
-        <tbody>
-          <tr
-            *ngFor="let item of tableData; let isEven = even"
-            [class]="isEven ? '' : 'bg-secondary-subtle'"
-          >
-            <td class="px-2">{{ item.name }}</td>
-            <td>
-              <span
-                class="status"
-                [class]="item.is_active ? 'active' : 'notActive'"
-                >{{ item.is_active==1 ? ('users.active' | translate) : ('users.notActive'| translate) }}</span
-              >
-            </td>
-            <td>{{ item.phoneNumber }}</td>
-            <td>{{ item.email }}</td>
-            <td class="text-center">
-              <button
-                mat-icon-button
-                [matMenuTriggerFor]="menu"
-                aria-label="Example icon-button with a menu"
-              >
-                <mat-icon>more_vert</mat-icon>
-              </button> 
-               <mat-menu #menu="matMenu">
-                <button  mat-menu-item (click)="openBlockDialog(item)">
-                  <mat-icon>block</mat-icon>
-                  <span>{{ item.is_active ==1 ? ('users.block' | translate) : ('users.unBlock' | translate) }} </span>
-                </button>
-  
-                <button [routerLink]="['viewUser', item.id]" mat-menu-item>
-                  <mat-icon>visibility</mat-icon>
-                  <span>{{'users.view' | translate}}</span>
-                </button>
-              </mat-menu>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="bg-info">
-      <mat-paginator
-        #paginator
-        class="demo-paginator"
-        (page)="handlePageEvent($event)"
-        [length]="tableResponse?.meta.total"
-        [pageSize]="tableResponse?.pageSize"
-        [pageSizeOptions]="[5, 10, 15, 20, 40, 100]"
-        [pageIndex]="pageIndex"
-        aria-label="Select page"
-      >
-      </mat-paginator>
-    </div>
-  </section>
-  
+    <table class="custom-table">
+      <thead class="text-capitalize">
+        <th class="px-2 alone">{{'users.user' | translate}}</th>
+        <th class="alone">{{'users.status' | translate}}</th>
+        <th class="alone">{{'users.mobile' | translate}}</th>
+        <th class="alone">{{'users.email' | translate}}</th>
+        <th class="alone">{{'users.actions' | translate}}</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of tableData; let isEven = even" [class]="isEven ? '' : 'bg-secondary-subtle'">
+          <td class="px-2">{{ item.name }}</td>
+          <td>
+            <span class="status" [class]="item.is_active ? 'active' : 'notActive'">{{ item.is_active==1 ?
+              ('users.active' | translate) : ('users.notActive'| translate) }}</span>
+          </td>
+          <td>{{ item.mobile }}</td>
+          <td>{{ item.email }}</td>
+          <td class="text-center">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="openBlockDialog(item)">
+                <mat-icon>block</mat-icon>
+                <span>{{ item.is_active ==1 ? ('users.block' | translate) : ('users.unBlock' | translate) }} </span>
+              </button>
+
+              <button [routerLink]="['viewUser', item.id]" mat-menu-item>
+                <mat-icon>visibility</mat-icon>
+                <span>{{'users.view' | translate}}</span>
+              </button>
+              <button [routerLink]="['edit',item.id]" mat-menu-item >
+                <mat-icon>edit_square</mat-icon>
+                <span>{{'edit'|translate}}</span>
+              </button>
+            </mat-menu>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="bg-info">
+    <mat-paginator #paginator class="demo-paginator" (page)="handlePageEvent($event)"
+      [length]="tableResponse?.total" [pageSize]="tableResponse?.pageSize"
+      [pageSizeOptions]="[5, 10, 15, 20, 40, 100]" [pageIndex]="pageIndex" aria-label="Select page">
+    </mat-paginator>
+  </div>
+</section>

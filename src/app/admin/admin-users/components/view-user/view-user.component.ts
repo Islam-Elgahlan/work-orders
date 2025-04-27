@@ -7,6 +7,10 @@ import { UsersService } from 'src/app/admin/services/users.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { HelperService } from 'src/app/services/helper.service';
 
+interface Account_type {
+  value: number;
+  viewValue: string;
+}
 @Component({
   selector: 'app-view-user',
   templateUrl: './view-user.component.html',
@@ -27,8 +31,17 @@ export class ViewUserComponent {
   }
   ngOnInit() {
     this.getCurrentUserById(this.userId)
+    this.getTitles()
   }
+
+  types: Account_type[] = [
+    {value: 0, viewValue: 'Admin'},
+    {value: 1, viewValue: 'Engineer'},
+    {value: 2, viewValue: 'Technician'},
+  ];
     currentUser: any;
+    userType: any;
+    titles:any
     userId:any;
     hide: boolean = true;
     confirmHide: boolean = true;
@@ -36,13 +49,15 @@ export class ViewUserComponent {
     editProfileForm = new FormGroup(
       {
         name: new FormControl(null, [Validators.required,]),
+        title: new FormControl(null, [Validators.required,]),
         // user_name: new FormControl(null, [Validators.required, Validators.pattern(/^[a-zA-z]{3,10}[0-9]{1,5}$/)]),
         email: new FormControl(null, [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
-        phoneNumber: new FormControl(null, [
+        mobile: new FormControl(null, [
           Validators.required,
           Validators.minLength(11),
           Validators.maxLength(13),
         ]),
+        account_type: new FormControl(null),
         // profileImage: new FormControl(null),
         password: new FormControl(null, [
           Validators.required,
@@ -108,14 +123,31 @@ export class ViewUserComponent {
         this._UsersService.getUser(id).subscribe(
           (res) => {
             this.currentUser = res.data
-            console.log(this.currentUser)
+            this.userType = this.currentUser.account_type 
+            this.titles = this.currentUser.title
+            // console.log(this.currentUser)
+            // console.log(this.userType)
+            // console.log(this.titles.id)
+
+
             this.editProfileForm.patchValue({
               name: this.currentUser?.name,
+              title: this.titles.id,
               email: this.currentUser?.email,
+              account_type: this.userType,
               // user_name: this.currentUser?.user_name,
-              phoneNumber: this.currentUser?.phoneNumber,
+              mobile: this.currentUser?.mobile,
               password_confirmation: this.currentUser?.password_confirmation,
             })
+            
           })
+      }
+      getTitles(){
+        this._UsersService.onGetAccountType().subscribe(
+          (res) => {
+            this.titles = res.data
+            console.log(this.titles)
+          }
+        )
       }
 }

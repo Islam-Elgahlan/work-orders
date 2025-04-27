@@ -77,7 +77,7 @@ getAllUsers(){
   }
   this._UsersService.getAllUsers(params).subscribe(
     (res)=>{
-      this.totalusers = res.meta.total
+      this.totalusers = res.total
       console.log(this.totalusers)
     }
   )

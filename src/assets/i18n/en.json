@@ -1,14 +1,14 @@
-{   
-    "spinner":"Work Orders Sys",
+{
+    "spinner": "Work Orders Sys",
     "home": {
         "hellow": "hellow ",
-        "pannerWelcome" : "You can add Departments and assign Work Orders Here!",
+        "pannerWelcome": "You can add Departments and assign Work Orders Here!",
         "workOrders": "Work Orders",
         "ActivatedUsers": "Activated Users",
         "DeactivatedUsers": "Deactivated Users",
-        "totalWorkOrders":"Total Work Orders",
-        "totalDepartments":"Total Departments",
-        "Progress":"Progress"
+        "totalWorkOrders": "Total Work Orders",
+        "totalDepartments": "Total Departments",
+        "Progress": "Progress"
     },
     "sidebar": {
         "home": "Home",
@@ -19,22 +19,79 @@
     },
     "users": {
         "users": "Users",
-        "user": "name",
-        "mobile": "mobile",
         "status": "Status",
-        "email": "Mail",
         "actions": "Actions",
         "view": "View",
         "block": "Block",
         "unBlock": "Un Block",
         "active": "Active",
+        "delete": "Delete",
+        "edit": "Edit",
         "notActive": "Not Active",
         "block_unblock": "Block | Unblock User",
-        "blockmsg":" Are you sure you want to"
+        "blockmsg": " Are you sure you want to",
+        "createnew": "Create new Account",
+        "editUser": "Edit User",
+        "user": "name",
+        "viewUser" : "View User Details",
+        "mobile": "Phone number",
+        "mobile_place":"Enter Mobine number",
+        "email": "E-mail",
+        "username":"User Name",
+        "password": "Password",
+        "confirmPass": "Confirm Password",
+        "title": "Title",
+        "AccType": "Account Type",
+        "username_pattern":" The User name must contain characters and end with numbers without spaces",
+        "username_place": " Enter User Name",
+        "email_pattern": "ex:test@abc.dc",
+        "email_place":"Enter Email",
+        "user_place":"Enter Name",
+        "password_pattern":"A password must contains at least eight characters, including at least one number and includes both lower and uppercase letters and special characters",
+        "match":"Password not Matched "
+
+
+
     },
-    "cancel" : "Cancel",
-    "logOut" : "Logout",
-    "logOutmsg" : " Are you sure you want to logout?",
-    "profile" :"Profile",
-    "changePass": "Change Password"
+    "welcome": "Welcome To Work Orders System",
+    "cancel": "Cancel",
+    "logOut": "Logout",
+    "logOutmsg": " Are you sure you want to logout?",
+    "profile": "Profile",
+    "changePass": "Change Password",
+    "save": "Save",
+    "addnew": "Add new",
+    "required": "required",
+    "login": {
+        "login": "Login",
+        "register": "Register",
+        "email": "E-mail",
+        "password": "Password",
+        "forget": "Forget Password",
+        "welcome": "Welcome To Work Orders System"
+    },
+    "orders": {
+        "orders": "Work Orders",
+        "id": "Work Order no",
+        "date": "Creation Date",
+        "building": "Building",
+        "department":"Department",
+        "workType": "Work Type",
+        "floor": "Floor",
+        "room": "Room",
+        "requestername": "Requester",
+        "mobile": "Phone number",
+        "equipment": "Equipment",
+        "source": "Source",
+        "description": "Description",
+        "actions": "Actions",
+        "view": "View",
+        "delete": "Delete",
+        "details": "Work Order Details",
+        "addOrder":"Add new Work Order",
+        "editOrder": "Edit Order",
+        "engineer" : "Engineer",
+        "technician" : "Technician"
+
+    }
 }

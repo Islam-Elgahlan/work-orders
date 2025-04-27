@@ -34,4 +34,11 @@ export class HelperService {
   getCurrentUser(): Observable<any> {
     return this._HttpClient.get('auth/get_single_user')
   }
+  getEngineers(id:number):Observable<any>{
+    return this._HttpClient.get(`auth/get_engineers/100/${id}`)
+  }
+  getTechnicians(id:number):Observable<any>{
+    return this._HttpClient.get(`auth/get_technicians/100/${id}`)
+  }
+
 }

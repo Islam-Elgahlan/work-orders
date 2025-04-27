@@ -1,0 +1,29 @@
+.custom-table {
+    width: 100%;
+  margin: 0p 5px;
+    thead {
+      font-size: 17px;
+      height: 60px;
+      background-color: #005b85;
+      color: white;
+    }
+  }
+  .status {
+    border-radius: 16px;
+    color: white;
+    padding: 8px 15px;
+   
+  
+    &.notActive {
+      background-color: rgba(239, 155, 40, 0.64);
+    }
+  
+    &.active {
+      background-color: #009247;
+    }
+  }
+  .page-header{
+    button{
+      background-color: #005b85;
+    }
+  }

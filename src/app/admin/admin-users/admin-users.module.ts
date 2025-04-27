@@ -6,13 +6,15 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { UsersComponent } from './components/users/users.component';
 import { ViewUserComponent } from './components/view-user/view-user.component';
 import { BlockUsersComponent } from './components/users/block-users/block-users.component';
+import { AddEditUserComponent } from './components/add-edit-user/add-edit-user.component';
 
 
 @NgModule({
   declarations: [
     UsersComponent,
     ViewUserComponent,
-    BlockUsersComponent
+    BlockUsersComponent,
+    AddEditUserComponent
   ],
   imports: [
     CommonModule,
