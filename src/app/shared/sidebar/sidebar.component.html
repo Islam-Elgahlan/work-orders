@@ -10,7 +10,7 @@
         'text-center':!isOpened 
        }">
         <ng-container *ngFor="let item of menu">
-            <a [routerLink]="item.link"  routerLinkActive="active"  class="mt-2">
+            <a [routerLink]="item.link"  routerLinkActive="active" *ngIf="item.isActive" class="mt-2">
                 <div class="content">
                     <div class="content-li " [ngClass]="isOpened?'ps-3':'ps-0'">
                        

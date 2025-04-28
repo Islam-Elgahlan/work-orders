@@ -51,6 +51,8 @@ export class LoginComponent {
         this._Route.navigate(['/dashboard/admin/home']); 
         localStorage.setItem('name', this.data.name)
         localStorage.setItem('email', this.data.email)
+        localStorage.setItem('title', this.data.title.name)
+
 
 
         this._ToastrService.success(this.ress.message,`hello ${this.data.name}`)
