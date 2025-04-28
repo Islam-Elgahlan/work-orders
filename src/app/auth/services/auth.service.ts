@@ -10,10 +10,10 @@ import { ILogin } from 'src/app/models/auth';
   providedIn: 'root'
 })
 export class AuthService {
-
+  title :string |null = ''
   constructor(private _HttpClient:HttpClient) {
     if(localStorage.getItem('token')!==null){
-      console.log(localStorage.getItem('token'))
+      // console.log(localStorage.getItem('token'))
       this.getProfile()
     }
    }
@@ -25,17 +25,17 @@ export class AuthService {
     // localStorage.setItem('role', decoded.userGroup);
     // localStorage.setItem('name', decoded.name);
     // localStorage.setItem('email', decoded.email);
-    // this.getRole()
+    this.getRole()
    }
 
-  //  getRole() {
-  //   if (
-  //     localStorage.getItem('token') !== null &&
-  //     localStorage.getItem('role')
-  //   ) {
-  //     this.role = localStorage.getItem('role');
-  //   }
-  // }
+   getRole() {
+    if (
+      localStorage.getItem('token') !== null &&
+      localStorage.getItem('title')
+    ) {
+      this.title = localStorage.getItem('title');
+    }
+  }
 
 
   onLogin(data: ILogin): Observable<any> {
