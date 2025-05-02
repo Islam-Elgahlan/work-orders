@@ -1,1 +1,58 @@
-<p>work-orders works!</p>
+<section>
+    <div class=" container py-5">
+      <div class="page-header shadow-lg">
+        <h1>{{'orders.orders' | translate}}</h1>
+        <button routerLink="add-edit-order" class="primary px-3">
+          <span class="fa-solid fa-plus mx-2"></span>
+          <span>{{'addnew'|translate}}</span>
+      </button>
+      </div>
+  
+      <table class="custom-table">
+        <thead class="text-capitalize">
+          <th class="alone">#</th>
+          <th class="alone">{{'orders.workType' | translate}}</th>
+          <th class="alone">{{'orders.building' | translate}}</th>
+          <th class="alone">{{'orders.floor' | translate}}</th>
+          <th class="alone">{{'orders.room' | translate}}</th>
+          <th class="alone">{{'orders.requestername' | translate}}</th>
+          <th class="alone">{{'orders.date' | translate}}</th>
+          <th class="alone">{{'orders.actions' | translate}}</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of tableData; let isEven = even" [class]="isEven ? '' : 'bg-secondary-subtle'">
+            <td class="px-2">{{ item.id }}</td>
+            <td>{{ item.work_type.name }}</td>
+            <td>{{ item.building.name }}</td>
+            <td>{{ item.floor_no }}</td>
+            <td>{{ item.room_no }}</td>
+            <td>{{item.customer_name}}</td>
+        
+            <td>{{ item.start_date | date : "dd-MM-yyyy , hh:mm a" }}</td>
+
+            <td class="text-center">
+              <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button [routerLink]="['view-order', item.id]" mat-menu-item>
+                  <mat-icon>visibility</mat-icon>
+                  <span>{{'users.view' | translate}}</span>
+                </button>
+                <button [routerLink]="['edit-order',item.id]" mat-menu-item >
+                  <mat-icon>edit_square</mat-icon>
+                  <span>{{'edit'|translate}}</span>
+                </button>
+              </mat-menu>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bg-info">
+      <mat-paginator #paginator class="demo-paginator" (page)="handlePageEvent($event)"
+        [length]="tableResponse?.total" [pageSize]="tableResponse?.pageSize"
+        [pageSizeOptions]="[5, 10, 15, 20, 40, 100]" [pageIndex]="pageIndex" aria-label="Select page">
+      </mat-paginator>
+    </div>
+  </section>

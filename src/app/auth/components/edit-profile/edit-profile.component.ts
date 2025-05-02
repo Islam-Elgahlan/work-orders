@@ -4,6 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { HelperService } from 'src/app/services/helper.service';
 import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-profile',
@@ -12,14 +13,21 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EditProfileComponent {
   constructor(
+    private _activateRoute: ActivatedRoute,
     private _AuthService: AuthService,
     private _ToastrService: ToastrService,
     private _HelperService: HelperService,
     private spinner: NgxSpinnerService
-  ) { }
-  ngOnInit() {
-    this.getCurrentUser()
+  ) {
+    this.userId = this._activateRoute.snapshot.paramMap.get('id')
   }
+  ngOnInit() {
+
+    this.getCurrentUser()
+    this.getUserById(this.userId);
+  }
+  userId: any;
+  user:any
   currentUser: any;
   hide: boolean = true;
   confirmHide: boolean = true;
@@ -106,5 +114,12 @@ export class EditProfileComponent {
           password_confirmation: this.currentUser?.password_confirmation,
         })
       })
+  }
+  getUserById(id:number){
+    this._AuthService.getUserById(id).subscribe(
+      (res)=>{
+        this.user = res.data
+      }
+    )
   }
 }

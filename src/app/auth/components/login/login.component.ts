@@ -37,10 +37,13 @@ export class LoginComponent {
     console.log(data.value)
     this._AuthService.onLogin(data.value).subscribe({
       next: (res) => {
-        localStorage.setItem('token', res.data.token)
-
         this.ress=res
         this.data = res.data
+        localStorage.setItem('token', res.data.token)
+        localStorage.setItem('name', this.data.name)
+        localStorage.setItem('email', this.data.email)
+        localStorage.setItem('title', this.data.title.name)
+
       },
       error: (err) => {
         this._ToastrService.error(err.error.message, 'Error!');
@@ -48,10 +51,10 @@ export class LoginComponent {
       },
       complete: () => {
         this._AuthService.getProfile();
-        this._Route.navigate(['/dashboard/admin/home']); 
-        localStorage.setItem('name', this.data.name)
-        localStorage.setItem('email', this.data.email)
-        localStorage.setItem('title', this.data.title.name)
+        this._Route.navigate(['/dashboard']); 
+        // localStorage.setItem('name', this.data.name)
+        // localStorage.setItem('email', this.data.email)
+        // localStorage.setItem('title', this.data.title.name)
 
 
 
