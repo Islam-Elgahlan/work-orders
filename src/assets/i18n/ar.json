@@ -21,7 +21,6 @@
     },
     "users": {
         "users": "المستخدمين",
-        
         "status": "الحالة",
         "actions": "تحكم",
         "view": "معاينة",
@@ -42,6 +41,7 @@
         "password": "الرقم السري",
         "confirmPass": "تأكيد الرقم السري",
         "title": "الوظيفة",
+        "department":"القسم",
         "AccType": "نوع الحساب",
         "username_pattern":" أسم المستخدم لابد أن يحتوي على ألاقام وحروف وبدون مسافات",
         "username_place": "ادخل أسم المستخدم",
@@ -101,7 +101,20 @@
         "addOrder":"إضافة أمر عمل جديد",
         "editOrder": "تعديل أمر عمل",
         "engineer" : "المهندس",
-        "technician" : "الفني"
+        "technician" : "الفني",
+        "update":{
+            "material" : " المواد المستخدمة",
+            "parts" : "قطع الغيار",
+            "name" : "الأسم",
+            "description" : "الوصف",
+            "quantity" : "الكمية"
+        },
+        "status": "الحالة",
+        "tech_report": "التقرير الفني",
+        "holding_reason": "سبب التعليق "
+
+
+
 
 
 

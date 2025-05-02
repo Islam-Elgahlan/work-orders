@@ -11,13 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ViewOrderComponent {
   ngOnInit() {
-    this.getOrderById(this.orderId);
-    this.getworkType()
-    this.getBuilding()
-    this.getEqipment()
-    this.getSource()
-    this.getReport()
-    this.getDepartment()
+   
   }
 
   constructor(
@@ -26,6 +20,13 @@ export class ViewOrderComponent {
     private _LookupsService: LookupsService
   ) {
     this.orderId = this._activateRoute.snapshot.paramMap.get('id')
+    this.getOrderById(this.orderId);
+    this.getworkType()
+    this.getBuilding()
+    this.getEqipment()
+    this.getSource()
+    this.getReport()
+    this.getDepartment()
   }
 
 

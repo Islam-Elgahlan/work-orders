@@ -6,7 +6,7 @@ import { EditProfileComponent } from '../auth/components/edit-profile/edit-profi
 const routes: Routes = [
   {path:'',redirectTo:'home',pathMatch:'full'},
   {path:'home' , component:HomeComponent},
-  {path: 'edit-profile', component: EditProfileComponent },
+  {path:'edit-profile', component: EditProfileComponent },
   {path:'users',loadChildren: () => import('./admin-users/admin-users.module').then(m => m.AdminUsersModule)},
   {path:'departments',loadChildren:() => import('./departments/departments.module').then(m =>m.DepartmentsModule)},
   {path:'work-orders',loadChildren:() => import('./work-orders/work-orders.module').then(m =>m.WorkOrdersModule)}

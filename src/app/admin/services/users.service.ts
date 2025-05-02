@@ -20,11 +20,15 @@ export class UsersService {
   onBlockOrUnblockUser(param: any): Observable<any> {
     return this._HttpClient.post('auth/change_status', {}, { params: param });
   }
+  onEditUser(data:any , id:number ):Observable<any>{
+    return this._HttpClient.put(`profile/update_user_by_id/${id}`, data);
+  }
   // Lookups
   onGetAccountType(): Observable<any> {
     return this._HttpClient.get('work-orders/lookups/titles');
   }
-  onEditUser(data:any ):Observable<any>{
-    return this._HttpClient.post(`profile/update`,data)
+  onGetDepartment(): Observable<any> {
+    return this._HttpClient.get('work-orders/lookups/departments');
   }
+ 
 }

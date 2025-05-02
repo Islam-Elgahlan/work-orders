@@ -27,12 +27,12 @@ export class SidebarComponent {
     private _AuthService: AuthService) { }
 
   ngOnInit() {
-    console.log(this.isEngineer())
+    // console.log(this.isEngineer())
     
     if (this.isAdmin()) {
-      this._Router.navigate(['/dashboard/admin/home'])
+      // this._Router.navigate(['/dashboard/admin/home'])
     } else {
-      this._Router.navigate(['/dashboard/engineer/home'])
+      // this._Router.navigate(['/dashboard/engineer/home'])
     }
   }
 
@@ -43,15 +43,15 @@ export class SidebarComponent {
     this.isOpenedflag.emit(this.isOpened)
   }
   isAdmin(): boolean {
-    if (this._AuthService.title == 'admin') {
-      return this._AuthService.title == 'admin'
+    if (this._AuthService.title == 'Admin') {
+      return this._AuthService.title == 'Admin'
     } else {
       return false
     }
   }
   isEngineer(): boolean {
     if (this._AuthService.title == 'Engineer') {
-      return true
+      return this._AuthService.title == 'Engineer'
     } else {
       return false
     }

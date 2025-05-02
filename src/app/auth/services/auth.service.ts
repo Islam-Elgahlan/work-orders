@@ -21,10 +21,9 @@ export class AuthService {
    getProfile(){
     let encoded: any = localStorage.getItem('token');
     let decoded: any = jwtDecode(encoded);
+    // localStorage.setItem('title', da)
     console.log(decoded.name)
-    // localStorage.setItem('role', decoded.userGroup);
-    // localStorage.setItem('name', decoded.name);
-    // localStorage.setItem('email', decoded.email);
+   
     this.getRole()
    }
 
@@ -47,6 +46,12 @@ export class AuthService {
     return this._HttpClient.post('auth/register' , data)
   }
   onEditProfile(data:any):Observable<any>{
-    return this._HttpClient.post('profile/update' , data)
+    return this._HttpClient.post(`profile/update` , data)
+  }
+  onEditUer(data:any , id:any):Observable<any>{
+    return this._HttpClient.post(`profile/update_user_by_id/${id}` , data)
+  }
+  getUserById(id:number):Observable<any>{
+    return this._HttpClient.get(`profile/get_user_by_id/${id}`)
   }
 }

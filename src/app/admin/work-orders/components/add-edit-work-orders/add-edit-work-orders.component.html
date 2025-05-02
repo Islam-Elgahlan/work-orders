@@ -42,7 +42,7 @@
                             <div class="col-md-4">
                                 <mat-form-field class="w-100" [hideRequiredMarker]="hideRequiredMarker">
                                     <mat-label>{{'orders.engineer' | translate}}</mat-label>
-                                    <mat-select formControlName="engineer">
+                                    <mat-select formControlName="engineer_id">
                                         <mat-option *ngFor="let item of engineers" [value]="item.id">
                                             {{item.name}}
                                         </mat-option>
@@ -53,7 +53,7 @@
                             <div class="col-md-4">
                                 <mat-form-field class="w-100" [hideRequiredMarker]="hideRequiredMarker">
                                     <mat-label>{{'orders.technician' | translate}}</mat-label>
-                                    <mat-select formControlName="technician">
+                                    <mat-select formControlName="technician_id">
                                         <mat-option *ngFor="let item of technicians" [value]="item.id">
                                             {{item.name}}
                                         </mat-option>

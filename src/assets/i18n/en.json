@@ -41,6 +41,7 @@
         "password": "Password",
         "confirmPass": "Confirm Password",
         "title": "Title",
+        "department":"Department",
         "AccType": "Account Type",
         "username_pattern":" The User name must contain characters and end with numbers without spaces",
         "username_place": " Enter User Name",
@@ -91,7 +92,17 @@
         "addOrder":"Add new Work Order",
         "editOrder": "Edit Order",
         "engineer" : "Engineer",
-        "technician" : "Technician"
+        "technician" : "Technician",
+        "update":{
+            "material" : "Material Details",
+            "parts" : "Spare Parts",
+            "name" : "name",
+            "description" : "Description",
+            "quantity" : "Quantity"
+        },
+        "status": "Status",
+        "tech_report": "Technical Report",
+        "holding_reason": "Holding Reason"
 
     }
 }

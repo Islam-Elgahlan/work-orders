@@ -29,5 +29,8 @@ export class LookupsService {
   getDepartmentById(id:number):Observable<any>{
     return this._HttpClient.get(`work-orders/get_department_by_id/${id}`)
   }
+  getStatus():Observable<any>{
+    return this._HttpClient.get('work-orders/lookups/statuses')
+  }
 
 }

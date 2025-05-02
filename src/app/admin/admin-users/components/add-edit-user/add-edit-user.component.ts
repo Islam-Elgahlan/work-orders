@@ -26,6 +26,7 @@ export class AddEditUserComponent {
   ];
   userId: any
   titles: any
+  department:any
   currentUser: any;
   userType: any
   hide: boolean = true;
@@ -54,11 +55,13 @@ export class AddEditUserComponent {
   ngOnInit() {
     this.getCurrentUserById(this.userId)
     this.getTitles()
+    this.getDepartments()
   }
   userForm = new FormGroup(
     {
       name: new FormControl(null, [Validators.required,]),
       title_id: new FormControl(null, [Validators.required,]),
+      department_id: new FormControl(null, [Validators.required,]),
       user_name: new FormControl(null, [Validators.required, Validators.pattern(/^[a-zA-z]{3,10}[0-9]{1,5}$/)]),
       email: new FormControl(null, [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
       mobile: new FormControl(null, [
@@ -114,7 +117,7 @@ export class AddEditUserComponent {
       for (const [key, value] of myMap) {
         myData.append(key, data.value[key]);
       }
-      this._UsersService.onEditUser(data.value).subscribe({
+      this._UsersService.onEditUser(data.value ,this.userId).subscribe({
         next: (res) => {
           console.log(data.value)
           this._ToastrService.success('User Updated Succesfuly');
@@ -123,7 +126,7 @@ export class AddEditUserComponent {
           this._ToastrService.error(err.message, 'Error in Update User');
         },
         complete: () => {
-          this._Router.navigate(['/dashboard/admin/users']);
+          // this._Router.navigate(['/dashboard/admin/users']);
         }
       })
   
@@ -150,7 +153,7 @@ export class AddEditUserComponent {
           );
         },
         complete: () => {
-          this._Router.navigate(['/dashboard/admin/users']);
+          // this._Router.navigate(['/dashboard/admin/users']);
         }
       });
 
@@ -166,10 +169,12 @@ export class AddEditUserComponent {
         this.currentUser = res.data
         this.userType = this.currentUser.account_type
         this.titles = this.currentUser.title
+        this.department = this.currentUser.department
 
         this.userForm.patchValue({
           name: this.currentUser?.name,
-          title_id: this.titles.id,
+          title_id: this.titles?.id,
+          department_id: this.department?.id,
           email: this.currentUser?.email,
           account_type: this.userType,
           user_name: this.currentUser?.user_name,
@@ -186,6 +191,13 @@ export class AddEditUserComponent {
     this._UsersService.onGetAccountType().subscribe(
       (res) => {
         this.titles = res.data
+      }
+    )
+  }
+  getDepartments() {
+    this._UsersService.onGetDepartment().subscribe(
+      (res) => {
+        this.department = res.data
       }
     )
   }
