@@ -132,6 +132,12 @@ export class EditOrderComponent {
     this._WorkOrdersService.getOrder(id).subscribe(
       (res) => {
         this.currentOrder = res.data
+        if(this.currentOrder.status == 4){
+          this.isHold = true;
+      (this.updateOrderForm as FormGroup).addControl('holding_reason',new FormControl(null , [Validators.required]))
+          this.updateOrderForm.patchValue({ holding_reason: this.currentOrder.holding_reason } as any);
+
+        }
         // this.getengineers(this.currentOrder?.department.id)
         // this.gettechnicians(this.currentOrder?.department.id)
 
@@ -156,9 +162,6 @@ export class EditOrderComponent {
           status: this.currentOrder?.status,
           technician_report: this.currentOrder?.technician_report,
           // holding_reason: this.currentOrder?.holding_reason,
-          // used_items_descriptions: this.currentOrder?.engineer?.name,
-         
-
         })
 
       }
@@ -174,12 +177,29 @@ export class EditOrderComponent {
       this.isHold = true;
       (this.updateOrderForm as FormGroup).addControl('holding_reason',new FormControl(null , [Validators.required]))
     }else{
-      this._WorkOrdersService.updateStatus(this.orderId,data.value).subscribe(
-        (res)=>{
-          this._ToastrService.success('Status Updated Succesfuly');
-        }
-      )
+      // this._WorkOrdersService.updateStatus(this.orderId,data.value).subscribe(
+      //   (res)=>{
+      //     this._ToastrService.success('Status Updated Succesfuly');
+      //   }
+      // )
     }
+  }
+  onupdate(data:FormGroup){
+    // console.log(data.value);
+    let myData = new FormData();
+    let myMap = new Map(Object.entries(data.value));
+    for (const [key, value] of myMap) {
+      myData.append(key, data.value[key]);
+    }
+    this._WorkOrdersService.updateOrder(this.orderId,data.value).subscribe(
+      (res)=>{
+          this._ToastrService.success('Order Updated Succesfuly');
+      },
+      (err)=>{
+        this._ToastrService.error(err.message ,'Error in Update')
+      }
+    )
+    
   }
   // start Material 
 
