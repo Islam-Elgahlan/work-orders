@@ -5,6 +5,7 @@ import { WorkOrdersRoutingModule } from './work-orders-routing.module';
 import { EditOrderComponent } from './components/edit-order/edit-order.component';
 import { ViewOrderComponent } from './components/view-order/view-order.component';
 import { WorkOrdersComponent } from './components/work-orders/work-orders.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { WorkOrdersComponent } from './components/work-orders/work-orders.compon
   ],
   imports: [
     CommonModule,
-    WorkOrdersRoutingModule
+    WorkOrdersRoutingModule,
+    SharedModule
   ]
 })
 export class WorkOrdersModule { }

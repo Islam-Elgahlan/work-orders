@@ -4,7 +4,7 @@ import { DepartmentsComponent } from './components/departments/departments.compo
 
 const routes: Routes = [
   {path:'' , component:DepartmentsComponent},
-  {path:'departments' , component:DepartmentsComponent}
+  {path:'departments' , component:DepartmentsComponent},
 ];
 
 @NgModule({

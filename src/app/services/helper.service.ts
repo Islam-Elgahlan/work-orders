@@ -40,5 +40,8 @@ export class HelperService {
   getTechnicians(id:number):Observable<any>{
     return this._HttpClient.get(`auth/get_technicians/100/${id}`)
   }
+  getSupervisor(id:number):Observable<any>{
+    return this._HttpClient.get(`auth/get_technicians/100/${id}`)
+  }
 
 }

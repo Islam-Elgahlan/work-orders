@@ -1,0 +1,120 @@
+#home {
+    background-image: url("../../../../assets/images/home-bg.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 45vh;
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    padding: 0px 1rem !important;
+    margin-top: 1rem;
+  }
+  .chart-card {
+    background-color: white;
+    border-radius: 15px;
+    padding: 1rem;
+    margin: 1rem 0px;
+    .chart-item {
+      border-radius: 15px;
+      background-color: #e5e6f4;
+      padding: 1rem;
+      h2{
+          margin-top: 7px;
+      }
+      .item-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #cfd1ec;
+      }
+    }
+  }
+  
+  .pink{
+      background-color: #F4E5ED !important;
+      .item-icon{
+          background-color: #E7C3D7 !important;
+      }
+  }
+  
+  .yellow{
+      background-color: #F4F4E5 !important;
+      .item-icon{
+          background-color: #E4E4BC !important;
+      }
+  }
+  
+  .Blue{
+      background-color: #C2EEFF !important;
+      .item-icon{
+          background-color: #9DD9F3 !important;
+      }
+  }
+  #home{
+      background-image: url('../../../../assets/images/home-bg.png');
+       background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 45vh;
+      display: flex;
+      align-items: center;
+      border-radius: 15px;
+      padding: 0px 1rem !important;
+      margin-top: 1rem;
+      .home-content{
+          h3{
+              font-size: 30px;
+          }
+          p{
+              font-size: 20px;
+          }
+      }
+  }
+  .chart-card {
+      background-color: white;
+      border-radius: 15px;
+      padding: 1rem;
+      margin: 1rem 0px;
+      .chart-item {
+        border-radius: 15px;
+        background-color: #e5e6f4;
+        padding: 1rem;
+        h2{
+            margin-top: 7px;
+        }
+        .item-icon {
+          width: 40px;
+          height: 40px;
+          border-radius: 15px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: #cfd1ec;
+        }
+      }
+    }
+    
+    .pink{
+        background-color: #F4E5ED !important;
+        .item-icon{
+            background-color: #E7C3D7 !important;
+        }
+    }
+    
+    .yellow{
+        background-color: #F4F4E5 !important;
+        .item-icon{
+            background-color: #E4E4BC !important;
+        }
+    }
+    
+    .Blue{
+        background-color: #C2EEFF !important;
+        .item-icon{
+            background-color: #9DD9F3 !important;
+        }
+    }
