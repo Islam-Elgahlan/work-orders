@@ -1,8 +1,8 @@
 <section>
   <div class="table-card container py-5">
     <div class="page-header shadow-lg">
-      <h1>{{'department.department' | translate}}</h1>
-      <button class="primary px-3"  (click)="openAddDepartment()" >
+      <h1>{{'building.building' | translate}}</h1>
+      <button (click)="openAddBuilding()" class="primary px-3">
         <span class="fa-solid fa-plus mx-2"></span>
         <span>{{'addnew'|translate}}</span>
       </button>
@@ -10,25 +10,25 @@
 
     <table class="custom-table">
       <thead class="text-capitalize">
-        <th class="px-2 alone">{{'department.name_en' | translate}}</th>
-        <th class="px-2 alone">{{'department.name_ar' | translate}}</th>
-        <th class="alone">{{'department.maintenance_supervisor.name' | translate}}</th>
-        <th class="alone">{{'department.actions' | translate}}</th>
+        <th class="px-2 alone">{{'building.name_en' | translate}}</th>
+        <th class="px-2 alone">{{'building.name_ar' | translate}}</th>
+        <th class="alone">{{'building.no_of_floors' | translate}}</th>
+        <th class="alone">{{'building.actions' | translate}}</th>
       </thead>
       <tbody>
         <tr *ngFor="let item of tableData; let isEven = even" [class]="isEven ? '' : 'bg-secondary-subtle'">
           <td class="px-2">{{ item.name_en }}</td>
-          <td class="px-2">{{ item.name_ar }}</td>
-          <td *ngIf="item.maintenance_supervisor">{{ item.maintenance_supervisor.name}}</td>
-          <td *ngIf="!item.maintenance_supervisor">{{'department.maintenance_supervisor.supervisor' | translate}}</td>
+          <td>{{ item.name_ar }}</td>
+          <td>{{ item.no_of_floors}}</td>
           <td class="text-center">
             <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="openEditDepartment(item.id)">
+
+              <button mat-menu-item (click)="openEditBuilding(item.id)">
                 <mat-icon>edit_square</mat-icon>
-                <span>{{'department.edit'|translate}}</span>
+                <span>{{'building.edit'|translate}}</span>
               </button>
               <button mat-menu-item (click)="deleteDialog(item)">
                 <mat-icon>delete</mat-icon>

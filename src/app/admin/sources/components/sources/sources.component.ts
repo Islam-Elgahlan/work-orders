@@ -1,59 +1,56 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { PageEvent } from '@angular/material/paginator';
+import { SourcesService } from '../../services/sources.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { debounceTime, Subject } from 'rxjs';
-import { DepartmentsService } from '../../sevices/departments.service';
-import { FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { MatDialog } from '@angular/material/dialog';
+import { debounceTime, Subject } from 'rxjs';
+import { PageEvent } from '@angular/material/paginator';
+import { AddSourceComponent } from '../add-source/add-source.component';
+import { FormGroup } from '@angular/forms';
+import { EditSourceComponent } from '../edit-source/edit-source.component';
 import { DeleteItemComponent } from 'src/app/shared/delete-item/delete-item.component';
-import { AddDepartmentComponent } from '../add-department/add-department.component';
-import { EditDepartmentComponent } from '../edit-department/edit-department.component';
 
 @Component({
-  selector: 'app-departments',
-  templateUrl: './departments.component.html',
-  styleUrls: ['./departments.component.scss']
+  selector: 'app-sources',
+  templateUrl: './sources.component.html',
+  styleUrls: ['./sources.component.scss']
 })
-export class DepartmentsComponent implements OnInit{
+export class SourcesComponent implements OnInit {
+
+  tableResponse: any | undefined;
+  tableData: any[] | undefined = [];
+  pageSize: number | undefined = 5;
+  page: number | undefined = 1;
+  pageIndex: number = 0;
 
   private subject = new Subject<any>;
-  constructor(
-    private _DepartmentsService: DepartmentsService,
-    private spinner: NgxSpinnerService,
+  constructor(private _SourcesService: SourcesService, private spinner: NgxSpinnerService,
     private _ToastrService: ToastrService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,) { }
 
   ngOnInit(): void {
-    this.onGetAllDepartments();
+    this.onGetAllSources();
     this.subject.pipe((debounceTime(800))).subscribe({
       next: (res) => {
-        this.onGetAllDepartments()
+        this.onGetAllSources()
       },
     })
   }
 
-  tableResponse: any | undefined;
-  tableData: any[] | undefined = [];
-  pageSize: number | undefined = 100;
-  page: number | undefined = 1;
-  pageIndex: number = 0;
-
-  onGetAllDepartments() {
+  onGetAllSources() {
     this.spinner.show()
-    this._DepartmentsService.onGetDepartment().subscribe({
+    this._SourcesService.onGetSources().subscribe({
       next: (res) => {
         this.tableResponse = res;
         this.tableData = res?.data;
         console.log(this.tableData);
-
         this.spinner.hide()
       }
     });
   }
 
-  openAddDepartment() {
-    const dialogRef = this.dialog.open(AddDepartmentComponent, {
+  openAddSource() {
+    const dialogRef = this.dialog.open(AddSourceComponent, {
       data: this.tableData
     });
 
@@ -62,13 +59,13 @@ export class DepartmentsComponent implements OnInit{
       console.log('The dialog was closed', result);
       if (result) {
         this.addDepartment(result)
-        this.onGetAllDepartments()
+        this.onGetAllSources()
       }
     });
   }
 
   addDepartment(data: FormGroup) {
-    this._DepartmentsService.addDepartment(data.value).subscribe({
+    this._SourcesService.addSource(data.value).subscribe({
       next: (res) => {
         this._ToastrService.success(res.message, 'Department Added Succesfuly');
       },
@@ -83,8 +80,8 @@ export class DepartmentsComponent implements OnInit{
   }
 
   // Edit Department
-  openEditDepartment(id:number) {
-    const dialogRef = this.dialog.open(EditDepartmentComponent, {
+  openEditSource(id: number) {
+    const dialogRef = this.dialog.open(EditSourceComponent, {
       data: id
     });
 
@@ -92,19 +89,19 @@ export class DepartmentsComponent implements OnInit{
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed', result);
       if (result) {
-        this.editDepartment(result,id)
-        this.onGetAllDepartments()
+        this.editSource(result, id)
+        this.onGetAllSources()
       }
     });
   }
 
-  editDepartment(data: FormGroup,id:number) {
-    this._DepartmentsService.editDepartment(data.value,id).subscribe({
+  editSource(data: FormGroup, id: number) {
+    this._SourcesService.editSource(data.value, id).subscribe({
       next: (res) => {
-        this._ToastrService.success(res.message, 'Department Update Succesfuly');
+        this._ToastrService.success(res.message, 'Source Update Succesfuly');
       },
       error: (err) => {
-        this._ToastrService.error(err.message, 'Error in Update Department');
+        this._ToastrService.error(err.message, 'Error in Update Source');
       },
       complete: () => {
 
@@ -117,10 +114,10 @@ export class DepartmentsComponent implements OnInit{
     console.log(e);
     this.pageSize = e.pageSize
     this.page = e.pageIndex + 1
-    this.onGetAllDepartments();
+    this.onGetAllSources();
   }
 
-  // Delete Department
+  // Delete Source
   deleteDialog(data: any): void {
     console.log(data);
 
@@ -134,7 +131,7 @@ export class DepartmentsComponent implements OnInit{
       // console.log(result);
       if (result) {
         this.deleteItem(result.id)
-        this.onGetAllDepartments();
+        this.onGetAllSources();
       }
 
     });
@@ -142,15 +139,15 @@ export class DepartmentsComponent implements OnInit{
 
   }
   deleteItem(id: number) {
-    this._DepartmentsService.deleteDepartment(id).subscribe({
+    this._SourcesService.deleteSource(id).subscribe({
       next: (res) => {
         console.log(res)
       },
       error: (err) => {
-        this._ToastrService.error('Delete Department Failed')
+        this._ToastrService.error('Delete Source Failed')
       },
       complete: () => {
-        this._ToastrService.success('Department Deleted')
+        this._ToastrService.success('Source Deleted')
       }
     })
   }

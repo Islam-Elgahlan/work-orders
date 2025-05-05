@@ -7,7 +7,7 @@
              <img src="../../../assets/images/delete-img.svg" alt="" class=""> 
         </div>
         <h3>Delete this item</h3>
-        <p>Are you sure to delete <span class="text-success text-capitalize fw-bold">{{data.title}}</span></p>
+        <p>Are you sure to delete <span class="text-success text-capitalize fw-bold">{{data.title}} {{data.name_en}}</span></p>
         <button [mat-dialog-close]="data" class="btn btn-outline-danger py-1 px-3 my-2">Delete</button>
     </div>
 </section>

@@ -15,6 +15,8 @@
         "users": "Users",
         "workOrders": "Work Orders",
         "departments": "Departments",
+        "building": "building",
+        "sources": "sources",
         "myorders": "My Work Orders"
     },
     "users": {
@@ -33,26 +35,23 @@
         "createnew": "Create new Account",
         "editUser": "Edit User",
         "user": "name",
-        "viewUser" : "View User Details",
+        "viewUser": "View User Details",
         "mobile": "Phone number",
-        "mobile_place":"Enter Mobine number",
+        "mobile_place": "Enter Mobine number",
         "email": "E-mail",
-        "username":"User Name",
+        "username": "User Name",
         "password": "Password",
         "confirmPass": "Confirm Password",
         "title": "Title",
-        "department":"Department",
+        "department": "Department",
         "AccType": "Account Type",
-        "username_pattern":" The User name must contain characters and end with numbers without spaces",
+        "username_pattern": " The User name must contain characters and end with numbers without spaces",
         "username_place": " Enter User Name",
         "email_pattern": "ex:test@abc.dc",
-        "email_place":"Enter Email",
-        "user_place":"Enter Name",
-        "password_pattern":"A password must contains at least eight characters, including at least one number and includes both lower and uppercase letters and special characters",
-        "match":"Password not Matched "
-
-
-
+        "email_place": "Enter Email",
+        "user_place": "Enter Name",
+        "password_pattern": "A password must contains at least eight characters, including at least one number and includes both lower and uppercase letters and special characters",
+        "match": "Password not Matched "
     },
     "welcome": "Welcome To Work Orders System",
     "cancel": "Cancel",
@@ -76,7 +75,7 @@
         "id": "Work Order no",
         "date": "Creation Date",
         "building": "Building",
-        "department":"Department",
+        "department": "Department",
         "workType": "Work Type",
         "floor": "Floor",
         "room": "Room",
@@ -89,19 +88,58 @@
         "view": "View",
         "delete": "Delete",
         "details": "Work Order Details",
-        "addOrder":"Add new Work Order",
+        "addOrder": "Add new Work Order",
         "editOrder": "Edit Order",
-        "engineer" : "Engineer",
-        "technician" : "Technician",
-        "update":{
-            "material" : "Material Details",
-            "parts" : "Spare Parts",
-            "name" : "name",
-            "description" : "Description",
-            "quantity" : "Quantity"
+        "engineer": "Engineer",
+        "technician": "Technician",
+        "update": {
+            "material": "Material Details",
+            "parts": "Spare Parts",
+            "name": "name",
+            "description": "Description",
+            "quantity": "Quantity"
         },
         "status": "Status",
         "tech_report": "Technical Report",
+
+        "holding_reason": "Holding Reason"
+    },
+    "department": {
+        "department": "Departments",
+        "add":" Add New Department",
+        "view": "View",
+        "edit": "Edit",
+        "name": "name",
+        "name_en": "English Name",
+        "name_ar": "Arabic Name",
+        "actions": "Actions",
+        "maintenance_supervisor": {
+            "name": "Maintenance Supervisor",
+            "supervisor": "No supervisor"
+        }
+    },
+    "building": {
+        "building": "Building",
+        "add": "Add New Building",
+        "edit-new": "Edit Building",
+        "view": "View",
+        "edit": "Edit",
+        "name": "Name",
+        "name_en": "English Name",
+        "name_ar": "Arabic Name",
+        "actions": "Actions",
+        "no_of_floors": "Number Of Floors"
+    },
+    "sources": {
+        "sources": "source",
+        "add": "Add New source",
+        "edit-new": "Edit source",
+        "view": "View",
+        "edit": "Edit",
+        "name": "Name",
+        "name_en": "English Name",
+        "name_ar": "Arabic Name",
+        "actions": "Actions",
         "holding_reason": "Holding Reason",
         "add_new_material" : "Add New Material",
         "add_new_part" : "Add New Spare Part"
