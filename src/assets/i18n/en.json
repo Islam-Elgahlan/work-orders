@@ -17,6 +17,7 @@
         "departments": "Departments",
         "building": "building",
         "sources": "sources",
+        "equipments": "equipments",
         "myorders": "My Work Orders"
     },
     "users": {
@@ -143,6 +144,17 @@
         "holding_reason": "Holding Reason",
         "add_new_material" : "Add New Material",
         "add_new_part" : "Add New Spare Part"
-
+    },
+    "equipments": {
+        "equipments": "source",
+        "add": "Add New source",
+        "edit-new": "Edit source",
+        "view": "View",
+        "edit": "Edit",
+        "name": "Name",
+        "name_en": "English Name",
+        "name_ar": "Arabic Name",
+        "actions": "Actions"
+        
     }
 }
