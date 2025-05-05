@@ -17,6 +17,7 @@
         "departments": "الأقسام",
         "building": "المباني",
         "sources": "المصادر",
+        "equipments": "المعدات",
         "myorders": "أوامر العمل خاصتي"
     },
     "users": {
@@ -101,7 +102,6 @@
         },
         "status": "الحالة",
         "tech_report": "التقرير الفني",
-
         "holding_reason": "سبب التعليق "
     },
     "department": {
@@ -141,9 +141,19 @@
         "name_ar": "الاسم بالعربية",
         "actions": "تحكم",
         "holding_reason": "سبب التعليق ",
-        "add_new_material" : "إضافة مواد مستخدمة ",
-        "add_new_part" : "إضافة قطع غيار"
-
-
+        "add_new_material": "إضافة مواد مستخدمة ",
+        "add_new_part": "إضافة قطع غيار"
+    },
+    "equipments": {
+        "equipments": "المعدات",
+        "add": "اضافة معدة جديد",
+        "edit-new": "تحديث معدة",
+        "view": "معاينة",
+        "edit": "تعديل",
+        "name": "الأسم",
+        "name_en": "الاسم بالانجليزية",
+        "name_ar": "الاسم بالعربية",
+        "actions": "تحكم"
+       
     }
 }

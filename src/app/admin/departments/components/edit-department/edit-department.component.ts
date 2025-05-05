@@ -33,16 +33,13 @@ export class EditDepartmentComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
-    // console.log(this.materialForm.value)
-
   }
 
   departmentForm = new FormGroup({
     id: new FormControl(this.data),
     name_en: new FormControl(null),
     name_ar: new FormControl(null),
-    maintenance_supervisor_id: new FormControl(null),
-
+    maintenance_supervisor_id: new FormControl(null)
   })
 
   getAllUsers() {
@@ -64,29 +61,18 @@ export class EditDepartmentComponent implements OnInit {
     this._DepartmentsService.onGetDepartmentById(id).subscribe({
       next: (res) => {
         this.departmentData = res.data;
+        console.log(this.departmentData.maintenance_supervisor.name);
+        
       }, error: (err) => {
 
       }, complete: () => {
         this.departmentForm.patchValue({
           name_en: this.departmentData?.name_en,
           name_ar: this.departmentData?.name_ar,
-          maintenance_supervisor_id: this.departmentData?.maintenance_supervisor_id
+          maintenance_supervisor_id: this.departmentData?.maintenance_supervisor.id
         })
       }
     })
   }
 
-  onSelectSupervisor(){
-    this.getSupervisor(this.supervisorId)
-  }
-  getSupervisor(id: number) {
-    this._DepartmentsService.getSupervisor(id).subscribe({
-      next: (res) => {
-        this.supdervisor = res.data
-        console.log(this.supervisorId);
-        
-
-      }
-    })
-  }
 }
