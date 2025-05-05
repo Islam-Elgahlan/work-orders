@@ -18,7 +18,10 @@ export class EditDepartmentComponent implements OnInit {
   pageSize: number | undefined = 100;
   page: number | undefined = 1;
   pageIndex: number = 0;
-  departmentData: any
+  departmentData: any;
+  supervisorId:any;
+  supdervisor:any;
+
   constructor(
     public dialogRef: MatDialogRef<EditDepartmentComponent>, private _DepartmentsService: DepartmentsService,
     @Inject(MAT_DIALOG_DATA) public data: any, private _UsersService: UsersService) { }
@@ -73,4 +76,17 @@ export class EditDepartmentComponent implements OnInit {
     })
   }
 
+  onSelectSupervisor(){
+    this.getSupervisor(this.supervisorId)
+  }
+  getSupervisor(id: number) {
+    this._DepartmentsService.getSupervisor(id).subscribe({
+      next: (res) => {
+        this.supdervisor = res.data
+        console.log(this.supervisorId);
+        
+
+      }
+    })
+  }
 }

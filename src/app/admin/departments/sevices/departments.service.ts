@@ -16,6 +16,9 @@ export class DepartmentsService {
   onGetDepartmentById(id:number): Observable<any> {
     return this._HttpClient.get(`departments/show/${id}`);
   }
+  getSupervisor(id:number):Observable<any>{
+    return this._HttpClient.get(`departments/100/${id}`)
+  }
 
   addDepartment(data: any): Observable<any> {
     return this._HttpClient.post("departments/create", data)
