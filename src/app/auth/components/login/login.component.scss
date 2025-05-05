@@ -1,11 +1,13 @@
 .login {
-
-    background-image: url(../../../../assets/images/bg2.avif);
-    background-size: cover;
-    background-repeat: no-repeat;
-
-    height: 100vh;
-    display: flex;
-    // justify-content: center;
-    align-items: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../../../../assets/images/bg-auth.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #000000; // Fallback
+  height: 100vh;
+  display: flex;
+  align-items: center;
 }
+
+
+
+

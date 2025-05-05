@@ -1,7 +1,7 @@
 {
     "spinner": "Work Orders Sys",
     "home": {
-        "hellow": "hellow ",
+        "hello": "Hello ",
         "pannerWelcome": "You can add Departments and assign Work Orders Here!",
         "workOrders": "Work Orders",
         "ActivatedUsers": "Activated Users",

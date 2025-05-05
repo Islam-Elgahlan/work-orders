@@ -1,120 +1,120 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { HelperService } from 'src/app/services/helper.service';
 
-
 interface Imenu {
-  title: any,
-  icon: string,
-  link: string,
-  isActive:boolean
-
+  title: any;
+  icon: string;
+  link: string;
+  isActive: boolean;
 }
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  styleUrls: ['./sidebar.component.scss'],
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
   @Output() isOpenedflag = new EventEmitter<boolean>();
   isOpened: boolean = true;
-  constructor(public translate: TranslateService,
+
+  // المتغيرات الخاصة باليوزر
+  name: string | null = '';
+  email: string | null = '';
+  role: string | null = '';
+  image: string = '../../../assets/images/admin-img.webp';
+
+  constructor(
+    public translate: TranslateService,
     public _HelperService: HelperService,
     private _Router: Router,
-    private _AuthService: AuthService) { }
+    private _AuthService: AuthService
+  ) {}
 
   ngOnInit() {
-    // console.log(this.isEngineer())
-    
+    this.name = localStorage.getItem('name');
+    this.email = localStorage.getItem('email');
+    this.role = this._AuthService.title || localStorage.getItem('role');
+
     if (this.isAdmin()) {
-      // this._Router.navigate(['/dashboard/admin/home'])
+      this._Router.navigate(['/dashboard/admin/home']);
+    } else if (this.isEngineer()) {
+      this._Router.navigate(['/dashboard/engineer/home']);
     } else {
-      // this._Router.navigate(['/dashboard/engineer/home'])
+      this._Router.navigate(['/dashboard/technicians/home']);
     }
   }
-
 
   toggleSidebar() {
     this.isOpened = !this.isOpened;
-
-    this.isOpenedflag.emit(this.isOpened)
+    this.isOpenedflag.emit(this.isOpened);
   }
+
   isAdmin(): boolean {
-    if (this._AuthService.title == 'Admin') {
-      return this._AuthService.title == 'Admin'
-    } else {
-      return false
-    }
-  }
-  isEngineer(): boolean {
-    if (this._AuthService.title == 'Engineer') {
-      return this._AuthService.title == 'Engineer'
-    } else {
-      return false
-    }
-  }
-  isTechnician(): boolean {
-    if (this._AuthService.title == 'Technician') {
-      return true
-    } else {
-      return false
-    }
+    return this._AuthService.title === 'Admin';
   }
 
-  menu: any[] = [
+  isEngineer(): boolean {
+    return this._AuthService.title === 'Engineer';
+  }
+
+  isTechnician(): boolean {
+    return (
+      this._AuthService.title === 'Technician' ||
+      this._AuthService.title === 'Worker'
+    );
+  }
+
+  menu: Imenu[] = [
     {
       icon: 'fa-solid fa-house fs-4',
       title: this.translate.instant('sidebar.home'),
       link: '/dashboard/admin/home',
-      isActive: this.isAdmin()
+      isActive: this.isAdmin(),
     },
     {
       icon: 'fa-solid fa-house fs-4',
       title: this.translate.instant('sidebar.home'),
       link: '/dashboard/engineer/home',
-      isActive: this.isEngineer()
+      isActive: this.isEngineer(),
     },
     {
       icon: 'fa-solid fa-house fs-4',
       title: this.translate.instant('sidebar.home'),
-      link: '/dashboard/technician/home',
-      isActive: this.isTechnician()
+      link: '/dashboard/technicians/home',
+      isActive: this.isTechnician(),
     },
     {
       icon: 'fa-solid fa-layer-group fs-4',
       title: this.translate.instant('sidebar.workOrders'),
       link: '/dashboard/admin/work-orders',
-      isActive: this.isAdmin()
+      isActive: this.isAdmin(),
     },
-
     {
       icon: 'fa-solid fa-users fs-4',
       title: this.translate.instant('sidebar.users'),
       link: '/dashboard/admin/users',
-      isActive: this.isAdmin()
+      isActive: this.isAdmin(),
     },
     {
-      icon: 'fa-solid fa-users fs-4',
+      icon: 'fa-solid fa-sitemap fs-4',
       title: this.translate.instant('sidebar.departments'),
       link: '/dashboard/admin/departments',
-      isActive: this.isAdmin()
+      isActive: this.isAdmin(),
     },
-
     {
       icon: 'fa-solid fa-layer-group fs-4',
       title: this.translate.instant('sidebar.myorders'),
       link: '/dashboard/engineer/work-orders',
-      isActive: this.isEngineer()
+      isActive: this.isEngineer(),
     },
     {
       icon: 'fa-solid fa-house fs-4',
       title: this.translate.instant('sidebar.myorders'),
-      link: '/dashboard/technician/work-orders',
-      isActive: this.isTechnician()
+      link: '/dashboard/technicians/work-orders',
+      isActive: this.isTechnician(),
     },
-
-  ]
+  ];
 }

@@ -1,5 +1,5 @@
 #home {
-    background-image: url("../../../../assets/images/home-bg.png");
+    background-image: url("../../../../assets/images/bg-auth.webp");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -33,21 +33,21 @@
       }
     }
   }
-  
+
   .pink{
       background-color: #F4E5ED !important;
       .item-icon{
           background-color: #E7C3D7 !important;
       }
   }
-  
+
   .yellow{
       background-color: #F4F4E5 !important;
       .item-icon{
           background-color: #E4E4BC !important;
       }
   }
-  
+
   .Blue{
       background-color: #C2EEFF !important;
       .item-icon{
@@ -55,7 +55,7 @@
       }
   }
   #home{
-      background-image: url('../../../../assets/images/home-bg.png');
+      background-image: url('../../../../assets/images/home-background.webp');
        background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
@@ -97,24 +97,28 @@
         }
       }
     }
-    
+
     .pink{
         background-color: #F4E5ED !important;
         .item-icon{
             background-color: #E7C3D7 !important;
         }
     }
-    
+
     .yellow{
         background-color: #F4F4E5 !important;
         .item-icon{
             background-color: #E4E4BC !important;
         }
     }
-    
+
     .Blue{
         background-color: #C2EEFF !important;
         .item-icon{
             background-color: #9DD9F3 !important;
         }
+    }
+
+    .text-white {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     }

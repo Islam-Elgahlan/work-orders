@@ -1,62 +1,62 @@
 <section class="login">
-    <div class="container">
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
-            <div class="row">
-                <div class="col-md-6 mx-auto">
-                    <div class="auth-card">
-                        <div class="title mb-2">
-                            <span>{{'login.welcome' |translate}}</span>
-                            <h3 class="fs-3 mt-2">{{'login.login' |translate}}</h3>
-                        </div>
-                        <mat-form-field appearance="fill" class="w-100" [hideRequiredMarker]="hideRequiredMarker">
-                            <mat-label>{{'login.email' |translate}}</mat-label>
-                            <input formControlName="email" matInput placeholder="Enter Your E-mail" />
-                        </mat-form-field>
-                        <div class="mb-1">
-                            <mat-error
-                                *ngIf="loginForm.controls.email.touched&&loginForm.controls.email.hasError('required')">
-                                Email required
-                            </mat-error>
-                            <mat-error
-                                *ngIf="loginForm.controls.email.touched&&loginForm.controls.email.hasError('pattern')">
-                                ex: abc@cde.ab
-                            </mat-error>
-                        </div>
-
-
-                        <mat-form-field appearance="fill" class="w-100" [hideRequiredMarker]="hideRequiredMarker">
-                            <mat-label>{{'login.password' |translate}}</mat-label>
-                            <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" />
-                            <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
-                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                                <mat-icon>{{
-                                    hide ? "visibility_off" : "visibility"
-                                    }}</mat-icon>
-                            </button>
-                        </mat-form-field>
-                        <div class="mb-1">
-                            <mat-error
-                                *ngIf="loginForm.controls.password.touched&&loginForm.controls.password.hasError('required')">
-                                Password required
-                            </mat-error>
-                            <mat-error
-                                *ngIf="loginForm.controls.password.touched&&loginForm.controls.password.hasError('pattern')">
-                                A password must contains at least eight characters, including at least one number and
-                                includes both
-                                lower and uppercase letters and special characters
-                            </mat-error>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center my-3 text-white">
-                            <a routerLink="/auth/register" class="text-white text-decoration-none"> {{'login.register' |translate}}</a>
-              
-                            <a routerLink="/auth/forget-password" class="text-decoration-none text-white">{{'login.forget' |translate}}</a>
-                          </div>
-                        <div class="text-center">
-                            <button class="primary text-center w-100">{{'login.login' |translate}}</button>
-                          </div>
-                    </div>
-                </div>
+  <div class="container">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)" class="auth-form">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="auth-card">
+            <!-- Logo -->
+            <div class="logo-container text-center mb-4">
+              <img src="assets/images/LogInLogo.png" alt="Logo" class="logo-img">
             </div>
-        </form>
-    </div>
+            <!-- Title -->
+            <!-- <div class="title mb-4 text-center">
+              <span class="welcome-text">{{'login.welcome' | translate}}</span>
+              <h3 class="fs-3 mt-2">{{'login.login' | translate}}</h3>
+            </div> -->
+            <!-- Email Field -->
+            <mat-form-field appearance="fill" class="w-100" [hideRequiredMarker]="hideRequiredMarker">
+              <mat-label>{{'login.email' | translate}}</mat-label>
+              <input formControlName="email" matInput placeholder="Enter Your E-mail" />
+            </mat-form-field>
+            <div class="error-container mb-2">
+              <mat-error *ngIf="loginForm.controls.email.touched && loginForm.controls.email.hasError('required')">
+                Email required
+              </mat-error>
+              <mat-error *ngIf="loginForm.controls.email.touched && loginForm.controls.email.hasError('pattern')">
+                ex: abc@cde.ab
+              </mat-error>
+            </div>
+            <!-- Password Field -->
+            <mat-form-field appearance="fill" class="w-100 no-white-bg" [hideRequiredMarker]="hideRequiredMarker">
+              <mat-label>{{'login.password' | translate}}</mat-label>
+              <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" />
+              <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+            </mat-form-field>
+            <div class="error-container mb-3">
+              <mat-error
+                *ngIf="loginForm.controls.password.touched && loginForm.controls.password.hasError('required')">
+                Password required
+              </mat-error>
+              <mat-error *ngIf="loginForm.controls.password.touched && loginForm.controls.password.hasError('pattern')">
+                A password must contain at least eight characters, including at least one number, both lower and
+                uppercase letters, and special characters
+              </mat-error>
+            </div>
+            <!-- Links -->
+            <div class="d-flex justify-content-around align-items-center my-3 link-container">
+              <a routerLink="/auth/register" class="text-decoration-none">{{'login.register' | translate}}</a>
+              <a routerLink="/auth/forget-password" class="text-decoration-none">{{'login.forget' | translate}}</a>
+            </div>
+            <!-- Submit Button -->
+            <div class="text-center">
+              <button mat-raised-button color="primary" class="w-100 submit-btn">{{'login.login' | translate}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 </section>
