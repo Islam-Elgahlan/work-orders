@@ -42,12 +42,16 @@ export class BuildingComponent {
   }
 
   onGetAllBuildings() {
+    let params = {
+      page_size: this.pageSize,
+      page: this.page,
+    };
     this.spinner.show()
     this._BuildingService.onGetBuildings().subscribe({
       next: (res) => {
         this.tableResponse = res;
         this.tableData = res?.data;
-        console.log(this.tableData);
+        // console.log(this.tableData);
 
         this.spinner.hide()
       }
@@ -94,7 +98,7 @@ export class BuildingComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed', result);
-      console.log(id);
+      // console.log(id);
 
       if (result) {
         this.editBuilding(result, id)
