@@ -159,7 +159,7 @@ export class EditOrderComponent {
         })
 
         this.updateOrderForm.patchValue({
-          status: this.currentOrder?.status,
+          status: this.currentOrder?.status.id,
           technician_report: this.currentOrder?.technician_report,
           // holding_reason: this.currentOrder?.holding_reason,
         })

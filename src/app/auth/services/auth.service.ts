@@ -10,7 +10,7 @@ import { ILogin } from 'src/app/models/auth';
   providedIn: 'root'
 })
 export class AuthService {
-  title :string |null = ''
+  title :any
   constructor(private _HttpClient:HttpClient) {
     if(localStorage.getItem('token')!==null){
       // console.log(localStorage.getItem('token'))
@@ -21,7 +21,7 @@ export class AuthService {
    getProfile(){
     let encoded: any = localStorage.getItem('token');
     let decoded: any = jwtDecode(encoded);
-    // localStorage.setItem('title', da)
+    localStorage.getItem('title')
     console.log(decoded.name)
    
     this.getRole()

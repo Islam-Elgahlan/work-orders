@@ -40,6 +40,7 @@ export class LoginComponent {
         this.ress=res
         this.data = res.data
         localStorage.setItem('token', res.data.token)
+        localStorage.setItem('id', res.data.id)
         localStorage.setItem('name', this.data.name)
         localStorage.setItem('email', this.data.email)
         localStorage.setItem('title', this.data.title.name)

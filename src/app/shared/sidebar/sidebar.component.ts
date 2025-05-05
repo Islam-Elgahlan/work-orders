@@ -27,12 +27,14 @@ export class SidebarComponent {
     private _AuthService: AuthService) { }
 
   ngOnInit() {
-    // console.log(this.isEngineer())
-    
+
+
     if (this.isAdmin()) {
-      // this._Router.navigate(['/dashboard/admin/home'])
-    } else {
-      // this._Router.navigate(['/dashboard/engineer/home'])
+      this._Router.navigate(['/dashboard/admin/home'])
+    } else if(this.isEngineer()) {
+      this._Router.navigate(['/dashboard/engineer/home'])
+    } else{
+      this._Router.navigate(['/dashboard/technicians/home'])
     }
   }
 
@@ -57,7 +59,7 @@ export class SidebarComponent {
     }
   }
   isTechnician(): boolean {
-    if (this._AuthService.title == 'Technician') {
+    if (this._AuthService.title == 'Worker') {
       return true
     } else {
       return false
@@ -80,7 +82,7 @@ export class SidebarComponent {
     {
       icon: 'fa-solid fa-house fs-4',
       title: this.translate.instant('sidebar.home'),
-      link: '/dashboard/technician/home',
+      link: '/dashboard/technicians/home',
       isActive: this.isTechnician()
     },
     {
@@ -112,7 +114,7 @@ export class SidebarComponent {
     {
       icon: 'fa-solid fa-house fs-4',
       title: this.translate.instant('sidebar.myorders'),
-      link: '/dashboard/technician/work-orders',
+      link: '/dashboard/technicians/work-orders',
       isActive: this.isTechnician()
     },
 

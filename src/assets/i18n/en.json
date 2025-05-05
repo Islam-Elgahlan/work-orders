@@ -102,7 +102,9 @@
         },
         "status": "Status",
         "tech_report": "Technical Report",
-        "holding_reason": "Holding Reason"
+        "holding_reason": "Holding Reason",
+        "add_new_material" : "Add New Material",
+        "add_new_part" : "Add New Spare Part"
 
     }
 }
