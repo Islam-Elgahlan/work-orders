@@ -9,6 +9,8 @@ const routes: Routes = [
   {path:'edit-profile', component: EditProfileComponent },
   {path:'users',loadChildren: () => import('./admin-users/admin-users.module').then(m => m.AdminUsersModule)},
   {path:'departments',loadChildren:() => import('./departments/departments.module').then(m =>m.DepartmentsModule)},
+  {path:'building',loadChildren:() => import('./building/building.module').then(m =>m.BuildingModule)},
+  {path:'sources',loadChildren:() => import('./sources/sources.module').then(m =>m.SourcesModule)},
   {path:'work-orders',loadChildren:() => import('./work-orders/work-orders.module').then(m =>m.WorkOrdersModule)}
 
 ];

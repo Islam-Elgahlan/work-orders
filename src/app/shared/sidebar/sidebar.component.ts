@@ -97,9 +97,21 @@ export class SidebarComponent {
       isActive: this.isAdmin()
     },
     {
-      icon: 'fa-solid fa-users fs-4',
+      icon: 'fa-solid fa-list-check fs-4',
       title: this.translate.instant('sidebar.departments'),
       link: '/dashboard/admin/departments',
+      isActive: this.isAdmin()
+    },
+    {
+      icon: 'fa-solid fa-building fs-4',
+      title: this.translate.instant('sidebar.building'),
+      link: '/dashboard/admin/building',
+      isActive: this.isAdmin()
+    },
+    {
+      icon: 'fa-brands fa-osi fs-4',
+      title: this.translate.instant('sidebar.sources'),
+      link: '/dashboard/admin/sources',
       isActive: this.isAdmin()
     },
 
