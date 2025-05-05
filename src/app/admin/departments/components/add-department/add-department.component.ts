@@ -17,7 +17,6 @@ export class AddDepartmentComponent implements OnInit{
   pageSize: number | undefined = 100;
   page: number | undefined = 1;
   pageIndex: number = 0;
-  user_id: number = 0
 
   constructor(
     public dialogRef: MatDialogRef<AddDepartmentComponent>,

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -15,16 +15,14 @@ import { EditDepartmentComponent } from '../edit-department/edit-department.comp
   templateUrl: './departments.component.html',
   styleUrls: ['./departments.component.scss']
 })
-export class DepartmentsComponent {
+export class DepartmentsComponent implements OnInit{
 
   private subject = new Subject<any>;
   constructor(
     private _DepartmentsService: DepartmentsService,
     private spinner: NgxSpinnerService,
     private _ToastrService: ToastrService,
-    public dialog: MatDialog,
-
-  ) { }
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.onGetAllDepartments();
@@ -40,7 +38,6 @@ export class DepartmentsComponent {
   pageSize: number | undefined = 100;
   page: number | undefined = 1;
   pageIndex: number = 0;
-  user_id: number = 0
 
   onGetAllDepartments() {
     this.spinner.show()
@@ -71,12 +68,7 @@ export class DepartmentsComponent {
   }
 
   addDepartment(data: FormGroup) {
-    let myData = new FormData();
-    let myMap = new Map(Object.entries(data.value));
-    for (const [key, value] of myMap) {
-      myData.append(key, data.value[key]);
-    }
-    this._DepartmentsService.addDepartment(myData).subscribe({
+    this._DepartmentsService.addDepartment(data.value).subscribe({
       next: (res) => {
         this._ToastrService.success(res.message, 'Department Added Succesfuly');
       },
@@ -107,11 +99,6 @@ export class DepartmentsComponent {
   }
 
   editDepartment(data: FormGroup,id:number) {
-    // let myData = new FormData();
-    // let myMap = new Map(Object.entries(data.value));
-    // for (const [key, value] of myMap) {
-    //   myData.append(key, data.value[key]);
-    // }
     this._DepartmentsService.editDepartment(data.value,id).subscribe({
       next: (res) => {
         this._ToastrService.success(res.message, 'Department Update Succesfuly');

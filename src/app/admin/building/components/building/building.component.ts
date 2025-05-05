@@ -47,6 +47,8 @@ export class BuildingComponent {
       next: (res) => {
         this.tableResponse = res;
         this.tableData = res?.data;
+        console.log(this.tableData);
+
         this.spinner.hide()
       }
     });
@@ -69,12 +71,7 @@ export class BuildingComponent {
   }
 
   addBuilding(data: FormGroup) {
-    let myData = new FormData();
-    let myMap = new Map(Object.entries(data.value));
-    for (const [key, value] of myMap) {
-      myData.append(key, data.value[key]);
-    }
-    this._BuildingService.addBuilding(myData).subscribe({
+    this._BuildingService.addBuilding(data.value).subscribe({
       next: (res) => {
         this._ToastrService.success(res.message, 'Building Added Succesfuly');
       },
