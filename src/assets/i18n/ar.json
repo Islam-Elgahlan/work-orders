@@ -111,7 +111,9 @@
         },
         "status": "الحالة",
         "tech_report": "التقرير الفني",
-        "holding_reason": "سبب التعليق "
+        "holding_reason": "سبب التعليق ",
+        "add_new_material" : "إضافة مواد مستخدمة ",
+        "add_new_part" : "إضافة قطع غيار"
 
 
 

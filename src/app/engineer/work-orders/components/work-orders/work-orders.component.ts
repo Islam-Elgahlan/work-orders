@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { debounceTime, Subject } from 'rxjs';
 import { WorkOrdersService } from '../../services/work-orders.service';
 import { PageEvent } from '@angular/material/paginator';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-work-orders',
@@ -16,12 +17,17 @@ export class WorkOrdersComponent {
 
   constructor(
     private _WorkOrdersService: WorkOrdersService,
+    private _activateRoute: ActivatedRoute,
     private _ToastrService: ToastrService,
     private spinner: NgxSpinnerService,
     public dialog: MatDialog,
     private _Toastr: ToastrService
 
-  ) { }
+  ) {
+    // this.orderId = this._activateRoute.snapshot.paramMap.get('id')
+    this.userId = localStorage.getItem('id')
+
+  }
 
   ngOnInit(): void {
     this.onGetAllOrders();
@@ -36,7 +42,7 @@ export class WorkOrdersComponent {
   pageSize: number | undefined = 5;
   page: number | undefined = 1;
   pageIndex: number = 0;
-
+  userId:any
   onGetAllOrders() {
     let params = {
       page_size: this.pageSize,
@@ -44,7 +50,7 @@ export class WorkOrdersComponent {
       // userName: this.searchValue,
     };
     this.spinner.show()
-    this._WorkOrdersService.getAllOrders( 742,params).subscribe({
+    this._WorkOrdersService.getAllOrders(this.userId, params).subscribe({
       next: (res) => {
 
         this.tableResponse = res;

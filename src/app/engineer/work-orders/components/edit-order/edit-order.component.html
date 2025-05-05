@@ -220,7 +220,7 @@
                     </div>
 
                     <!--  Status Form -->
-                    <form [formGroup]="updateOrderForm" >
+                    <form [formGroup]="updateOrderForm" (ngSubmit)="onupdate(updateOrderForm)" >
                         <div class="row">
                             <div class="col-md-4">
                                 <mat-form-field class="w-100" [hideRequiredMarker]="hideRequiredMarker">
@@ -235,7 +235,7 @@
                             </div>
                             <!-- Holding Reason -->
                         <div *ngIf="isHold==true" class="col-md-4">
-                            <mat-form-field appearance="fill" class="w-100"
+                            <mat-form-field class="example-full-width" appearance="fill" class="w-100"
                                 [hideRequiredMarker]="hideRequiredMarker">
                                 <mat-label class="text-orange"> {{'orders.holding_reason' | translate}}</mat-label>
                                 <input formControlName="holding_reason" matInput
@@ -251,6 +251,9 @@
                                     <mat-label>{{'orders.tech_report'|translate}}</mat-label>
                                     <textarea formControlName="technician_report" matInput
                                         placeholder="Ex. It makes me feel..."></textarea>
+                                        <!-- <mat-error *ngIf="updateOrderForm.controls.technician_report.hasError('required')">
+                                            {{'orders.tech_report' | translate}} {{'required' | translate}}
+                                        </mat-error> -->
                                 </mat-form-field>
                             </div>
                         </div>
@@ -259,7 +262,7 @@
                         <!-- Update button for Order -->
                         <div class="text-center mt-3 d-flex justify-content-between">
                             <button type="button" class="outline-secondary w-25"
-                                routerLink="/dashboard/admin/work-orders">{{'cancel'|translate}}</button>
+                                routerLink="/dashboard/engineer/work-orders">{{'cancel'|translate}}</button>
                             <button [disabled]="updateOrderForm.invalid" class="primary text-center w-25">{{'save'|translate}}</button>
                         </div>
                     </form>
