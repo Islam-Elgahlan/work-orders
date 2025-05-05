@@ -22,11 +22,10 @@
                         </mat-form-field>
                     </div>
                     <!-- maintenance_supervisor -->
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <mat-form-field class="w-100" [hideRequiredMarker]="hideRequiredMarker">
                             <mat-label>{{'department.maintenance_supervisor.name' | translate}}</mat-label>
-                            <mat-select (selectionChange)="onSelectSupervisor()" [(value)]="supervisorId"
-                                formControlName="maintenance_supervisor_id">
+                            <mat-select formControlName="maintenance_supervisor_id">
                                 <mat-option *ngFor="let item of tableData" [value]="item.id">
                                     {{item.name}}
                                 </mat-option>

@@ -116,6 +116,12 @@ export class SidebarComponent {
       link: '/dashboard/admin/sources',
       isActive: this.isAdmin()
     },
+    {
+      icon: 'fa-solid fa-toolbox fs-4',
+      title: this.translate.instant('sidebar.equipments'),
+      link: '/dashboard/admin/equipments',
+      isActive: this.isAdmin()
+    },
 
     {
       icon: 'fa-solid fa-layer-group fs-4',
