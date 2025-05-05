@@ -1,44 +1,45 @@
-<section>
-    <h1 mat-dialog-title class="w-100 bg-orange text-dark">
-        <!-- {{'users.block_unblock' | translate}} -->
-        Add New Material
-    </h1>
-    <div mat-dialog-content>
-        <form [formGroup]="materialForm">
-            <div class="row">
-                <!--  name -->
-                <div class="col-md-12">
-                    <mat-form-field appearance="fill" class="w-100">
-                        <mat-label class="text-orange">{{'orders.update.name' | translate}}</mat-label>
-                        <input formControlName="name" matInput placeholder="{{'orders.update.name' | translate}}" />
-                    </mat-form-field>
+<div [dir]="currentLang =='en' ? 'ltr' : 'rtl'">
+    <section>
+        <h1 mat-dialog-title class="w-100 bg-orange text-dark">
+            {{'orders.add_new_material' | translate}}
+        </h1>
+        <div mat-dialog-content>
+            <form [formGroup]="materialForm">
+                <div class="row">
+                    <!--  name -->
+                    <div class="col-md-12">
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label class="text-orange">{{'orders.update.name' | translate}}</mat-label>
+                            <input formControlName="name" matInput placeholder="{{'orders.update.name' | translate}}" />
+                        </mat-form-field>
+                    </div>
+                    <!-- description -->
+                    <div class="col-md-12">
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label class="text-orange"> {{'orders.update.description'|
+                                translate}}</mat-label>
+                            <input formControlName="description" matInput
+                                placeholder=" {{'orders.update.description'| translate}}" />
+                        </mat-form-field>
+                    </div>
+                    <!-- Quantity -->
+                    <div class="col-md-12">
+                        <mat-form-field appearance="fill" class="w-100">
+                            <mat-label class="text-orange"> {{'orders.update.quantity'| translate}}</mat-label>
+                            <input formControlName="quantity" matInput
+                                placeholder=" {{'orders.update.quantity'| translate}}" />
+                        </mat-form-field>
+                    </div>
                 </div>
-                <!-- description -->
-                <div class="col-md-12">
-                    <mat-form-field appearance="fill" class="w-100">
-                        <mat-label class="text-orange"> {{'orders.update.description'|
-                            translate}}</mat-label>
-                        <input formControlName="description" matInput
-                            placeholder=" {{'orders.update.description'| translate}}" />
-                    </mat-form-field>
-                </div>
-                <!-- Quantity -->
-                <div class="col-md-12">
-                    <mat-form-field appearance="fill" class="w-100">
-                        <mat-label class="text-orange"> {{'orders.update.quantity'| translate}}</mat-label>
-                        <input formControlName="quantity" matInput
-                            placeholder=" {{'orders.update.quantity'| translate}}" />
-                    </mat-form-field>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div mat-dialog-actions class="d-flex justify-content-between">
-        <button class=" primary mb-2 text-white" mat-button [mat-dialog-close]="materialForm" cdkFocusInitial>
-            {{'addnew'|translate }}
-        </button>
-        <button class="btn mb-2 btn-secondary" mat-button (click)="onNoClick()">
-            {{'cancel'|translate}}
-        </button>
-    </div>
-</section>
+            </form>
+        </div>
+        <div mat-dialog-actions class="d-flex justify-content-between">
+            <button class=" primary mb-2 text-white" mat-button [mat-dialog-close]="materialForm" cdkFocusInitial>
+                {{'addnew'|translate }}
+            </button>
+            <button class="btn mb-2 btn-secondary" mat-button (click)="onNoClick()">
+                {{'cancel'|translate}}
+            </button>
+        </div>
+    </section>
+</div>
