@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { EngineerGuard } from '../Guards/engineer.guard';
+import { TechnicianGuard } from '../Guards/technician.guard';
 
 const routes: Routes = [
 
@@ -8,13 +10,19 @@ const routes: Routes = [
     path: '', component: DashboardComponent, children: [
 
       {
-        path: "admin", loadChildren: () => import('../admin/admin.module').then(m => m.AdminModule)
+        path: "admin",
+        // canActivate: [AdminGuard],
+        loadChildren: () => import('../admin/admin.module').then(m => m.AdminModule)
       },
       {
-        path: "engineer", loadChildren: () => import('../engineer/engineer.module').then(m => m.EngineerModule)
+        path: "engineer",
+        // canActivate: [EngineerGuard],
+        loadChildren: () => import('../engineer/engineer.module').then(m => m.EngineerModule)
       },
       {
-        path: "technicians", loadChildren: () => import('../technicians/technicians.module').then(m => m.TechniciansModule)
+        path: "technicians",
+        // canActivate: [TechnicianGuard],
+        loadChildren: () => import('../technicians/technicians.module').then(m => m.TechniciansModule)
       }
     ]
   }

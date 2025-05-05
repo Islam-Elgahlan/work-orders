@@ -101,6 +101,7 @@
         },
         "status": "الحالة",
         "tech_report": "التقرير الفني",
+
         "holding_reason": "سبب التعليق "
     },
     "department": {
@@ -138,6 +139,11 @@
         "name": "الأسم",
         "name_en": "الاسم بالانجليزية",
         "name_ar": "الاسم بالعربية",
-        "actions": "تحكم"
+        "actions": "تحكم",
+        "holding_reason": "سبب التعليق ",
+        "add_new_material" : "إضافة مواد مستخدمة ",
+        "add_new_part" : "إضافة قطع غيار"
+
+
     }
 }

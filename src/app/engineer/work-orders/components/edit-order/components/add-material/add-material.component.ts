@@ -9,6 +9,8 @@ import { BlockUsersComponent } from 'src/app/admin/admin-users/components/users/
   styleUrls: ['./add-material.component.scss']
 })
 export class AddMaterialComponent {
+  currentLang  = localStorage.getItem('lang')
+
   constructor(
     public dialogRef: MatDialogRef<BlockUsersComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }

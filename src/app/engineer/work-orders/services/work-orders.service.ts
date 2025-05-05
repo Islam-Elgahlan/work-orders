@@ -40,4 +40,7 @@ getPartsByOrderId(id:number):Observable<any>{
  updateStatus(id:number, data:any):Observable<any>{
   return this._HttpClient.put(`work-orders/${id}/change-status`,data)
  }
+ updateOrder(id:number,data:any):Observable<any>{
+  return this._HttpClient.put(`work-orders/update-by-engineer/${id}`,data)
+ }
 }
