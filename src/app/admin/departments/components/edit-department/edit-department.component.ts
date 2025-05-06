@@ -1,8 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UsersService } from 'src/app/admin/services/users.service';
 import { DepartmentsService } from '../../sevices/departments.service';
+import { DepartmentsComponent } from '../departments/departments.component';
 
 @Component({
   selector: 'app-edit-department',
@@ -19,8 +20,8 @@ export class EditDepartmentComponent implements OnInit {
   page: number | undefined = 1;
   pageIndex: number = 0;
   departmentData: any;
-  supervisorId:any;
-  supdervisor:any;
+  supervisorId: any;
+  supdervisor: any;
 
   constructor(
     public dialogRef: MatDialogRef<EditDepartmentComponent>, private _DepartmentsService: DepartmentsService,
@@ -37,9 +38,9 @@ export class EditDepartmentComponent implements OnInit {
 
   departmentForm = new FormGroup({
     id: new FormControl(this.data),
-    name_en: new FormControl(null),
-    name_ar: new FormControl(null),
-    maintenance_supervisor_id: new FormControl(null)
+    name_en: new FormControl(null, [Validators.required]),
+    name_ar: new FormControl(null, [Validators.required]),
+    maintenance_supervisor_id: new FormControl(null, [Validators.required]),
   })
 
   getAllUsers() {
@@ -62,7 +63,7 @@ export class EditDepartmentComponent implements OnInit {
       next: (res) => {
         this.departmentData = res.data;
         console.log(this.departmentData.maintenance_supervisor.name);
-        
+
       }, error: (err) => {
 
       }, complete: () => {

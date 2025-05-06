@@ -36,7 +36,7 @@
             </form>
         </div>
         <div mat-dialog-actions class="d-flex justify-content-between">
-            <button class=" primary mb-2 text-white" mat-button [mat-dialog-close]="departmentForm" cdkFocusInitial>
+            <button class=" primary mb-2 text-white" [disabled]="departmentForm.invalid" mat-button [mat-dialog-close]="departmentForm" cdkFocusInitial>
                 {{'save'|translate }}
             </button>
             <button class="btn mb-2 btn-secondary" mat-button (click)="onNoClick()">

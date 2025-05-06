@@ -1,6 +1,8 @@
 import { Component, Inject } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { DepartmentsComponent } from 'src/app/admin/departments/components/departments/departments.component';
+import { BuildingComponent } from '../building/building.component';
 
 @Component({
   selector: 'app-add-building',
@@ -12,7 +14,7 @@ export class AddBuildingComponent {
   currentLang = localStorage.getItem('lang')
 
   constructor(
-    public dialogRef: MatDialogRef<AddBuildingComponent>,
+    public dialogRef: MatDialogRef<BuildingComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
@@ -20,9 +22,9 @@ export class AddBuildingComponent {
   }
 
   buildingForm = new FormGroup({
-    name_en: new FormControl(null),
-    name_ar: new FormControl(null),
-    no_of_floors: new FormControl(null),
+    name_en: new FormControl(null, [Validators.required]),
+    name_ar: new FormControl(null, [Validators.required]),
+    no_of_floors: new FormControl(null, [Validators.required]),
   })
 
 }

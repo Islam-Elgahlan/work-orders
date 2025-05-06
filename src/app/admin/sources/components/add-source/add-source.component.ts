@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { SourcesComponent } from '../sources/sources.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UsersService } from 'src/app/admin/services/users.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-source',
@@ -35,9 +35,8 @@ export class AddSourceComponent implements OnInit{
   
     sourcesForm = new FormGroup({
       id: new FormControl(this.data),
-      name_en: new FormControl(null),
-      name_ar: new FormControl(null),  
+      name_en: new FormControl(null,[Validators.required]),
+      name_ar: new FormControl(null,[Validators.required]),  
     })
   
-
 }
