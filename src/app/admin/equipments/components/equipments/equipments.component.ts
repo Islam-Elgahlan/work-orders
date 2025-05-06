@@ -68,6 +68,7 @@ export class EquipmentsComponent implements OnInit {
     this._EquipmentsService.addEquipment(data.value).subscribe({
       next: (res) => {
         this._ToastrService.success(res.message, 'Equipment Added Succesfuly');
+        this.onGetAllEquipments()
       },
       error: (err) => {
         this._ToastrService.error(err.message, 'Error in Added Equipment');
@@ -98,13 +99,13 @@ export class EquipmentsComponent implements OnInit {
   editSource(data: FormGroup, id: number) {
     this._EquipmentsService.editEquipment(data.value, id).subscribe({
       next: (res) => {
+        this.onGetAllEquipments()
         this._ToastrService.success(res.message, 'Equipment Update Succesfuly');
       },
       error: (err) => {
         this._ToastrService.error(err.message, 'Error in Update Equipment');
       },
       complete: () => {
-
       }
 
     })
@@ -140,7 +141,7 @@ export class EquipmentsComponent implements OnInit {
   deleteItem(id: number) {
     this._EquipmentsService.deleteEquipment(id).subscribe({
       next: (res) => {
-        console.log(res)
+        this.onGetAllEquipments()
       },
       error: (err) => {
         this._ToastrService.error('Delete Equipment Failed')
