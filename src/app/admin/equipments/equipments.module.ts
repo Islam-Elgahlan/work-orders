@@ -5,6 +5,7 @@ import { EquipmentsRoutingModule } from './equipments-routing.module';
 import { EquipmentsComponent } from './components/equipments/equipments.component';
 import { AddEquipmentComponent } from './components/add-equipment/add-equipment.component';
 import { EditEquipmentComponent } from './components/edit-equipment/edit-equipment.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { EditEquipmentComponent } from './components/edit-equipment/edit-equipme
   ],
   imports: [
     CommonModule,
-    EquipmentsRoutingModule
+    EquipmentsRoutingModule,
+    SharedModule
   ]
 })
 export class EquipmentsModule { }

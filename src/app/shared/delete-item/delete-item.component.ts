@@ -7,6 +7,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./delete-item.component.scss']
 })
 export class DeleteItemComponent {
+  currentLang = localStorage.getItem('lang')
+
   constructor( public dialogRef: MatDialogRef<DeleteItemComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,){
 

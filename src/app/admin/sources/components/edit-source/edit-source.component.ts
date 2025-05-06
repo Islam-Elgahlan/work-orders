@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SourcesService } from '../../services/sources.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SourcesComponent } from '../sources/sources.component';
 
 @Component({
@@ -36,8 +36,8 @@ export class EditSourceComponent implements OnInit {
 
   sourcesForm = new FormGroup({
     id: new FormControl(this.data),
-    name_en: new FormControl(null),
-    name_ar: new FormControl(null),
+    name_en: new FormControl(null, [Validators.required]),
+    name_ar: new FormControl(null, [Validators.required]),
   })
 
   getDepartmentById(id: number) {

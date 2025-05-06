@@ -57,12 +57,11 @@ export class DepartmentsComponent implements OnInit{
       data: this.tableData
     });
 
-
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed', result);
       if (result) {
-        this.addDepartment(result)
         this.onGetAllDepartments()
+        this.addDepartment(result)
       }
     });
   }

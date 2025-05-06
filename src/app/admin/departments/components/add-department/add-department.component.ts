@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UsersService } from 'src/app/admin/services/users.service';
+import { DepartmentsComponent } from '../departments/departments.component';
 
 @Component({
   selector: 'app-add-department',
@@ -34,10 +35,9 @@ export class AddDepartmentComponent implements OnInit{
 
   departmentForm = new FormGroup({
     id: new FormControl(this.data),
-    name_en: new FormControl(null),
-    name_ar: new FormControl(null),
-    maintenance_supervisor_id: new FormControl(null),
-
+    name_en: new FormControl(null,[Validators.required]),
+    name_ar: new FormControl(null,[Validators.required]),
+    maintenance_supervisor_id: new FormControl(null,[Validators.required]),
   })
 
   getAllUsers() {
