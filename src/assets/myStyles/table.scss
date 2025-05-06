@@ -1,20 +1,21 @@
 .custom-table {
-    width: 100%;
+  width: 100%;
   margin: 0p 15px;
   margin: 0;
-  
-    thead {
-      font-size: 17px;
-      height: 60px;
-      background-color: #005b85;
-      color: white;
-      text-align: center;
-    }
-    
-    tr{
-        text-align: center;
-        &:hover{
-            box-shadow: 2px 4px 10px #5c5959;
-        }
+
+  thead {
+    font-size: 17px;
+    height: 60px;
+    background-color: #00A551;
+    color: white;
+    text-align: center;
+  }
+
+  tr {
+    text-align: center;
+
+    &:hover {
+      box-shadow: 2px 4px 10px #5c5959;
     }
   }
+}

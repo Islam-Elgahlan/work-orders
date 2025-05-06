@@ -1,13 +1,15 @@
 .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-<<<<<<< HEAD
   background-color: transparent !important;
+
+  .mdc-text-field__input {
+    color: white !important;
+  }
 }
 
 .mat-mdc-form-field:not(.mat-form-field-disabled) .mat-mdc-floating-label.mdc-floating-label {
   color: #ef9b28;
 }
 
-.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input,
 .mat-mdc-raised-button:not(:disabled) {
   color: white !important;
 }
@@ -17,25 +19,5 @@
 }
 
 .mat-mdc-raised-button.mat-unthemed {
-  --mdc-protected-button-container-color: #fff;
-}
-
-.mat-mdc-raised-button.mat-unthemed {
   --mdc-protected-button-container-color: #4f78db;
-  ;
 }
-=======
-    background-color: transparent !important;
-  }
-  
-  .mat-mdc-form-field:not(.mat-form-field-disabled) .mat-mdc-floating-label.mdc-floating-label {
-    color: #ef9b28 ;
-  }
-  
-  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
-    color: white !important;
-  }
-  
-  
- 
->>>>>>> c2bb48a72b039a165a7fb03845b19df609a971e9
