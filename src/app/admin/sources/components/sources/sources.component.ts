@@ -29,68 +29,60 @@ export class SourcesComponent implements OnInit {
     public dialog: MatDialog,) { }
 
   ngOnInit(): void {
-    this.onGetAllSources();
+    this.getAllSources();
     this.subject.pipe((debounceTime(800))).subscribe({
       next: (res) => {
-        this.onGetAllSources()
+        this.getAllSources()
       },
     })
   }
 
-  onGetAllSources() {
+  // all sources
+  getAllSources() {
     this.spinner.show()
-    this._SourcesService.onGetSources().subscribe({
+    this._SourcesService.getSources().subscribe({
       next: (res) => {
         this.tableResponse = res;
         this.tableData = res?.data;
-        console.log(this.tableData);
         this.spinner.hide()
       }
     });
   }
 
+  // add source
   openAddSource() {
     const dialogRef = this.dialog.open(AddSourceComponent, {
       data: this.tableData
     });
-
-
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed', result);
       if (result) {
-        this.addDepartment(result)
-        this.onGetAllSources()
+        this.addSource(result)
       }
     });
   }
 
-  addDepartment(data: FormGroup) {
+  addSource(data: FormGroup) {
     this._SourcesService.addSource(data.value).subscribe({
       next: (res) => {
-        this._ToastrService.success(res.message, 'Department Added Succesfuly');
+        this._ToastrService.success(res.message, 'Source Added Succesfuly');
       },
       error: (err) => {
-        this._ToastrService.error(err.message, 'Error in Update Department');
+        this._ToastrService.error(err.message, 'Error in Added Source');
       },
       complete: () => {
-
+        this.getAllSources()
       }
-
     })
   }
 
-  // Edit Department
+  // edit source
   openEditSource(id: number) {
     const dialogRef = this.dialog.open(EditSourceComponent, {
       data: id
     });
-
-
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed', result);
       if (result) {
         this.editSource(result, id)
-        this.onGetAllSources()
       }
     });
   }
@@ -104,50 +96,42 @@ export class SourcesComponent implements OnInit {
         this._ToastrService.error(err.message, 'Error in Update Source');
       },
       complete: () => {
-
+        this.getAllSources()
       }
 
     })
   }
 
+  // pagination
   handlePageEvent(e: PageEvent) {
     console.log(e);
     this.pageSize = e.pageSize
     this.page = e.pageIndex + 1
-    this.onGetAllSources();
+    this.getAllSources();
   }
 
-  // Delete Source
+  // delete source
   deleteDialog(data: any): void {
-    console.log(data);
-
     const dialogRef = this.dialog.open(DeleteItemComponent, {
       data: data,
       width: '30%'
     });
-
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // console.log(result);
       if (result) {
         this.deleteItem(result.id)
-        this.onGetAllSources();
       }
-
     });
-
-
   }
   deleteItem(id: number) {
     this._SourcesService.deleteSource(id).subscribe({
       next: (res) => {
-        console.log(res)
+        this._ToastrService.success('Source Deleted')
       },
       error: (err) => {
         this._ToastrService.error('Delete Source Failed')
       },
       complete: () => {
-        this._ToastrService.success('Source Deleted')
+        this.getAllSources();
       }
     })
   }

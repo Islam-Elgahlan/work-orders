@@ -9,11 +9,11 @@ export class EquipmentsService {
 
   constructor(private _HttpClient: HttpClient) { }
 
-  onGetEquipments(): Observable<any> {
+  getEquipments(): Observable<any> {
     return this._HttpClient.get('equipments');
   }
 
-  onGetEquipmentById(id: number): Observable<any> {
+  getEquipmentById(id: number): Observable<any> {
     return this._HttpClient.get(`equipments/show/${id}`);
   }
 

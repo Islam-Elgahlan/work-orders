@@ -9,7 +9,7 @@ import { DepartmentsComponent } from '../departments/departments.component';
   templateUrl: './add-department.component.html',
   styleUrls: ['./add-department.component.scss']
 })
-export class AddDepartmentComponent implements OnInit{
+export class AddDepartmentComponent implements OnInit {
 
   currentLang = localStorage.getItem('lang')
   hideRequiredMarker: boolean = true
@@ -29,15 +29,13 @@ export class AddDepartmentComponent implements OnInit{
 
   onNoClick(): void {
     this.dialogRef.close();
-    // console.log(this.materialForm.value)
-
   }
 
   departmentForm = new FormGroup({
     id: new FormControl(this.data),
-    name_en: new FormControl(null,[Validators.required]),
-    name_ar: new FormControl(null,[Validators.required]),
-    maintenance_supervisor_id: new FormControl(null,[Validators.required]),
+    name_en: new FormControl(null, [Validators.required]),
+    name_ar: new FormControl(null, [Validators.required]),
+    maintenance_supervisor_id: new FormControl(null, [Validators.required]),
   })
 
   getAllUsers() {
@@ -48,9 +46,7 @@ export class AddDepartmentComponent implements OnInit{
     this._UsersService.getAllUsers(params).subscribe({
       next: (res) => {
         this.tableResponse = res;
-        this.tableData = this.tableResponse.data;
-        console.log(this.tableData);
-
+        this.tableData = this.tableResponse?.data;
       }
     })
   }
