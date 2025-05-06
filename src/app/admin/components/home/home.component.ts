@@ -1,12 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { UsersService } from '../../services/users.service';
 import { TranslateService } from '@ngx-translate/core';
+import {
+  trigger,
+  transition,
+  style,
+  animate,
+  stagger,
+  query,
+  keyframes,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  animations: [
+    trigger('cardAnimation', [
+      transition(':enter', [
+        query('.chart-item', [
+          style({ opacity: 0, transform: 'scale(0.8)' }),
+          stagger(200, [
+            animate(
+              '800ms ease-out',
+              keyframes([
+                style({ opacity: 0, transform: 'scale(0.8)', offset: 0 }),
+                style({ opacity: 0.5, transform: 'scale(1.05)', offset: 0.7 }),
+                style({ opacity: 1, transform: 'scale(1)', offset: 1.0 }),
+              ])
+            ),
+          ]),
+        ]),
+      ]),
+    ]),
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit {
   userName: any = localStorage.getItem('name');
@@ -20,7 +54,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private _UsersService: UsersService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private cdr: ChangeDetectorRef // إضافة ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -29,6 +64,7 @@ export class HomeComponent implements OnInit {
   }
 
   createChart() {
+    if (this.chart) this.chart.destroy();
     this.chart = new Chart('canvas', {
       type: 'doughnut',
       data: {
@@ -47,8 +83,24 @@ export class HomeComponent implements OnInit {
             ],
             backgroundColor: ['gray', '#EAB56D', '#009247'],
             hoverOffset: 4,
+            borderWidth: 2,
+            borderColor: '#fff',
           },
         ],
+      },
+      options: {
+        animation: {
+          duration: 2500,
+          easing: 'easeInOutCubic',
+          animateRotate: true,
+          animateScale: true,
+        },
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: { color: '#333', font: { size: 14 } },
+          },
+        },
       },
     });
   }
@@ -61,7 +113,8 @@ export class HomeComponent implements OnInit {
     this._UsersService.getAllUsers(params).subscribe((res) => {
       this.totalusers = res.total;
       console.log(this.totalusers);
-      this.createChart(); // تحديث الـ chart بعد جلب البيانات
+      this.createChart(); // تحديث الـ chart
+      this.cdr.markForCheck(); // إجبار الكشف عن التغييرات
     });
   }
 }
