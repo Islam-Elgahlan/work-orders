@@ -1,59 +1,58 @@
-<section class="shadow-sm">
-    <div class="container-fluid py-1">
-        <div class="row justify-content-between">
-            <div class="col-md-2">
-                <div class="logo-img">
-                    <img src=""alt="">
-                    <div>
-                        <div style="cursor: pointer" *ngIf="_HelperService.translate.currentLang=='ar'" (click)="onChangeLang('en')">
-                            <span class="px-2">English</span>
-                             <img  src="../../../assets/images/en-flag.png"class="lang-img">
-                        </div>
-                        <div style="cursor: pointer" *ngIf="_HelperService.translate.currentLang=='en'" (click)="onChangeLang('ar')" >
-                            <img src="../../../assets/images/ar-flag.png"class="lang-img">
-                            <span class="px-2">العربية</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-10 d-flex justify-content-end">
-                <div class="d-flex align-item-centeer">
-                    <div class="profile-img ">
-                        <img src="../../../assets/images/user-avatar.jpg" alt="">
-                    </div>
-                    <div class="ms-2">
-                        <h3  class="m-0">{{name}}</h3>
-                        <span class="text-muted">{{email}}</span>
-                    </div>
-                 
-                    <div>
-                        <button  (click)="toggleBadgeVisibility()" mat-icon-button>
-                            <mat-icon [matBadgeHidden]="hidden" matBadge="7" >notifications</mat-icon>
-                        </button>
-                    </div>
-                    <div>
-                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                            <mat-icon>more_vert</mat-icon>
-                          </button>
-                          <mat-menu #menu="matMenu">
-
-                            <button routerLink="/dashboard/admin/edit-profile" mat-menu-item>
-                              <mat-icon>person</mat-icon>
-                              <span>{{'profile' | translate}}</span>
-                            </button>
-                            <button  mat-menu-item>
-                              <mat-icon >visibility</mat-icon>
-                              <span>{{'changePass' | translate}}</span>
-                            </button>
-                            <button (click)="logOut()" mat-menu-item>
-                              <mat-icon>logout</mat-icon>
-                              <span>{{'logOut' | translate}}</span>
-                            </button>
-                          </mat-menu>
-                          
-                    </div>
-                </div>
-            </div>
-        </div>
+<section class="main-navbar shadow-sm">
+  <div class="container-fluid py-1 d-flex justify-content-between align-items-center">
+    <!-- Logo on the right -->
+    <div class="d-flex align-items-center logo-container">
+      <img src="../../../assets/images/LogInLogo.png" alt="Logo" class="logo-img me-3" />
     </div>
+
+    <!-- Right side: Language + Profile -->
+    <div class="d-flex align-items-center gap-3">
+      <!-- Language Switcher -->
+      <div class="lang-switcher d-flex align-items-center" style="cursor: pointer">
+        <ng-container *ngIf="_HelperService.translate.currentLang == 'ar'; else english">
+          <span class="px-2" (click)="onChangeLang('en')">English</span>
+          <img src="../../../assets/images/en-flag.png" class="lang-img" />
+        </ng-container>
+        <ng-template #english>
+          <img src="../../../assets/images/ar-flag.png" class="lang-img" (click)="onChangeLang('ar')" />
+          <span class="px-2">العربية</span>
+        </ng-template>
+      </div>
+
+      <!-- Profile Info -->
+      <div class="d-flex align-items-center">
+        <!-- <div class="profile-img me-2">
+          <img src="../../../assets/images/user-avatar.jpg" alt="Profile" />
+        </div> -->
+        <!-- <div class="me-3">
+          <h6 class="m-0">{{ name }}</h6>
+          <small class="text-muted">{{ email }}</small>
+        </div> -->
+
+        <!-- Notification Icon -->
+        <button (click)="toggleBadgeVisibility()" mat-icon-button>
+          <mat-icon [matBadgeHidden]="hidden" matBadge="7">notifications</mat-icon>
+        </button>
+
+        <!-- More menu -->
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="More">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button routerLink="/dashboard/admin/edit-profile" mat-menu-item>
+            <mat-icon>person</mat-icon>
+            <span>{{ 'profile' | translate }}</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>visibility</mat-icon>
+            <span>{{ 'changePass' | translate }}</span>
+          </button>
+          <button (click)="logOut()" mat-menu-item>
+            <mat-icon>logout</mat-icon>
+            <span>{{ 'logOut' | translate }}</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
 </section>
