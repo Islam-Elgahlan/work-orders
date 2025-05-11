@@ -12,7 +12,7 @@ import { HelperService } from 'src/app/services/helper.service';
 export class NavbarComponent {
   name:string | null =''
   email:string |null =''
-  hidden = false; 
+  hidden = false;
 
   ngOnInit(){
     this.getCurrentUser()
@@ -23,7 +23,7 @@ export class NavbarComponent {
     public _HelperService:HelperService
 
   ) {}
-  
+
   logOut() {
     const dialogRef = this.dialog.open(LogoutComponent);
   }

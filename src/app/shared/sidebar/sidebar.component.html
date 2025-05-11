@@ -1,25 +1,41 @@
-<section class="overflow-auto ">
-    <div class=" py-4 ">
-        <button  (click)="toggleSidebar()" [ngClass]="isOpened?'toggle-btn':'reverse-btn'">
-            <i class="fa-solid fa-angle-left"></i>
-        </button>
+<section class="overflow-auto">
+  <div class="py-4">
+    <button (click)="toggleSidebar()" [ngClass]="isOpened ? 'toggle-btn' : 'reverse-btn'">
+      <i class="fa-solid fa-angle-left"></i>
+    </button>
+  </div>
+
+  <!-- Admin Section -->
+  <div class="admin-section" [ngClass]="{
+    'text-start': isOpened && _HelperService.translate.currentLang == 'en',
+    'text-end': isOpened && _HelperService.translate.currentLang == 'ar',
+    'text-center': !isOpened
+  }">
+    <div class="admin-wrapper">
+      <img [src]="image" alt="Admin Image" class="admin-image" />
+      <div class="admin-info">
+        <span class="admin-name">{{ name }}</span>
+        <span class="admin-email">{{ email }}</span>
+        <span class="admin-role">{{ role }}</span>
+      </div>
     </div>
-    <div  [ngClass]="{
-        'text-start':isOpened && _HelperService.translate.currentLang =='en',
-        'text-end':isOpened && _HelperService.translate.currentLang =='ar',
-        'text-center':!isOpened 
-       }">
-        <ng-container *ngFor="let item of menu">
-            <a [routerLink]="item.link"  routerLinkActive="active" *ngIf="item.isActive" class="mt-2">
-                <div class="content">
-                    <div class="content-li " [ngClass]="isOpened?'ps-3':'ps-0'">
-                       
-                        <span ><i [class]="item.icon" style="color: #ffffff;"></i></span>
-                        <span  [ngClass]="isOpened?'d-inline':'d-none'">{{item.title}}</span>
-                    </div>
-                </div>
-               </a>
-        </ng-container>
-       </div>
-        
-    </section>
+  </div>
+
+  <!-- Navigation Menu -->
+  <div [ngClass]="{
+    'text-start': isOpened && _HelperService.translate.currentLang == 'en',
+    'text-end': isOpened && _HelperService.translate.currentLang == 'ar',
+    'text-center': !isOpened
+  }">
+    <ng-container *ngFor="let item of menu">
+      <a [routerLink]="item.link" routerLinkActive="active" *ngIf="item.isActive" class="mt-2">
+        <div class="content">
+          <div class="content-li" [ngClass]="isOpened ? 'ps-3' : 'ps-0'">
+            <span><i [class]="item.icon" style="color: #00A551;"></i></span>
+            <span [ngClass]="isOpened ? 'd-inline' : 'd-none'">{{ item.title }}</span>
+          </div>
+        </div>
+      </a>
+    </ng-container>
+  </div>
+</section>

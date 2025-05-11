@@ -1,37 +1,50 @@
+// Variables
+$main-color: #EF9B28;
+$white: #ffffff;
+$shadow-1: rgba(0, 0, 0, 0.1);
+$shadow-2: rgba(0, 0, 0, 0.05);
 
-.sec-color{
-    color: #EF9B28;
-  }
+// Classes
+.sec-color {
+  color: $main-color;
+}
+
 .auth-card {
-    background-color: #005b85;
-    padding: 2rem 1rem;
-    border-radius: 16px;
-  
-    .title {
-      padding: 10px 0px;
-  
-      span {
-        color: white;
-        font-size: 16px;
-      }
-  
-      h3 {
-        color: #ef9b28;
-        position: relative;
-  
-        &::after {
-          content: "";
-          width: 20px;
-          height: 5px;
-          background-color: #ef9b28;
-          // position: absolute;
-          // left: 0px;
-          bottom: -5px;
-          z-index: 33;
-        }
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 30px 25px;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px $shadow-1, 0 4px 8px $shadow-2;
+
+  .title {
+    padding: 10px 0;
+
+    span {
+      color: $white;
+      font-size: 16px;
+    }
+
+    h3 {
+      color: $main-color;
+      position: relative;
+
+      &::after {
+        content: "";
+        width: 20px;
+        height: 5px;
+        background-color: $main-color;
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        z-index: 33;
       }
     }
   }
-  a{
-    text-decoration: none;
-}  
+}
+
+a {
+  text-decoration: none;
+}
+
+.logo-container img {
+  max-width: 150px;
+}
