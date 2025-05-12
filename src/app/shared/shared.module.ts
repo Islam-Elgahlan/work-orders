@@ -13,6 +13,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { DeleteItemComponent } from './delete-item/delete-item.component';
+import { NotificationsListComponent } from './notifications-list/notifications-list.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -23,7 +24,8 @@ export function createTranslateLoader(http: HttpClient) {
     NavbarComponent,
     SidebarComponent,
     LogoutComponent,
-    DeleteItemComponent
+    DeleteItemComponent,
+    NotificationsListComponent
   ],
   imports: [
     CommonModule,
@@ -44,8 +46,9 @@ export function createTranslateLoader(http: HttpClient) {
     FormsModule,
     NavbarComponent,
     SidebarComponent,
-    TranslateModule
-   
+    TranslateModule,
+    NotificationsListComponent
+
   ]
 })
 export class SharedModule { }
