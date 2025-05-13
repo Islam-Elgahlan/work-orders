@@ -58,15 +58,16 @@ export class SourcesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed', result);
       if (result) {
-        this.addDepartment(result)
+        this.addSource(result)
         this.onGetAllSources()
       }
     });
   }
 
-  addDepartment(data: FormGroup) {
+  addSource(data: FormGroup) {
     this._SourcesService.addSource(data.value).subscribe({
       next: (res) => {
+        this.onGetAllSources()
         this._ToastrService.success(res.message, 'Department Added Succesfuly');
       },
       error: (err) => {
@@ -98,6 +99,7 @@ export class SourcesComponent implements OnInit {
   editSource(data: FormGroup, id: number) {
     this._SourcesService.editSource(data.value, id).subscribe({
       next: (res) => {
+        this.onGetAllSources()
         this._ToastrService.success(res.message, 'Source Update Succesfuly');
       },
       error: (err) => {
@@ -141,7 +143,7 @@ export class SourcesComponent implements OnInit {
   deleteItem(id: number) {
     this._SourcesService.deleteSource(id).subscribe({
       next: (res) => {
-        console.log(res)
+        this.onGetAllSources()
       },
       error: (err) => {
         this._ToastrService.error('Delete Source Failed')

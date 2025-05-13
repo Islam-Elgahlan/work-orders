@@ -62,7 +62,7 @@ export class EditDepartmentComponent implements OnInit {
     this._DepartmentsService.onGetDepartmentById(id).subscribe({
       next: (res) => {
         this.departmentData = res.data;
-        console.log(this.departmentData.maintenance_supervisor.name);
+        // console.log(this.departmentData.maintenance_supervisor.name);
 
       }, error: (err) => {
 
