@@ -39,7 +39,7 @@ const MaterialComponents = [
   MatMenuModule,
   MatBadgeModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
 
 ]
 
