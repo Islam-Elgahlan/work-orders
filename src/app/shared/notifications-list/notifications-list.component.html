@@ -1,0 +1,41 @@
+<section>
+  <div class="container py-5">
+    <div class="page-header shadow-lg">
+      <h1>{{ 'notifications.title' | translate }}</h1>
+      <button routerLink="add-edit-notification" class="primary px-3">
+        <span class="fa-solid fa-plus mx-2"></span>
+        <span>{{ 'addnew' | translate }}</span>
+      </button>
+    </div>
+
+    <div class="notification-list">
+      <div *ngIf="notifications.length > 0; else noNotifications">
+        <div *ngFor="let notification of notifications" class="notification-item">
+          <mat-card class="mb-3">
+            <mat-card-header>
+              <mat-icon>{{ notification.icon }}</mat-icon>
+              <mat-card-title>{{ notification.title }}</mat-card-title>
+              <mat-card-subtitle>{{ notification.time }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>{{ notification.message }}</mat-card-content>
+            <mat-card-actions>
+              <button mat-button [routerLink]="['edit-notification', notification.id]">{{ 'edit' | translate }}</button>
+              <!-- <button mat-button (click)="deleteNotification(notification)">{{ 'delete' | translate }}</button> -->
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+
+      <ng-template #noNotifications>
+        <div class="no-notifications">{{ 'no_notifications' | translate }}</div>
+      </ng-template>
+    </div>
+
+    <!-- Pagination -->
+    <!-- <div class="bg-info">
+      <mat-paginator #paginator class="demo-paginator" (page)="handlePageEvent($event)" [length]="notifications.length"
+        [pageSize]="10" [pageSizeOptions]="[5, 10, 15]" aria-label="Select page">
+      </mat-paginator>
+    </div> -->
+  </div>
+</section>

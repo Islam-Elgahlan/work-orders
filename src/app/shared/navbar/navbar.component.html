@@ -1,11 +1,11 @@
 <section class="main-navbar shadow-sm">
-  <div class="container-fluid py-1 d-flex justify-content-between align-items-center">
+  <div class="container-fluid py-1 d-flex flex-column flex-sm-row justify-content-between align-items-center">
     <!-- Logo on the right -->
     <div class="d-flex align-items-center logo-container">
       <img src="../../../assets/images/LogInLogo.png" alt="Logo" class="logo-img me-3" />
     </div>
 
-    <!-- Right side: Language + Profile -->
+    <!-- Right side: Language + Profile + Notifications -->
     <div class="d-flex align-items-center gap-3">
       <!-- Language Switcher -->
       <div class="lang-switcher d-flex align-items-center" style="cursor: pointer">
@@ -19,22 +19,55 @@
         </ng-template>
       </div>
 
-      <!-- Profile Info -->
-      <div class="d-flex align-items-center">
-        <!-- <div class="profile-img me-2">
-          <img src="../../../assets/images/user-avatar.jpg" alt="Profile" />
-        </div> -->
-        <!-- <div class="me-3">
-          <h6 class="m-0">{{ name }}</h6>
-          <small class="text-muted">{{ email }}</small>
-        </div> -->
-
-        <!-- Notification Icon -->
-        <button (click)="toggleBadgeVisibility()" mat-icon-button>
-          <mat-icon [matBadgeHidden]="hidden" matBadge="7">notifications</mat-icon>
+      <!-- Notification Icon -->
+      <div class="notification-icon">
+        <button (click)="toggleBadgeVisibility()" mat-icon-button class="notification-toggle">
+          <mat-icon [matBadgeHidden]="hidden" [matBadge]="notifications.length" matBadgeColor="warn">
+            notifications
+          </mat-icon>
         </button>
 
-        <!-- More menu -->
+
+      </div>
+
+      <!-- Notification Dropdown -->
+      <div class="notification-menu" *ngIf="!hidden" [ngClass]="{'rtl': _HelperService.translate.currentLang === 'ar'}">
+        <!-- Header with Close Button on Right -->
+        <div class="notification-header">
+
+          <button mat-icon-button class="close-btn" (click)="toggleBadgeVisibility()">
+            <mat-icon>close</mat-icon>
+          </button>
+
+          <span class="header-title">الإشعارات</span>
+        </div>
+        <mat-divider></mat-divider>
+
+        <ng-container *ngIf="notifications.length > 0; else noNotifications">
+          <div class="notification-item" *ngFor="let notification of displayedNotifications.slice(0, 3)"
+            (click)="navigateToOrder(notification.orderId)">
+            <div class="icon">
+              <mat-icon>{{ notification.icon }}</mat-icon>
+            </div>
+            <div class="content">
+              <div class="title">{{ notification.title }}</div>
+              <div class="message">{{ notification.message }}</div>
+              <div class="time">{{ notification.time }}</div>
+            </div>
+            <div class="status-dot"></div>
+          </div>
+          <button mat-button class="view-all-btn" (click)="viewAllNotifications()">عرض الكل</button>
+
+        </ng-container>
+
+        <!-- No Notifications Message -->
+        <ng-template #noNotifications>
+          <div class="no-notifications">لا توجد إشعارات جديدة</div>
+        </ng-template>
+      </div>
+
+      <!-- More menu -->
+      <div class="d-flex align-items-center">
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="More">
           <mat-icon>more_vert</mat-icon>
         </button>

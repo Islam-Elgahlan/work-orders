@@ -57,6 +57,7 @@ export class SourcesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.addSource(result)
+
       }
     });
   }
@@ -65,6 +66,8 @@ export class SourcesComponent implements OnInit {
     this._SourcesService.addSource(data.value).subscribe({
       next: (res) => {
         this._ToastrService.success(res.message, 'Source Added Succesfuly');
+        this.onGetAllSources()
+
       },
       error: (err) => {
         this._ToastrService.error(err.message, 'Error in Added Source');
