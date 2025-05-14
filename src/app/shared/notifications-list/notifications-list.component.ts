@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
@@ -8,13 +9,14 @@ import { HelperService } from 'src/app/services/helper.service';
 })
 export class NotificationsListComponent {
   notifications: any[] = [];
-  constructor(private _HelperService: HelperService) {}
+  title = localStorage.getItem('title')?.toLowerCase();
+  constructor(private _HelperService: HelperService, private _Router: Router) {}
   ngOnInit(): void {
     this.getAllNotifications();
   }
 
   getAllNotifications() {
-    this._HelperService.getNotifications().subscribe(
+    this._HelperService.getAllNotifications().subscribe(
       (response) => {
         if (response.success) {
           this.notifications = response.data.map((item: any) => ({
@@ -41,5 +43,11 @@ export class NotificationsListComponent {
     if (diff < 3600) return `منذ ${Math.floor(diff / 60)} دقيقة`;
     if (diff < 86400) return `منذ ${Math.floor(diff / 3600)} ساعة`;
     return `منذ ${Math.floor(diff / 86400)} يوم`;
+  }
+
+  openNotification(orderId: number) {
+    this._Router.navigate([
+      `dashboard/${this.title}/work-orders/edit-order/${orderId}`,
+    ]);
   }
 }
