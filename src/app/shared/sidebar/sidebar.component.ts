@@ -31,7 +31,7 @@ export class SidebarComponent implements OnInit {
     public _HelperService: HelperService,
     private _Router: Router,
     private _AuthService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.name = localStorage.getItem('name');
@@ -121,6 +121,12 @@ export class SidebarComponent implements OnInit {
       icon: 'fa-solid fa-toolbox fs-4',
       title: this.translate.instant('sidebar.equipments'),
       link: '/dashboard/admin/equipments',
+      isActive: this.isAdmin(),
+    },
+    {
+      icon: 'fa-solid fa-receipt fs-4',
+      title: this.translate.instant('sidebar.reports'),
+      link: '/dashboard/admin/reports',
       isActive: this.isAdmin(),
     },
     {

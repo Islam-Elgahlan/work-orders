@@ -6,7 +6,7 @@
         <div mat-dialog-content>
             <form [formGroup]="departmentForm">
                 <div class="row">
-                    <!--  name -->
+                    <!--  english name -->
                     <div class="col-md-6">
                         <mat-form-field appearance="fill" class="w-100">
                             <mat-label class="text-orange">{{'department.name_en' | translate}}</mat-label>
@@ -14,6 +14,7 @@
                                 placeholder="{{'department.name_en' | translate}}" />
                         </mat-form-field>
                     </div>
+                    <!--  arabic name -->
                     <div class="col-md-6">
                         <mat-form-field appearance="fill" class="w-100">
                             <mat-label class="text-orange">{{'department.name_ar' | translate}}</mat-label>
@@ -36,7 +37,8 @@
             </form>
         </div>
         <div mat-dialog-actions class="d-flex justify-content-between">
-            <button class=" primary mb-2 text-white" [disabled]="departmentForm.invalid" mat-button [mat-dialog-close]="departmentForm" cdkFocusInitial>
+            <button class=" primary mb-2 text-white" [disabled]="departmentForm.invalid" mat-button
+                [mat-dialog-close]="departmentForm" cdkFocusInitial>
                 {{'save'|translate }}
             </button>
             <button class="btn mb-2 btn-secondary" mat-button (click)="onNoClick()">

@@ -6,13 +6,14 @@
         <div mat-dialog-content>
             <form [formGroup]="sourcesForm">
                 <div class="row">
-                    <!--  name -->
+                    <!--  english name -->
                     <div class="col-md-6">
                         <mat-form-field appearance="fill" class="w-100">
                             <mat-label class="text-orange">{{'sources.name_en' | translate}}</mat-label>
                             <input formControlName="name_en" matInput placeholder="{{'sources.name_en' | translate}}" />
                         </mat-form-field>
                     </div>
+                     <!--  arabic name -->
                     <div class="col-md-6">
                         <mat-form-field appearance="fill" class="w-100">
                             <mat-label class="text-orange">{{'sources.name_ar' | translate}}</mat-label>

@@ -3,6 +3,7 @@ import { EquipmentsComponent } from '../equipments/equipments.component';
 import { EquipmentsService } from '../../services/equipments.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-equipment',
@@ -12,40 +13,32 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class EditEquipmentComponent implements OnInit {
 
   currentLang = localStorage.getItem('lang')
-  hideRequiredMarker: boolean = true
-  tableResponse: any | undefined;
-  tableData: any[] | undefined = [];
-  pageSize: number | undefined = 100;
-  page: number | undefined = 1;
-  pageIndex: number = 0;
   sourcesData: any
 
   constructor(
-    public dialogRef: MatDialogRef<EquipmentsComponent>, private _EquipmentsService: EquipmentsService,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    public dialogRef: MatDialogRef<EditEquipmentComponent>, private _EquipmentsService: EquipmentsService,
+    @Inject(MAT_DIALOG_DATA) public data: any, private _ToastrService: ToastrService) { }
 
   ngOnInit(): void {
-    this.getDepartmentById(this.data);
+    this.getEquipmentById(this.data);
   }
 
   onNoClick(): void {
     this.dialogRef.close();
-    // console.log(this.materialForm.value)
-
   }
 
   equipmentForm = new FormGroup({
-    id: new FormControl(this.data, [Validators.required]),
+    id: new FormControl(this.data),
     name_en: new FormControl(null, [Validators.required]),
     name_ar: new FormControl(null, [Validators.required]),
   })
 
-  getDepartmentById(id: number) {
-    this._EquipmentsService.onGetEquipmentById(id).subscribe({
+  getEquipmentById(id: number) {
+    this._EquipmentsService.getEquipmentById(id).subscribe({
       next: (res) => {
         this.sourcesData = res.data;
       }, error: (err) => {
-
+        this._ToastrService.error(err.message, 'Equipment id Failed')
       }, complete: () => {
         this.equipmentForm.patchValue({
           name_en: this.sourcesData?.name_en,

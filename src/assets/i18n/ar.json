@@ -18,6 +18,7 @@
     "building": "المباني",
     "sources": "المصادر",
     "equipments": "المعدات",
+    "reports": "التقارير",
     "myorders": "أوامر العمل خاصتي"
   },
   "users": {
@@ -58,6 +59,7 @@
   "profile": "الملف الشخصي",
   "changePass": "تغيير الرقم السري",
   "save": "حفظ",
+  "search": "بحث",
   "delete": "حذف",
   "edit": "تعديل",
   "addnew": "إضافة جديد",
@@ -154,5 +156,24 @@
     "name_en": "الاسم بالانجليزية",
     "name_ar": "الاسم بالعربية",
     "actions": "تحكم"
+  },
+  "reports": {
+    "reports": "التقارير",
+    "department": "القسم",
+    "engineer": "المهندس",
+    "technician": "الفني",
+    "building": "المبنى",
+    "work_type": "نوع العمل",
+    "source": "المصدر",
+    "report": "التقرير",
+    "maintenanceSupervisor": "المشرف",
+    "equipment": "المعدة",
+    "user": "المستخدم",
+    "added_by": "اضافة بواسطة",
+    "description": "الوصف",
+    "customer": "اسم العميل",
+    "phone": "رقم التيلفون",
+    "start": "تاريخ البدء",
+    "end": "تاريخ الانتهاء"
   }
 }

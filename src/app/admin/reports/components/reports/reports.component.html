@@ -1,0 +1,117 @@
+<section>
+    <div class="my-4">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="p-4">
+                    <form [formGroup]="reportForm" (ngSubmit)="onSubmit(reportForm)">
+                        <div class="row align-items-center">
+                            <h2></h2>
+                        </div>
+                        <div class="row">
+                            <!--  Department -->
+                            <div class="col-md-4">
+                                <mat-form-field class="w-100" [hideRequiredMarker]="hideRequiredMarker">
+                                    <mat-label>{{'reports.department' | translate}}</mat-label>
+                                    <mat-select (selectionChange)="onselectDepartment()" [(value)]="departmentId"
+                                        formControlName="department_id">
+                                        <mat-option *ngFor="let item of departments" [value]="item.id">
+                                            {{item.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <!--  Engineer -->
+                            <div class="col-md-4">
+                                <mat-form-field class="w-100" [hideRequiredMarker]="hideRequiredMarker">
+                                    <mat-label>{{'reports.engineer' | translate}}</mat-label>
+                                    <mat-select formControlName="engineer_id">
+                                        <mat-option *ngFor="let item of engineers" [value]="item.id">
+                                            {{item.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <!--  Technician -->
+                            <div class="col-md-4">
+                                <mat-form-field class="w-100" [hideRequiredMarker]="hideRequiredMarker">
+                                    <mat-label>{{'reports.technician' | translate}}</mat-label>
+                                    <mat-select formControlName="technician_id">
+                                        <mat-option *ngFor="let item of technicians" [value]="item.id">
+                                            {{item.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <!-- start Date -->
+                            <div class="col-md-4">
+                                <mat-form-field appearance="fill" class="example-full-width">
+
+                                    <mat-label>{{'reports.start' | translate}}</mat-label>
+                                    <input formControlName="from_date" matInput [matDatepicker]="picker3">
+                                    <mat-hint>MM/DD/YYYY</mat-hint>
+                                    <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker3></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <!-- end date -->
+                            <div class="col-md-4">
+                                <mat-form-field appearance="fill" class="example-full-width">
+
+                                    <mat-label>{{'reports.end' | translate}}</mat-label>
+                                    <input formControlName="to_date" matInput [matDatepicker]="picker4">
+                                    <mat-hint>MM/DD/YYYY</mat-hint>
+                                    <mat-datepicker-toggle matIconSuffix [for]="picker4"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker4></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+                        <div class="text-start mt-3">
+                            <button class="primary text-center w-25">{{'search'|translate}}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Table -->
+    <div class="my-4">
+        <div class="table-card container py-5">
+            <div class="page-header shadow-lg">
+                <h1>{{'reports.reports' | translate}}</h1>
+            </div>
+
+            <table class="custom-table">
+                <thead class="text-capitalize">
+                    <th class="alone">#</th>
+                    <th class="px-2 alone">{{'reports.building' | translate}}</th>
+                    <th class="alone">{{'reports.work_type' | translate}}</th>
+                    <th class="alone">{{'reports.source' | translate}}</th>
+                    <th class="alone">{{'reports.department' | translate}}</th>
+                    <th class="alone">{{'reports.maintenanceSupervisor' | translate}}</th>
+                    <th class="alone">{{'reports.equipment' | translate}}</th>
+                    <th class="alone">{{'reports.engineer' | translate}}</th>
+                    <th class="alone">{{'reports.technician' | translate}}</th>
+                    <th class="alone">{{'reports.added_by' | translate}}</th>
+                    <th class="alone">{{'reports.description' | translate}}</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of data; let isEven = even" [class]="isEven ? '' : 'bg-secondary-subtle'">
+                        <td class="px-2"><a [routerLink]="['/dashboard/admin/work-orders/view-order', item.id]">{{
+                                item.id }}</a></td>
+                        <td class="px-2">{{ item.building?.name }}</td>
+                        <td class="px-2">{{ item.work_type?.name }}</td>
+                        <td class="px-2">{{ item.source?.name }}</td>
+                        <td class="px-2">{{ item.department?.name }}</td>
+                        <td class="px-2">{{ item.department?.maintenanceSupervisor?.name }}</td>
+                        <td class="px-2">{{ item.equipment?.name }}</td>
+                        <td class="px-2">{{ item.engineer?.name }}</td>
+                        <td class="px-2">{{ item.technician?.name }}</td>
+                        <td class="px-2">{{ item.added_by?.name }}</td>
+                        <td class="px-2">{{ item.description }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
