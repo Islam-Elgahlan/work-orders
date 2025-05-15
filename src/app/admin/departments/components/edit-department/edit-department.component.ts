@@ -58,6 +58,7 @@ export class EditDepartmentComponent implements OnInit {
     this._DepartmentsService.getDepartmentById(id).subscribe({
       next: (res) => {
         this.departmentData = res.data;
+
       }, error: (err) => {
         this._ToastrService.error(err.message, 'Department id Failed')
       }, complete: () => {
