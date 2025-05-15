@@ -12,20 +12,8 @@ import { ReportsService } from '../../services/reports.service';
   styleUrls: ['./reports.component.scss']
 })
 export class ReportsComponent {
-
-  ngOnInit() {
-    this.getDepartment()
-  }
-
-  constructor(
-    private _ReportsService: ReportsService,
-    private _LookupsService: LookupsService,
-    private _ToastrService: ToastrService,
-    private _Router: Router,
-    private _HelperService: HelperService
-  ) { }
-
   data: any
+  status: any
   departments: any
   departmentId: any
   supervisor: any
@@ -37,6 +25,21 @@ export class ReportsComponent {
   hide: boolean = true;
   confirmHide: boolean = true;
   hideRequiredMarker: boolean = true;
+
+  constructor(
+    private _ReportsService: ReportsService,
+    private _LookupsService: LookupsService,
+    private _ToastrService: ToastrService,
+    private _Router: Router,
+    private _HelperService: HelperService
+  ) { }
+
+  ngOnInit() {
+    this.getDepartment()
+    this.getAllStatus()
+    this.getEngineers()
+    this.getTechnicians()
+  }
 
   reportForm = new FormGroup(
     {
@@ -60,7 +63,6 @@ export class ReportsComponent {
     this._ReportsService.addReports(data.value).subscribe({
       next: (res) => {
         this.data = res.data
-        console.log(data.value);
         this._ToastrService.success('Report Added Succesfuly');
       },
       error: (err) => {
@@ -76,6 +78,15 @@ export class ReportsComponent {
 
     })
   }
+  // Status
+  getAllStatus() {
+    this._ReportsService.getStatus().subscribe(
+      (res) => {
+        this.status = res.data
+
+      }
+    )
+  }
   // Department
   getDepartment() {
     this._LookupsService.getDepartment().subscribe(
@@ -85,24 +96,23 @@ export class ReportsComponent {
       }
     )
   }
-  onselectDepartment() {
-    this.supervisor = 'ssss'
-    this.getEngineers(this.departmentId)
-    this.getTechnicians(this.departmentId)
-  }
   // Engineers
-  getEngineers(id: number) {
-    this._HelperService.getEngineers(id).subscribe(
+  getEngineers() {
+    this._ReportsService.getEngineers().subscribe(
       (res) => {
         this.engineers = res.data;
+        console.log(this.engineers);
+
       }
     )
   }
   // Technicians
-  getTechnicians(id: number) {
-    this._HelperService.getTechnicians(id).subscribe(
+  getTechnicians() {
+    this._ReportsService.getTechnicians().subscribe(
       (res) => {
         this.technicians = res.data;
+        console.log(this.technicians);
+
       }
     )
   }

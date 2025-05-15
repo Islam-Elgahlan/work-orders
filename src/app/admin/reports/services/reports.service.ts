@@ -12,4 +12,13 @@ export class ReportsService {
   addReports(data: any): Observable<any> {
     return this._httpClient.post(`work-orders/custom-filter`, data)
   }
+  getStatus(): Observable<any> {
+    return this._httpClient.get(`work-orders/lookups/statuses`)
+  }
+  getEngineers(): Observable<any> {
+    return this._httpClient.get(`auth/get_engineers/10/1`)
+  }
+  getTechnicians(): Observable<any> {
+    return this._httpClient.get(`auth/get_technicians/10`)
+  }
 }
