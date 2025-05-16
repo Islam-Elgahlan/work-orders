@@ -169,6 +169,7 @@
         "maintenanceSupervisor": "maintenanceSupervisor",
         "equipment": "equipment",
         "user": "user",
+        "status": "status",
         "added_by": "added_by",
         "description": "description",
         "customer": "customer name",
