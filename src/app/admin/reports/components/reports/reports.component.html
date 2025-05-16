@@ -4,16 +4,26 @@
             <div class="col-md-10">
                 <div class="p-4">
                     <form [formGroup]="reportForm" (ngSubmit)="onSubmit(reportForm)">
-                        <div class="row align-items-center">
-                            <h2></h2>
-                        </div>
                         <div class="row">
+                            <!--  Status -->
+                            <div class="col-md-4">
+                                <mat-form-field class="w-100" [hideRequiredMarker]="hideRequiredMarker">
+                                    <mat-label>{{'reports.status' | translate}}</mat-label>
+                                    <mat-select formControlName="status">
+                                        <mat-option>None</mat-option>
+                                        <mat-option *ngFor="let item of status" [value]="item.id">
+                                            {{item.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
                             <!--  Department -->
                             <div class="col-md-4">
                                 <mat-form-field class="w-100" [hideRequiredMarker]="hideRequiredMarker">
                                     <mat-label>{{'reports.department' | translate}}</mat-label>
-                                    <mat-select (selectionChange)="onselectDepartment()" [(value)]="departmentId"
-                                        formControlName="department_id">
+                                    <!-- <mat-select (selectionChange)="onselectDepartment()" [(value)]="departmentId" -->
+                                    <mat-select [(value)]="departmentId" formControlName="department_id">
+                                        <mat-option>None</mat-option>
                                         <mat-option *ngFor="let item of departments" [value]="item.id">
                                             {{item.name}}
                                         </mat-option>
@@ -25,6 +35,7 @@
                                 <mat-form-field class="w-100" [hideRequiredMarker]="hideRequiredMarker">
                                     <mat-label>{{'reports.engineer' | translate}}</mat-label>
                                     <mat-select formControlName="engineer_id">
+                                        <mat-option>None</mat-option>
                                         <mat-option *ngFor="let item of engineers" [value]="item.id">
                                             {{item.name}}
                                         </mat-option>
@@ -36,6 +47,7 @@
                                 <mat-form-field class="w-100" [hideRequiredMarker]="hideRequiredMarker">
                                     <mat-label>{{'reports.technician' | translate}}</mat-label>
                                     <mat-select formControlName="technician_id">
+                                        <mat-option>None</mat-option>
                                         <mat-option *ngFor="let item of technicians" [value]="item.id">
                                             {{item.name}}
                                         </mat-option>
@@ -45,7 +57,6 @@
                             <!-- start Date -->
                             <div class="col-md-4">
                                 <mat-form-field appearance="fill" class="example-full-width">
-
                                     <mat-label>{{'reports.start' | translate}}</mat-label>
                                     <input formControlName="from_date" matInput [matDatepicker]="picker3">
                                     <mat-hint>MM/DD/YYYY</mat-hint>
@@ -88,12 +99,10 @@
                     <th class="alone">{{'reports.work_type' | translate}}</th>
                     <th class="alone">{{'reports.source' | translate}}</th>
                     <th class="alone">{{'reports.department' | translate}}</th>
-                    <th class="alone">{{'reports.maintenanceSupervisor' | translate}}</th>
-                    <th class="alone">{{'reports.equipment' | translate}}</th>
                     <th class="alone">{{'reports.engineer' | translate}}</th>
                     <th class="alone">{{'reports.technician' | translate}}</th>
                     <th class="alone">{{'reports.added_by' | translate}}</th>
-                    <th class="alone">{{'reports.description' | translate}}</th>
+                    <th class="alone">{{'reports.status' | translate}}</th>
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of data; let isEven = even" [class]="isEven ? '' : 'bg-secondary-subtle'">
@@ -103,12 +112,10 @@
                         <td class="px-2">{{ item.work_type?.name }}</td>
                         <td class="px-2">{{ item.source?.name }}</td>
                         <td class="px-2">{{ item.department?.name }}</td>
-                        <td class="px-2">{{ item.department?.maintenanceSupervisor?.name }}</td>
-                        <td class="px-2">{{ item.equipment?.name }}</td>
                         <td class="px-2">{{ item.engineer?.name }}</td>
                         <td class="px-2">{{ item.technician?.name }}</td>
                         <td class="px-2">{{ item.added_by?.name }}</td>
-                        <td class="px-2">{{ item.description }}</td>
+                        <td class="px-2">{{ item.status?.name }}</td>
                     </tr>
                 </tbody>
             </table>
