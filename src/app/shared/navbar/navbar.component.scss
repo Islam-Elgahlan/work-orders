@@ -6,7 +6,7 @@ body {
 .main-navbar {
   position: sticky;
   top: 0;
-  z-index: 1100;
+  //z-index: 1100;
   background-color: rgba(255, 255, 255, 0.7);
   height: auto;
   padding: 0.3rem 2rem;
@@ -17,6 +17,7 @@ body {
   justify-content: space-between;
   flex-wrap: wrap;
   transition: background-color 0.3s ease;
+
 
   .logo-container {
     display: flex;
@@ -70,96 +71,27 @@ body {
     }
   }
 
-  h6 {
-    font-size: 16px;
-    margin: 0;
-    font-weight: 600;
-  }
-
-  small {
-    font-size: 12px;
-    color: #888;
-  }
-
-  button[mat-icon-button] {
-    margin-inline: 6px;
-  }
-
-  .notification-icon {
-    position: relative;
-    z-index: 1200;
-  }
-
-  .notification-toggle {
-    z-index: 1200;
-  }
-
   .notification-menu {
     position: absolute;
     top: 100%;
-    left: 100px;
-    width: 380px;
-    max-height: 500px;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     padding: 15px;
     z-index: 1000;
+    width: 380px;
+    max-height: 500px;
     transform: translateY(-10px);
-    /* الشاشات الكبيرة: تحريك لفوق بـ 10 بكسل */
 
-    &.rtl {
-      direction: rtl;
+    &[dir="ltr"] {
+      left: auto;
+      right: 100px;
+    }
+
+    &[dir="rtl"] {
+      right: auto;
+      left: 100px;
       text-align: right;
-
-      .notification-header {
-        flex-direction: row-reverse;
-
-        .close-btn {
-          margin-right: 8px;
-          margin-left: 0;
-        }
-
-        .header-title {
-          text-align: start !important;
-          margin-right: auto;
-        }
-      }
-
-      .notification-item {
-        flex-direction: row-reverse;
-        padding: 8px;
-
-        .icon {
-          margin-right: 0;
-          margin-left: 12px;
-        }
-
-        .status-dot {
-          margin-left: 2px;
-          margin-right: 8px;
-        }
-      }
-
-      .view-all-btn {
-        text-align: center;
-        background-color: #eab56d;
-        border-radius: 6px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        transition: all 0.3s ease;
-
-        &:hover {
-          background-color: #ffc107;
-          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-          cursor: pointer;
-        }
-
-        &:active {
-          background-color: #3e009b;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-          transform: translateY(2px);
-        }
-      }
     }
 
     .notification-header {
@@ -171,17 +103,6 @@ body {
       background-color: #eab56d;
       color: #fff;
       border-radius: 8px 8px 0 0;
-
-      .close-btn {
-        margin-left: 8px;
-        color: #fff;
-      }
-
-      .header-title {
-        flex-grow: 1;
-        text-align: center;
-        font-size: 16px;
-      }
     }
 
     .notification-item {
@@ -190,13 +111,11 @@ body {
       padding: 10px 14px;
       margin: 4px 0;
       border-radius: 8px;
-      transition: background-color 0.2s ease;
       background-color: #f9f9f9;
       border: 1px solid #e0e0e0;
 
       &:hover {
         background-color: #e0f7fa;
-        cursor: pointer;
       }
 
       .icon {
@@ -208,8 +127,7 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 20px;
-        margin-right: 12px;
+        margin-inline-end: 12px;
       }
 
       .content {
@@ -220,8 +138,6 @@ body {
         .title {
           font-weight: bold;
           font-size: 14px;
-          color: #333;
-          margin-bottom: 2px;
         }
 
         .message {
@@ -232,16 +148,7 @@ body {
         .time {
           font-size: 10px;
           color: #999;
-          margin-top: 4px;
         }
-      }
-
-      .status-dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background-color: #ffc107;
-        margin-left: 8px;
       }
     }
 
@@ -252,27 +159,21 @@ body {
       padding: 8px;
       font-weight: bold;
       color: #fff;
-      background: none;
-      border: none;
-      cursor: pointer;
-      border-top: 1px solid #e0e0e0;
+      background-color: #eab56d;
+      margin-top: 8px;
 
       &:hover {
-        background-color: #f1f1f1;
+        background-color: #ffc107;
       }
     }
 
-    .no-notifications {
-      text-align: center;
-      padding: 12px;
-      color: #777;
-    }
-
+    //  responsive
     @media (max-width: 768px) {
-      left: 0;
+      left: 0 !important;
+      right: 0 !important;
       width: 100%;
       transform: translateY(-5px);
-      /* الشاشات الصغيرة: تحريك لفوق بـ 5 بكسل فقط */
     }
   }
+
 }

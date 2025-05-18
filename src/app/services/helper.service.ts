@@ -47,9 +47,15 @@ export class HelperService {
     return this._HttpClient.get(`auth/get_technicians/100/${id}`);
   }
 
-  getNotifications(): Observable<any> {
-    return this._HttpClient.get(
-      'notifications'
-    );
+  getNotifications(id: number): Observable<any> {
+    return this._HttpClient.get(`notifications/${id}`);
+  }
+
+  getAllNotifications(): Observable<any> {
+    return this._HttpClient.get(`notifications`);
+  }
+
+  MarkAsRead(id: number , data:number): Observable<any> {
+    return this._HttpClient.put(`notifications/mark_as_read/${id}`,data);
   }
 }
