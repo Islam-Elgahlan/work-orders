@@ -16,8 +16,8 @@ export class EditBuildingComponent implements OnInit {
   buildingData: any
 
   constructor(
-    public dialogRef: MatDialogRef<BuildingComponent>, private _BuildingService: BuildingService,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    public dialogRef: MatDialogRef<EditBuildingComponent>, private _BuildingService: BuildingService,
+    @Inject(MAT_DIALOG_DATA) public data: any, private _ToastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.getBuildingById(this.data)
@@ -34,11 +34,11 @@ export class EditBuildingComponent implements OnInit {
   })
 
   getBuildingById(id: number) {
-    this._BuildingService.onGetBuildingById(id).subscribe({
+    this._BuildingService.getBuildingById(id).subscribe({
       next: (res) => {
         this.buildingData = res.data;
       }, error: (err) => {
-
+        this._ToastrService.error(err.message, 'Building id Failed');
       }, complete: () => {
         this.buildingForm.patchValue({
           name_en: this.buildingData?.name_en,

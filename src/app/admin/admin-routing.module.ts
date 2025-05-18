@@ -45,6 +45,7 @@ const routes: Routes = [
         (m) => m.WorkOrdersModule
       ),
   },
+
 ];
 
 @NgModule({

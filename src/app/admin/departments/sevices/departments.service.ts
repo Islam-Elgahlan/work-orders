@@ -9,11 +9,11 @@ export class DepartmentsService {
 
   constructor(private _HttpClient: HttpClient) { }
 
-  onGetDepartment(): Observable<any> {
+  getDepartment(): Observable<any> {
     return this._HttpClient.get('departments');
   }
 
-  onGetDepartmentById(id:number): Observable<any> {
+  getDepartmentById(id:number): Observable<any> {
     return this._HttpClient.get(`departments/show/${id}`);
   }
 

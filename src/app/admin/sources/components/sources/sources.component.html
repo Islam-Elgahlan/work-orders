@@ -1,7 +1,7 @@
 <section>
     <div class="table-card container py-5">
         <div class="page-header shadow-lg">
-            <h1>{{'department.department' | translate}}</h1>
+            <h1>{{'sources.sources' | translate}}</h1>
             <button class="primary px-3" (click)="openAddSource()">
                 <span class="fa-solid fa-plus mx-2"></span>
                 <span>{{'addnew'|translate}}</span>
@@ -10,15 +10,15 @@
 
         <table class="custom-table">
             <thead class="text-capitalize">
-                <th class="px-2 alone">{{'department.name_en' | translate}}</th>
-                <th class="px-2 alone">{{'department.name_ar' | translate}}</th>
-                <th class="alone">{{'department.actions' | translate}}</th>
+                <th class="px-2 alone">{{'sources.name_en' | translate}}</th>
+                <th class="px-2 alone">{{'sources.name_ar' | translate}}</th>
+                <th class="alone">{{'sources.actions' | translate}}</th>
             </thead>
             <tbody>
                 <tr *ngFor="let item of tableData; let isEven = even" [class]="isEven ? '' : 'bg-secondary-subtle'">
                     <td class="px-2">{{ item.name_en }}</td>
                     <td class="px-2">{{ item.name_ar }}</td>
-                    
+
                     <td class="text-center">
                         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                             <mat-icon>more_vert</mat-icon>
@@ -26,7 +26,7 @@
                         <mat-menu #menu="matMenu">
                             <button mat-menu-item (click)="openEditSource(item.id)">
                                 <mat-icon>edit_square</mat-icon>
-                                <span>{{'department.edit'|translate}}</span>
+                                <span>{{'sources.edit'|translate}}</span>
                             </button>
                             <button mat-menu-item (click)="deleteDialog(item)">
                                 <mat-icon>delete</mat-icon>
