@@ -19,6 +19,8 @@ export class LogoutComponent {
 
     this.DialogRef.close();
     this._Router.navigate(['auth'])
+    window.location.reload();
+
     // alert('yes')
   }
 }
