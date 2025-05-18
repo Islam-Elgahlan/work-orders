@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UsersService } from 'src/app/admin/services/users.service';
 import { DepartmentsService } from '../../sevices/departments.service';
-import { DepartmentsComponent } from '../departments/departments.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-department',
@@ -20,12 +20,10 @@ export class EditDepartmentComponent implements OnInit {
   page: number | undefined = 1;
   pageIndex: number = 0;
   departmentData: any;
-  supervisorId: any;
-  supdervisor: any;
 
   constructor(
     public dialogRef: MatDialogRef<EditDepartmentComponent>, private _DepartmentsService: DepartmentsService,
-    @Inject(MAT_DIALOG_DATA) public data: any, private _UsersService: UsersService) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private _UsersService: UsersService, private _ToastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.getAllUsers();
@@ -51,26 +49,23 @@ export class EditDepartmentComponent implements OnInit {
     this._UsersService.getAllUsers(params).subscribe({
       next: (res) => {
         this.tableResponse = res;
-        this.tableData = this.tableResponse.data;
-        console.log(this.tableData);
-
+        this.tableData = this.tableResponse?.data;
       }
     })
   }
 
   getDepartmentById(id: number) {
-    this._DepartmentsService.onGetDepartmentById(id).subscribe({
+    this._DepartmentsService.getDepartmentById(id).subscribe({
       next: (res) => {
         this.departmentData = res.data;
-        console.log(this.departmentData.maintenance_supervisor.name);
 
       }, error: (err) => {
-
+        this._ToastrService.error(err.message, 'Department id Failed')
       }, complete: () => {
         this.departmentForm.patchValue({
           name_en: this.departmentData?.name_en,
           name_ar: this.departmentData?.name_ar,
-          maintenance_supervisor_id: this.departmentData?.maintenance_supervisor.id
+          maintenance_supervisor_id: this.departmentData?.maintenance_supervisor?.id
         })
       }
     })

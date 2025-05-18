@@ -12,33 +12,33 @@ import { DeleteItemComponent } from 'src/app/shared/delete-item/delete-item.comp
   templateUrl: './work-orders.component.html',
   styleUrls: ['./work-orders.component.scss']
 })
-export class WorkOrdersComponent implements OnInit{
+export class WorkOrdersComponent implements OnInit {
   private subject = new Subject<any>;
 
-    constructor(
-      private _WorkOrdersService:WorkOrdersService ,
-      private _ToastrService:ToastrService ,
-      private spinner: NgxSpinnerService,
-      public dialog: MatDialog,
-      private _Toastr:ToastrService
-  
-    ){}
+  constructor(
+    private _WorkOrdersService: WorkOrdersService,
+    private _ToastrService: ToastrService,
+    private spinner: NgxSpinnerService,
+    public dialog: MatDialog,
+    private _Toastr: ToastrService
+
+  ) { }
   ngOnInit(): void {
-       this.onGetAllOrders();
-        this.subject.pipe((debounceTime(800))).subscribe({
-          next: (res) => {
-            this.onGetAllOrders()
-          },
-        })
+    this.onGetAllOrders();
+    this.subject.pipe((debounceTime(800))).subscribe({
+      next: (res) => {
+        this.onGetAllOrders()
+      },
+    })
   }
 
   tableResponse: any | undefined;
   tableData: any[] | undefined = [];
-  pageSize: number | undefined = 5 ;
-  page :number | undefined = 1;
+  pageSize: number | undefined = 5;
+  page: number | undefined = 1;
   pageIndex: number = 0;
 
-  onGetAllOrders(){
+  onGetAllOrders() {
     let params = {
       page_size: this.pageSize,
       page: this.page,
@@ -59,7 +59,7 @@ export class WorkOrdersComponent implements OnInit{
     });
   }
 
-  
+
   handlePageEvent(e: PageEvent) {
     console.log(e);
     this.pageSize = e.pageSize
@@ -67,38 +67,38 @@ export class WorkOrdersComponent implements OnInit{
     this.onGetAllOrders();
   }
 
-  deleteDialog(data:any): void {
+  deleteDialog(data: any): void {
     // console.log(data);
-    
+
     const dialogRef = this.dialog.open(DeleteItemComponent, {
-     data:data, 
-      width:'30%'
+      data: data,
+      width: '30%'
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       // console.log(result);
-      if(result){
+      if (result) {
         this.deleteItem(result.id)
         this.onGetAllOrders();
       }
-      
+
     });
 
-   
+
   }
-  deleteItem(id:number){
+  deleteItem(id: number) {
     this._WorkOrdersService.deleteOrder(id).subscribe({
-      next:(res)=>{
+      next: (res) => {
         console.log(res)
       },
-      error:(err)=>{
+      error: (err) => {
         this._Toastr.error('delete order failed')
       },
-      complete:()=>{
+      complete: () => {
         this._Toastr.success('Order Deleted')
       }
-  })
+    })
   }
 
 }

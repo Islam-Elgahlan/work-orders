@@ -9,10 +9,10 @@ export class BuildingService {
 
   constructor(private _HttpClient: HttpClient) { }
 
-  onGetBuildings(): Observable<any> {
+  getBuildings(): Observable<any> {
     return this._HttpClient.get('buildings')
   }
-  onGetBuildingById(id:number): Observable<any> {
+  getBuildingById(id:number): Observable<any> {
     return this._HttpClient.get(`buildings/show/${id}`)
   }
   addBuilding(data: any): Observable<any> {
@@ -24,6 +24,5 @@ export class BuildingService {
   deleteBuilding(id: number): Observable<any> {
     return this._HttpClient.delete(`buildings/delete/${id}`)
   }
-
 
 }

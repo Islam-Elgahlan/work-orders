@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { DepartmentsComponent } from 'src/app/admin/departments/components/departments/departments.component';
 import { BuildingComponent } from '../building/building.component';
 
 @Component({
@@ -14,7 +13,7 @@ export class AddBuildingComponent {
   currentLang = localStorage.getItem('lang')
 
   constructor(
-    public dialogRef: MatDialogRef<BuildingComponent>,
+    public dialogRef: MatDialogRef<AddBuildingComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {

@@ -2,7 +2,7 @@
     <div class="table-card container py-5">
         <div class="page-header shadow-lg">
             <h1>{{'equipments.equipments' | translate}}</h1>
-            <button class="primary px-3" (click)="openAddSource()">
+            <button class="primary px-3" (click)="openAddEquipment()">
                 <span class="fa-solid fa-plus mx-2"></span>
                 <span>{{'addnew'|translate}}</span>
             </button>
@@ -24,7 +24,7 @@
                             <mat-icon>more_vert</mat-icon>
                         </button>
                         <mat-menu #menu="matMenu">
-                            <button mat-menu-item (click)="openEditSource(item.id)">
+                            <button mat-menu-item (click)="openEditEquipment(item.id)">
                                 <mat-icon>edit_square</mat-icon>
                                 <span>{{'equipments.edit'|translate}}</span>
                             </button>

@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SourcesService } from '../../services/sources.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { SourcesComponent } from '../sources/sources.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-source',
@@ -12,26 +12,18 @@ import { SourcesComponent } from '../sources/sources.component';
 export class EditSourceComponent implements OnInit {
 
   currentLang = localStorage.getItem('lang')
-  hideRequiredMarker: boolean = true
-  tableResponse: any | undefined;
-  tableData: any[] | undefined = [];
-  pageSize: number | undefined = 100;
-  page: number | undefined = 1;
-  pageIndex: number = 0;
   sourcesData: any
 
   constructor(
-    public dialogRef: MatDialogRef<SourcesComponent>, private _SourcesService: SourcesService,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    public dialogRef: MatDialogRef<EditSourceComponent>, private _SourcesService: SourcesService,
+    @Inject(MAT_DIALOG_DATA) public data: any, private _ToastrService: ToastrService) { }
 
   ngOnInit(): void {
-    this.getDepartmentById(this.data);
+    this.getSourceById(this.data);
   }
 
   onNoClick(): void {
     this.dialogRef.close();
-    // console.log(this.materialForm.value)
-
   }
 
   sourcesForm = new FormGroup({
@@ -40,12 +32,12 @@ export class EditSourceComponent implements OnInit {
     name_ar: new FormControl(null, [Validators.required]),
   })
 
-  getDepartmentById(id: number) {
-    this._SourcesService.onGetSourceById(id).subscribe({
+  getSourceById(id: number) {
+    this._SourcesService.getSourceById(id).subscribe({
       next: (res) => {
         this.sourcesData = res.data;
       }, error: (err) => {
-
+        this._ToastrService.error(err.message, 'Source id Failed')
       }, complete: () => {
         this.sourcesForm.patchValue({
           name_en: this.sourcesData?.name_en,

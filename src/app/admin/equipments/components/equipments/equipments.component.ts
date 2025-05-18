@@ -24,130 +24,116 @@ export class EquipmentsComponent implements OnInit {
   pageIndex: number = 0;
 
   private subject = new Subject<any>;
-  constructor(private _EquipmentsService: EquipmentsService, private spinner: NgxSpinnerService,
+  constructor(private _EquipmentsService: EquipmentsService,
+    private spinner: NgxSpinnerService,
     private _ToastrService: ToastrService,
     public dialog: MatDialog,) { }
 
   ngOnInit(): void {
-    this.onGetAllEquipments();
+    this.getAllEquipments();
     this.subject.pipe((debounceTime(800))).subscribe({
       next: (res) => {
-        this.onGetAllEquipments()
+        this.getAllEquipments()
       },
     })
   }
 
-  onGetAllEquipments() {
+  // all equipment
+  getAllEquipments() {
     this.spinner.show()
-    this._EquipmentsService.onGetEquipments().subscribe({
+    this._EquipmentsService.getEquipments().subscribe({
       next: (res) => {
         this.tableResponse = res;
         this.tableData = res?.data;
-        console.log(this.tableData);
         this.spinner.hide()
       }
     });
   }
 
-  openAddSource() {
+  // add equipment
+  openAddEquipment() {
     const dialogRef = this.dialog.open(AddEquipmentComponent, {
       data: this.tableData
     });
-
-
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed', result);
       if (result) {
-        this.addDepartment(result)
-        this.onGetAllEquipments()
+        this.addEquipment(result)
       }
     });
   }
 
-  addDepartment(data: FormGroup) {
+  addEquipment(data: FormGroup) {
     this._EquipmentsService.addEquipment(data.value).subscribe({
       next: (res) => {
         this._ToastrService.success(res.message, 'Equipment Added Succesfuly');
-        this.onGetAllEquipments()
       },
       error: (err) => {
         this._ToastrService.error(err.message, 'Error in Added Equipment');
       },
       complete: () => {
-
+        this.getAllEquipments()
       }
-
     })
   }
 
-  // Edit Department
-  openEditSource(id: number) {
+  // edit equipment
+  openEditEquipment(id: number) {
     const dialogRef = this.dialog.open(EditEquipmentComponent, {
       data: id
     });
-
-
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed', result);
       if (result) {
-        this.editSource(result, id)
-        this.onGetAllEquipments()
+        this.editEquipment(result, id)
       }
     });
   }
 
-  editSource(data: FormGroup, id: number) {
+  editEquipment(data: FormGroup, id: number) {
     this._EquipmentsService.editEquipment(data.value, id).subscribe({
       next: (res) => {
-        this.onGetAllEquipments()
         this._ToastrService.success(res.message, 'Equipment Update Succesfuly');
       },
       error: (err) => {
         this._ToastrService.error(err.message, 'Error in Update Equipment');
       },
       complete: () => {
+        this.getAllEquipments()
       }
 
     })
   }
 
+  // pagination
   handlePageEvent(e: PageEvent) {
     console.log(e);
     this.pageSize = e.pageSize
     this.page = e.pageIndex + 1
-    this.onGetAllEquipments();
+    this.getAllEquipments();
   }
 
-  // Delete Source
+  // delete equipment
   deleteDialog(data: any): void {
-    console.log(data);
-
     const dialogRef = this.dialog.open(DeleteItemComponent, {
       data: data,
       width: '30%'
     });
-
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // console.log(result);
       if (result) {
         this.deleteItem(result.id)
-        this.onGetAllEquipments();
       }
-
     });
   }
 
   deleteItem(id: number) {
     this._EquipmentsService.deleteEquipment(id).subscribe({
       next: (res) => {
-        this.onGetAllEquipments()
+        this._ToastrService.success('Equipment Deleted')
       },
       error: (err) => {
         this._ToastrService.error('Delete Equipment Failed')
       },
       complete: () => {
-        this._ToastrService.success('Equipment Deleted')
+        this.getAllEquipments();
       }
     })
   }

@@ -5,7 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { BuildingService } from '../../services/building.service';
 import { debounceTime, Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { DeleteItemComponent } from 'src/app/shared/delete-item/delete-item.component';
 import { AddBuildingComponent } from '../add-building/add-building.component';
 import { EditBuildingComponent } from '../edit-building/edit-building.component';
@@ -33,43 +33,38 @@ export class BuildingComponent {
   ) { }
 
   ngOnInit(): void {
-    this.onGetAllBuildings();
+    this.getAllBuildings();
     this.subject.pipe((debounceTime(800))).subscribe({
       next: (res) => {
-        this.onGetAllBuildings()
+        this.getAllBuildings()
       },
     })
   }
 
-  onGetAllBuildings() {
+  // all buildings
+  getAllBuildings() {
     let params = {
       page_size: this.pageSize,
       page: this.page,
     };
     this.spinner.show()
-    this._BuildingService.onGetBuildings().subscribe({
+    this._BuildingService.getBuildings().subscribe({
       next: (res) => {
         this.tableResponse = res;
         this.tableData = res?.data;
-        // console.log(this.tableData);
-
         this.spinner.hide()
       }
     });
   }
 
-  // Add Building
+  // add building
   openAddBuilding() {
     const dialogRef = this.dialog.open(AddBuildingComponent, {
       data: this.tableData
     });
-
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed', result);
-
       if (result) {
         this.addBuilding(result)
-        this.onGetAllBuildings()
       }
     });
   }
@@ -83,26 +78,19 @@ export class BuildingComponent {
         this._ToastrService.error(err.message, 'Error in Added Building');
       },
       complete: () => {
-
+        this.getAllBuildings()
       }
-
     })
   }
 
-  // Edit Building
+  // edit building
   openEditBuilding(id: any) {
-    console.log(id);
     const dialogRef = this.dialog.open(EditBuildingComponent, {
       data: id
     });
-
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed', result);
-      // console.log(id);
-
       if (result) {
         this.editBuilding(result, id)
-        this.onGetAllBuildings()
       }
     });
   }
@@ -116,49 +104,40 @@ export class BuildingComponent {
         this._ToastrService.error(err.message, 'Error in Update Building');
       },
       complete: () => {
-
+        this.getAllBuildings()
       }
     })
-
   }
 
+  // pagination
   handlePageEvent(e: PageEvent) {
     this.pageSize = e.pageSize
     this.page = e.pageIndex + 1
-    this.onGetAllBuildings();
+    this.getAllBuildings();
   }
 
-  // Delete Department
+  // delete building
   deleteDialog(data: any): void {
-    console.log(data);
-
     const dialogRef = this.dialog.open(DeleteItemComponent, {
       data: data,
       width: '30%'
     });
-
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // console.log(result);
       if (result) {
         this.deleteItem(result.id)
-        this.onGetAllBuildings();
       }
-
     });
-
-
   }
   deleteItem(id: number) {
     this._BuildingService.deleteBuilding(id).subscribe({
       next: (res) => {
-        console.log(res)
+        this._ToastrService.success('Building Deleted')
       },
       error: (err) => {
         this._ToastrService.error('Delete Building Failed')
       },
       complete: () => {
-        this._ToastrService.success('Building Deleted')
+        this.getAllBuildings();
       }
     })
   }
