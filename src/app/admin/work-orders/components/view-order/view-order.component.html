@@ -158,6 +158,8 @@
                         </div>
                         <div class="text-center mt-3 d-flex justify-content-end">
                             <button type="button" class="outline-secondary w-25"
+                             (click)="generatePdf()"  >{{'new'|translate}}</button>
+                            <button type="button" class="outline-secondary w-25"
                                 routerLink="/dashboard/admin/work-orders">{{'cancel'|translate}}</button>
                         </div>
                     </form>
