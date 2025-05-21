@@ -18,7 +18,7 @@ export class GlobalInterceptor implements HttpInterceptor {
 
     const token = localStorage.getItem('token');
     const language = localStorage.getItem('lang')
-    const baseUrl: string = 'http://vonnn.net/workorders/public/api/';
+    const baseUrl: string = 'https://vonnn.net/workorders/public/api/';
 
     let newRequest = {
       'Authorization': `Bearer `,
