@@ -132,7 +132,7 @@ export class EditOrderComponent {
     this._WorkOrdersService.getOrder(id).subscribe(
       (res) => {
         this.currentOrder = res.data
-        if(this.currentOrder.status == 4){
+        if(this.currentOrder.status.id == 4){
           this.isHold = true;
       (this.updateOrderForm as FormGroup).addControl('holding_reason',new FormControl(null , [Validators.required]))
           this.updateOrderForm.patchValue({ holding_reason: this.currentOrder.holding_reason } as any);
@@ -175,7 +175,7 @@ export class EditOrderComponent {
     this.isHold = false
     if(data.value.status == 4){
       this.isHold = true;
-      (this.updateOrderForm as FormGroup).addControl('holding_reason',new FormControl(null , [Validators.required]))
+      (this.updateOrderForm as FormGroup).addControl('holding_reason',new FormControl(null, [Validators.required]))
     }else{
       // this._WorkOrdersService.updateStatus(this.orderId,data.value).subscribe(
       //   (res)=>{
