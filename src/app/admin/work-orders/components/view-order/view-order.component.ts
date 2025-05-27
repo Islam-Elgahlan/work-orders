@@ -11,7 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ViewOrderComponent {
   ngOnInit() {
-   
+
   }
 
   constructor(
@@ -27,6 +27,9 @@ export class ViewOrderComponent {
     this.getSource()
     this.getReport()
     this.getDepartment()
+     this.getOrderMaterial()
+    this.getOrderParts()
+    this.getStatus()
   }
 
 
@@ -44,25 +47,41 @@ export class ViewOrderComponent {
   confirmHide: boolean = true;
   hideRequiredMarker: boolean = true;
 
+  materialTableData: any;
+  spareTableData: any;
+
+  status: any
+  statusId: any
+  isHold: boolean = false
+
   orderForm = new FormGroup(
     {
       start_date: new FormControl(null, [Validators.required]),
       department: new FormControl(null, [Validators.required]),
-      engineer: new FormControl(null, ),
+      engineer: new FormControl(null,),
       technician: new FormControl(null,),
       work_type: new FormControl(null, [Validators.required]),
       building: new FormControl(null, [Validators.required]),
-      floor_no: new FormControl({value: '', disabled: true}, [Validators.required]),
+      floor_no: new FormControl({ value: '', disabled: true }, [Validators.required]),
       room_no: new FormControl(null, [Validators.required]),
       source: new FormControl(null, [Validators.required]),
       customer_name: new FormControl(null, [Validators.required]),
       customer_phone: new FormControl(null, [Validators.required]),
       equipment: new FormControl(null, [Validators.required]),
       description: new FormControl(null, [Validators.required]),
+      priority: new FormControl({ value: '', disabled: true }, [Validators.required]),
+      type: new FormControl({ value: '', disabled: true },),
       // {value: '', disabled: true}
     }
   );
 
+  updateOrderForm = new FormGroup({
+    status: new FormControl({ value: '', disabled: true }, [Validators.required]),
+    technician_report: new FormControl({ value: '', disabled: true }, [Validators.required]),
+    // holding_reason: new FormControl(null),
+
+    // used_items_descriptions: new FormControl(null,[Validators.required]),
+  })
 
 
   getOrderById(id: number) {
@@ -70,7 +89,12 @@ export class ViewOrderComponent {
       (res) => {
         this.currentOrder = res.data
         // console.log(this.currentOrder.work_type.id)
+        if (this.currentOrder.status.id == 4) {
+          this.isHold = true;
+          (this.updateOrderForm as FormGroup).addControl('holding_reason', new FormControl({ value: '', disabled: true }))
+          this.updateOrderForm.patchValue({ holding_reason: this.currentOrder.holding_reason } as any);
 
+        }
         this.orderForm.patchValue({
           department: this.currentOrder?.department.id,
           floor_no: this.currentOrder?.floor_no,
@@ -88,10 +112,30 @@ export class ViewOrderComponent {
 
 
         })
+        this.updateOrderForm.patchValue({
+          status: this.currentOrder?.status.name,
+          technician_report: this.currentOrder?.technician_report,
+
+          // holding_reason: this.currentOrder?.holding_reason,
+        })
       }
     )
   }
 
+  getOrderMaterial() {
+    this._WorkOrdersService.getMaterialByOrderId(this.orderId).subscribe(
+      (res) => {
+        this.materialTableData = res.data
+      }
+    )
+  }
+  getOrderParts() {
+    this._WorkOrdersService.getPartsByOrderId(this.orderId).subscribe(
+      (res) => {
+        this.spareTableData = res.data
+      }
+    )
+  }
 
   // Start Lookups 
 
@@ -134,6 +178,13 @@ export class ViewOrderComponent {
     this._LookupsService.getDepartment().subscribe(
       (res) => {
         this.department = res.data
+      }
+    )
+  }
+  getStatus() {
+    this._LookupsService.getStatus().subscribe(
+      (res) => {
+        this.status = res.data
       }
     )
   }
