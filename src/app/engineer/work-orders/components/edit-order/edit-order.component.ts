@@ -73,22 +73,22 @@ export class EditOrderComponent {
 
   orderForm = new FormGroup(
     {
-      start_date: new FormControl({ value: '', disabled: true }),
+      start_date: new FormControl(null, [Validators.required]),
       start_time: new FormControl(new Date().toTimeString().split(' ')[0], [Validators.required]),
-      department_id: new FormControl({ value: '', disabled: true }, [Validators.required]),
-      engineer_id: new FormControl({ value: '', disabled: true }),
-      technician_id: new FormControl({ value: '', disabled: true },),
-      work_type_id: new FormControl({ value: '', disabled: true }, [Validators.required]),
-      building_id: new FormControl({ value: '', disabled: true }, [Validators.required]),
-      floor_no: new FormControl({ value: '', disabled: true }, [Validators.required]),
-      room_no: new FormControl({ value: '', disabled: true }, [Validators.required]),
-      source_id: new FormControl({ value: '', disabled: true }, [Validators.required]),
-      customer_name: new FormControl({ value: '', disabled: true }, [Validators.required]),
-      customer_phone: new FormControl({ value: '', disabled: true }, [Validators.required]),
-      equipment_id: new FormControl({ value: '', disabled: true }, [Validators.required]),
-      description: new FormControl({ value: '', disabled: true }, [Validators.required]),
-      priority: new FormControl({ value: '', disabled: true }, [Validators.required]),
-      type: new FormControl({ value: '', disabled: true },),
+      department_id: new FormControl(null, [Validators.required]),
+      engineer_id: new FormControl(null, [Validators.required]),
+      technician_id: new FormControl(null,),
+      work_type_id: new FormControl(null, [Validators.required]),
+      building_id: new FormControl(null, [Validators.required]),
+      floor_no: new FormControl(null, [Validators.required]),
+      room_no: new FormControl(null, [Validators.required]),
+      source_id: new FormControl(null, [Validators.required]),
+      customer_name: new FormControl(null, [Validators.required]),
+      customer_phone: new FormControl(null, [Validators.required]),
+      equipment_id: new FormControl(null, [Validators.required]),
+      description: new FormControl(null, [Validators.required]),
+      priority: new FormControl(null, [Validators.required]),
+      type: new FormControl(null,),
       // status: new FormControl(null,[Validators.required])
 
     }
@@ -129,8 +129,8 @@ export class EditOrderComponent {
 
 
   getOrderById(id: number) {
-    this._WorkOrdersService.getOrder(id).subscribe(
-      (res) => {
+    this._WorkOrdersService.getOrder(id).subscribe({
+      next: (res) => {
         this.currentOrder = res.data
         if (this.currentOrder.status == 4) {
           if (this.currentOrder.status.id == 4) {
@@ -167,7 +167,7 @@ export class EditOrderComponent {
 
         }
       }
-    )
+    })
   }
 
   // Update Status
@@ -179,15 +179,9 @@ export class EditOrderComponent {
       this.isHold = true;
       (this.updateOrderForm as FormGroup).addControl('holding_reason', new FormControl(null, [Validators.required]))
     } else {
+
       (this.updateOrderForm as FormGroup).addControl('holding_reason', new FormControl(null, [Validators.required]))
     }
-    // else{
-    // this._WorkOrdersService.updateStatus(this.orderId,data.value).subscribe(
-    //   (res)=>{
-    //     this._ToastrService.success('Status Updated Succesfuly');
-    //   }
-    // )
-    // }
   }
   onupdate(data: FormGroup) {
     // console.log(data.value);
@@ -260,12 +254,12 @@ export class EditOrderComponent {
     })
   }
   getOrderMaterial() {
-    this._WorkOrdersService.getMaterialByOrderId(this.orderId).subscribe(
-      (res) => {
+    this._WorkOrdersService.getMaterialByOrderId(this.orderId).subscribe({
+      next: (res) => {
         this.materialTableData = res.data
 
       }
-    )
+    })
   }
 
   // start parts 
@@ -321,21 +315,21 @@ export class EditOrderComponent {
     })
   }
   getOrderParts() {
-    this._WorkOrdersService.getPartsByOrderId(this.orderId).subscribe(
-      (res) => {
+    this._WorkOrdersService.getPartsByOrderId(this.orderId).subscribe({
+      next: (res) => {
         this.spareTableData = res.data
       }
-    )
+    })
   }
 
   // lookups
 
   getStatus() {
-    this._LookupsService.getStatus().subscribe(
-      (res) => {
+    this._LookupsService.getStatus().subscribe({
+      next: (res) => {
         this.status = res.data
       }
-    )
+    })
   }
 
 }
