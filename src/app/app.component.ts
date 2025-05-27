@@ -10,6 +10,8 @@ export class AppComponent {
  langu = localStorage.getItem('lang');
   constructor(public translate: TranslateService) {
     if(localStorage.getItem('lang')==null){
+    this.onChangeLang('en')
+
     }
     this.onChangeLang(this.langu)
     

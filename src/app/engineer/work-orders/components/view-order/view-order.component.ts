@@ -41,6 +41,8 @@ export class ViewOrderComponent {
   ) {
     this.orderId = this._activateRoute.snapshot.paramMap.get('id')
 
+ 
+
   }
 
 
@@ -96,7 +98,7 @@ export class ViewOrderComponent {
   updateOrderForm = new FormGroup({
     status: new FormControl({ value: '', disabled: true },[Validators.required]),
     technician_report: new FormControl({ value: '', disabled: true },[Validators.required]),
-    // holding_reason: new FormControl(null,[Validators.required]),
+    // holding_reason: new FormControl(null),
 
     // used_items_descriptions: new FormControl(null,[Validators.required]),
   })
@@ -132,9 +134,9 @@ export class ViewOrderComponent {
     this._WorkOrdersService.getOrder(id).subscribe(
       (res) => {
         this.currentOrder = res.data
-        if(this.currentOrder.status == 4){
+        if(this.currentOrder.status.id == 4){
           this.isHold = true;
-      (this.updateOrderForm as FormGroup).addControl('holding_reason',new FormControl({ value: '', disabled: true } , [Validators.required]))
+      (this.updateOrderForm as FormGroup).addControl('holding_reason',new FormControl({ value: '', disabled: true } ))
           this.updateOrderForm.patchValue({ holding_reason: this.currentOrder.holding_reason } as any);
 
         }
@@ -161,6 +163,7 @@ export class ViewOrderComponent {
         this.updateOrderForm.patchValue({
           status: this.currentOrder?.status.name,
           technician_report: this.currentOrder?.technician_report,
+          
           // holding_reason: this.currentOrder?.holding_reason,
         })
 

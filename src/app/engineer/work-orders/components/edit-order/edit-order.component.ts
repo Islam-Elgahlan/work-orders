@@ -133,37 +133,39 @@ export class EditOrderComponent {
       (res) => {
         this.currentOrder = res.data
         if (this.currentOrder.status == 4) {
-          this.isHold = true;
-          (this.updateOrderForm as FormGroup).addControl('holding_reason', new FormControl(null, [Validators.required]))
-          this.updateOrderForm.patchValue({ holding_reason: this.currentOrder.holding_reason } as any);
+          if (this.currentOrder.status.id == 4) {
+            this.isHold = true;
+            (this.updateOrderForm as FormGroup).addControl('holding_reason', new FormControl(null, [Validators.required]))
+            this.updateOrderForm.patchValue({ holding_reason: this.currentOrder.holding_reason } as any);
+
+          }
+          // this.getengineers(this.currentOrder?.department.id)
+          // this.gettechnicians(this.currentOrder?.department.id)
+
+          this.orderForm.patchValue({
+            start_date: this.currentOrder?.start_date,
+            department_id: this.currentOrder?.department?.name,
+            engineer_id: this.currentOrder?.engineer?.name,
+            technician_id: this.currentOrder?.technician?.name,
+            work_type_id: this.currentOrder?.work_type.name,
+            building_id: this.currentOrder?.building.name,
+            floor_no: this.currentOrder?.floor_no,
+            room_no: this.currentOrder?.room_no,
+            customer_name: this.currentOrder?.customer_name,
+            customer_phone: this.currentOrder?.customer_phone,
+            equipment_id: this.currentOrder?.equipment.name,
+            source_id: this.currentOrder?.source.name,
+            description: this.currentOrder?.description,
+
+          })
+
+          this.updateOrderForm.patchValue({
+            status: this.currentOrder?.status.id,
+            technician_report: this.currentOrder?.technician_report,
+            // holding_reason: this.currentOrder?.holding_reason,
+          })
 
         }
-        // this.getengineers(this.currentOrder?.department.id)
-        // this.gettechnicians(this.currentOrder?.department.id)
-
-        this.orderForm.patchValue({
-          start_date: this.currentOrder?.start_date,
-          department_id: this.currentOrder?.department?.name,
-          engineer_id: this.currentOrder?.engineer?.name,
-          technician_id: this.currentOrder?.technician?.name,
-          work_type_id: this.currentOrder?.work_type.name,
-          building_id: this.currentOrder?.building.name,
-          floor_no: this.currentOrder?.floor_no,
-          room_no: this.currentOrder?.room_no,
-          customer_name: this.currentOrder?.customer_name,
-          customer_phone: this.currentOrder?.customer_phone,
-          equipment_id: this.currentOrder?.equipment.name,
-          source_id: this.currentOrder?.source.name,
-          description: this.currentOrder?.description,
-
-        })
-
-        this.updateOrderForm.patchValue({
-          status: this.currentOrder?.status.id,
-          technician_report: this.currentOrder?.technician_report,
-          // holding_reason: this.currentOrder?.holding_reason,
-        })
-
       }
     )
   }
@@ -177,12 +179,15 @@ export class EditOrderComponent {
       this.isHold = true;
       (this.updateOrderForm as FormGroup).addControl('holding_reason', new FormControl(null, [Validators.required]))
     } else {
-      // this._WorkOrdersService.updateStatus(this.orderId,data.value).subscribe(
-      //   (res)=>{
-      //     this._ToastrService.success('Status Updated Succesfuly');
-      //   }
-      // )
+      (this.updateOrderForm as FormGroup).addControl('holding_reason', new FormControl(null, [Validators.required]))
     }
+    // else{
+    // this._WorkOrdersService.updateStatus(this.orderId,data.value).subscribe(
+    //   (res)=>{
+    //     this._ToastrService.success('Status Updated Succesfuly');
+    //   }
+    // )
+    // }
   }
   onupdate(data: FormGroup) {
     // console.log(data.value);
@@ -191,14 +196,14 @@ export class EditOrderComponent {
     for (const [key, value] of myMap) {
       myData.append(key, data.value[key]);
     }
-    this._WorkOrdersService.updateOrder(this.orderId, data.value).subscribe(
-      (res) => {
+    this._WorkOrdersService.updateOrder(this.orderId, data.value).subscribe({
+      next: (res) => {
         this._ToastrService.success('Order Updated Succesfuly');
       },
-      (err) => {
+      error: (err) => {
         this._ToastrService.error(err.message, 'Error in Update')
       }
-    )
+    })
 
   }
   // start Material 
@@ -258,7 +263,7 @@ export class EditOrderComponent {
     this._WorkOrdersService.getMaterialByOrderId(this.orderId).subscribe(
       (res) => {
         this.materialTableData = res.data
-        
+
       }
     )
   }

@@ -132,7 +132,7 @@ export class ViewOrderComponent {
         this._WorkOrdersService.getOrder(id).subscribe(
           (res) => {
             this.currentOrder = res.data
-            if(this.currentOrder.status == 4){
+            if(this.currentOrder.status.id == 4){
               this.isHold = true;
           (this.updateOrderForm as FormGroup).addControl('holding_reason',new FormControl({ value: '', disabled: true } , [Validators.required]))
               this.updateOrderForm.patchValue({ holding_reason: this.currentOrder.holding_reason } as any);

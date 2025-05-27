@@ -23,4 +23,13 @@ export class WorkOrdersService {
   editOrder(data:any , id: number):Observable<any>{
     return this._HttpClient.put(`work-orders/update/${id}`,data)
   }
+   getMaterialByOrderId(id:number):Observable<any>{
+  return this._HttpClient.get(`work-orders/materials/${id}`)
+ }
+ getPartsByOrderId(id:number):Observable<any>{
+  return this._HttpClient.get(`work-orders/spare-parts/${id}`)
+ }
+ updateOrder(id:number,data:any):Observable<any>{
+  return this._HttpClient.put(`work-orders/update-by-engineer/${id}`,data)
+ }
 }
