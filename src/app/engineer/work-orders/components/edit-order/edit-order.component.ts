@@ -67,9 +67,9 @@ export class EditOrderComponent {
   materialTableData: any;
   spareTableData: any;
 
-  status:any
-  statusId:any
-  isHold:boolean = false
+  status: any
+  statusId: any
+  isHold: boolean = false
 
   orderForm = new FormGroup(
     {
@@ -94,8 +94,8 @@ export class EditOrderComponent {
     }
   );
   updateOrderForm = new FormGroup({
-    status: new FormControl(null,[Validators.required]),
-    technician_report: new FormControl(null,[Validators.required]),
+    status: new FormControl(null, [Validators.required]),
+    technician_report: new FormControl(null, [Validators.required]),
     // holding_reason: new FormControl(null,[Validators.required]),
 
     // used_items_descriptions: new FormControl(null,[Validators.required]),
@@ -132,9 +132,9 @@ export class EditOrderComponent {
     this._WorkOrdersService.getOrder(id).subscribe(
       (res) => {
         this.currentOrder = res.data
-        if(this.currentOrder.status == 4){
+        if (this.currentOrder.status == 4) {
           this.isHold = true;
-      (this.updateOrderForm as FormGroup).addControl('holding_reason',new FormControl(null , [Validators.required]))
+          (this.updateOrderForm as FormGroup).addControl('holding_reason', new FormControl(null, [Validators.required]))
           this.updateOrderForm.patchValue({ holding_reason: this.currentOrder.holding_reason } as any);
 
         }
@@ -170,13 +170,13 @@ export class EditOrderComponent {
 
   // Update Status
 
-  onselectStatus(data:FormGroup){
+  onselectStatus(data: FormGroup) {
     // console.log(data.value.status)
     this.isHold = false
-    if(data.value.status == 4){
+    if (data.value.status == 4) {
       this.isHold = true;
-      (this.updateOrderForm as FormGroup).addControl('holding_reason',new FormControl(null , [Validators.required]))
-    }else{
+      (this.updateOrderForm as FormGroup).addControl('holding_reason', new FormControl(null, [Validators.required]))
+    } else {
       // this._WorkOrdersService.updateStatus(this.orderId,data.value).subscribe(
       //   (res)=>{
       //     this._ToastrService.success('Status Updated Succesfuly');
@@ -184,22 +184,22 @@ export class EditOrderComponent {
       // )
     }
   }
-  onupdate(data:FormGroup){
+  onupdate(data: FormGroup) {
     // console.log(data.value);
     let myData = new FormData();
     let myMap = new Map(Object.entries(data.value));
     for (const [key, value] of myMap) {
       myData.append(key, data.value[key]);
     }
-    this._WorkOrdersService.updateOrder(this.orderId,data.value).subscribe(
-      (res)=>{
-          this._ToastrService.success('Order Updated Succesfuly');
+    this._WorkOrdersService.updateOrder(this.orderId, data.value).subscribe(
+      (res) => {
+        this._ToastrService.success('Order Updated Succesfuly');
       },
-      (err)=>{
-        this._ToastrService.error(err.message ,'Error in Update')
+      (err) => {
+        this._ToastrService.error(err.message, 'Error in Update')
       }
     )
-    
+
   }
   // start Material 
 
@@ -226,6 +226,7 @@ export class EditOrderComponent {
     }
     this._WorkOrdersService.addMaterial(myData).subscribe({
       next: (res) => {
+        this.getOrderMaterial()
         this._ToastrService.success(res.message, 'Work Order Added Succesfuly');
       },
       error: (err) => {
@@ -257,79 +258,79 @@ export class EditOrderComponent {
     this._WorkOrdersService.getMaterialByOrderId(this.orderId).subscribe(
       (res) => {
         this.materialTableData = res.data
+        
       }
     )
   }
 
+  // start parts 
+  openPartsDialog() {
+    const dialogRef = this.dialog.open(AddSpareComponent, {
+      data: this.orderId,
+    });
 
-    // start parts 
 
-    openPartsDialog() {
-      const dialogRef = this.dialog.open(AddSpareComponent, {
-        data: this.orderId,
-      });
-  
-  
-      dialogRef.afterClosed().subscribe((result) => {
-        console.log('The dialog was closed', result);
-        if (result) {
-          this.addParts(result)
-          this.getOrderParts()
-        }
-      });
-    }
-  
-    addParts(data: FormGroup) {
-      let myData = new FormData();
-      let myMap = new Map(Object.entries(data.value));
-      for (const [key, value] of myMap) {
-        myData.append(key, data.value[key]);
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed', result);
+      if (result) {
+        this.addParts(result)
+        this.getOrderParts()
       }
-      this._WorkOrdersService.addParts(myData).subscribe({
-        next: (res) => {
-          this._ToastrService.success(res.message, 'Work Order Added Succesfuly');
-        },
-        error: (err) => {
-          this._ToastrService.error(err.message, 'Error in Update Order');
-        },
-        complete: () => {
-  
-        }
-  
-      })
-    }
-  
-    deletePartsById(id: number) {
-      this._WorkOrdersService.deleteParts(id).subscribe({
-        next: (res) => {
-          this.getOrderParts()
-          this._ToastrService.success(res.message, 'deleted Succesfuly');
-        },
-        error: (err) => {
-          this._ToastrService.error(err.message, ' Error in delete');
-  
-        },
-        complete: () => {
-        }
-  
-      })
-    }
-    getOrderParts() {
-      this._WorkOrdersService.getPartsByOrderId(this.orderId).subscribe(
-        (res) => {
-          this.spareTableData = res.data
-        }
-      )
-    }
+    });
+  }
 
-// lookups
-
-getStatus(){
-  this._LookupsService.getStatus().subscribe(
-    (res) =>{
-      this.status = res.data
+  addParts(data: FormGroup) {
+    let myData = new FormData();
+    let myMap = new Map(Object.entries(data.value));
+    for (const [key, value] of myMap) {
+      myData.append(key, data.value[key]);
     }
-  )
-}
+    this._WorkOrdersService.addParts(myData).subscribe({
+      next: (res) => {
+        this._ToastrService.success(res.message, 'Work Order Added Succesfuly');
+        this.getOrderParts()
+      },
+      error: (err) => {
+        this._ToastrService.error(err.message, 'Error in Update Order');
+      },
+      complete: () => {
+
+      }
+
+    })
+  }
+
+  deletePartsById(id: number) {
+    this._WorkOrdersService.deleteParts(id).subscribe({
+      next: (res) => {
+        this.getOrderParts()
+        this._ToastrService.success(res.message, 'deleted Succesfuly');
+      },
+      error: (err) => {
+        this._ToastrService.error(err.message, ' Error in delete');
+
+      },
+      complete: () => {
+      }
+
+    })
+  }
+  getOrderParts() {
+    this._WorkOrdersService.getPartsByOrderId(this.orderId).subscribe(
+      (res) => {
+        this.spareTableData = res.data
+      }
+    )
+  }
+
+  // lookups
+
+  getStatus() {
+    this._LookupsService.getStatus().subscribe(
+      (res) => {
+        this.status = res.data
+      }
+    )
+  }
 
 }

@@ -1,4 +1,7 @@
-<section class="add-view-order">
+<section id="print-section" class="add-view-order">
+    <div>
+        <img src="../../../../../assets//images/LogInLogo.png" alt="LogInLogo">
+    </div>
     <div class="my-4">
         <div class="row">
             <div class="col-md-10">
@@ -18,7 +21,7 @@
                             <div class="col-md-4">
                                 <mat-form-field appearance="fill" class="example-full-width">
                                     <mat-label>{{'orders.date' | translate}}</mat-label>
-                                    <input matInput [matDatepicker]="picker3" [value]="currentOrder?.start_date">
+                                    <input matInput [matDatepicker]="picker3" [value]="currentOrder?.start_date" disabled >
                                     <mat-hint>MM/DD/YYYY</mat-hint>
                                     <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
                                     <mat-datepicker #picker3></mat-datepicker>
@@ -166,3 +169,8 @@
         </div>
     </div>
 </section>
+<div class="p-3" [dir]="currentLang =='en' ? 'rtl' : 'ltr'">
+    <button class="primary" [printStyle]="{img : {'width': '10%','text-align':'start','display': 'inline-block'}}"
+     styleSheetFile="../../../../../assets/myStyles/main.scss" printSectionId="print-section"
+        ngxPrint>{{'reports.print' | translate}}</button>
+</div>

@@ -6,7 +6,12 @@ table {
     color: #000;
 }
 
-.mat-mdc-form-field:not(.mat-form-field-no-animations) .mdc-text-field__input{
+.mat-mdc-form-field:not(.mat-form-field-no-animations) .mdc-text-field__input {
     color: black !important;
-  }  
-  
+}
+
+img{
+    width: 10%;
+    display: none;
+}
+

@@ -21,6 +21,7 @@ export class ReportsComponent {
   technicians: any
   start_date: any
   date: any
+  currentLang = localStorage.getItem('lang')
 
   hide: boolean = true;
   confirmHide: boolean = true;
@@ -63,6 +64,7 @@ export class ReportsComponent {
     this._ReportsService.addReports(data.value).subscribe({
       next: (res) => {
         this.data = res.data
+        
         this._ToastrService.success('Report Added Succesfuly');
       },
       error: (err) => {
@@ -82,8 +84,7 @@ export class ReportsComponent {
   getAllStatus() {
     this._ReportsService.getStatus().subscribe(
       (res) => {
-        this.status = res.data
-
+        this.status = res.data   
       }
     )
   }
@@ -101,8 +102,6 @@ export class ReportsComponent {
     this._ReportsService.getEngineers().subscribe(
       (res) => {
         this.engineers = res.data;
-        console.log(this.engineers);
-
       }
     )
   }
@@ -111,8 +110,6 @@ export class ReportsComponent {
     this._ReportsService.getTechnicians().subscribe(
       (res) => {
         this.technicians = res.data;
-        console.log(this.technicians);
-
       }
     )
   }
