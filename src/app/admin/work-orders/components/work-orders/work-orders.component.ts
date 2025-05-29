@@ -7,8 +7,9 @@ import { debounceTime, Subject } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
 import { DeleteItemComponent } from 'src/app/shared/delete-item/delete-item.component';
 import { BuildingService } from 'src/app/admin/building/services/building.service';
-import { FormControl, FormGroup } from '@angular/forms';
 import { ReportsService } from 'src/app/admin/reports/services/reports.service';
+import { FormControl, FormGroup } from '@angular/forms';
+import { LookupsService } from 'src/app/services/lookups.service';
 
 @Component({
   selector: 'app-work-orders',
@@ -18,13 +19,23 @@ import { ReportsService } from 'src/app/admin/reports/services/reports.service';
 export class WorkOrdersComponent implements OnInit {
   hideRequiredMarker: boolean = true;
   buildingList: any
+  data: any
+  workTypeList: any
+  status: any
+  departments: any
+  engineers: any
+  technicians: any
   filterList: any
-  buildingId!:number
+  buildingId: any
+  workTypeId: any
+  searchValue: any
+  currentLang = localStorage.getItem('lang')
 
   private subject = new Subject<any>;
 
   constructor(
     private _WorkOrdersService: WorkOrdersService,
+    private _LookupsService: LookupsService,
     private _ToastrService: ToastrService,
     private spinner: NgxSpinnerService,
     public dialog: MatDialog,
@@ -33,13 +44,22 @@ export class WorkOrdersComponent implements OnInit {
     private _ReportsService: ReportsService,
 
   ) { }
+
   ngOnInit(): void {
-    this.onGetAllOrders();
-    this.onGetAllBuilding();
+    this.allOrders();
+    this.getAllStatus()
+    this.getDepartment()
+    this.getEngineers()
+    this.getTechnicians()
+    this.allWorkType()
     this.subject.pipe((debounceTime(800))).subscribe({
       next: (res) => {
-        this.onGetAllOrders()
-        this.onGetAllBuilding();
+        this.allOrders()
+        this.getAllStatus()
+        this.getDepartment()
+        this.getEngineers()
+        this.getTechnicians()
+        this.allWorkType()
       },
     })
   }
@@ -50,42 +70,16 @@ export class WorkOrdersComponent implements OnInit {
   page: number | undefined = 1;
   pageIndex: number = 0;
 
-  // orderForm = new FormGroup(
-  //   {
-  //     building_id: new FormControl(null),
-  //   }
-  // );
-
-  //  onSubmit(data: FormGroup) {
-  //   this._ReportsService.addReports(data.value).subscribe({
-  //     next: (res) => {
-  //       this.filterList = res.data
-        
-  //       this._ToastrService.success('Order Added Succesfuly');
-  //     },
-  //     error: (err) => {
-  //       this._ToastrService.error(
-  //         err.message,
-  //         'Error in Add  Order'
-  //       );
-  //     },
-  //     complete: () => {
-
-  //     }
-
-
-  //   })
-  // }
-
-  onGetAllOrders() {
+  allOrders() {
     let params = {
       page_size: this.pageSize,
       page: this.page,
-      buildingId:this.buildingId
-      // userName: this.searchValue,
+      // building_id: this.buildingId,
+      work_type_id: this.workTypeId,
+      userName: this.searchValue,
     };
     this.spinner.show()
-    this._WorkOrdersService.getAllOrders(params).subscribe({
+    this._ReportsService.addReports(params).subscribe({
       next: (res) => {
 
         this.tableResponse = res;
@@ -104,12 +98,11 @@ export class WorkOrdersComponent implements OnInit {
     console.log(e);
     this.pageSize = e.pageSize
     this.page = e.pageIndex + 1
-    this.onGetAllOrders();
+    this.allOrders();
   }
 
   deleteDialog(data: any): void {
     // console.log(data);
-
     const dialogRef = this.dialog.open(DeleteItemComponent, {
       data: data,
       width: '30%'
@@ -120,12 +113,9 @@ export class WorkOrdersComponent implements OnInit {
       // console.log(result);
       if (result) {
         this.deleteItem(result.id)
-        this.onGetAllOrders();
+        this.allOrders();
       }
-
     });
-
-
   }
   deleteItem(id: number) {
     this._WorkOrdersService.deleteOrder(id).subscribe({
@@ -141,14 +131,88 @@ export class WorkOrdersComponent implements OnInit {
     })
   }
 
-  onGetAllBuilding() {
-    this._buildingService.getBuildings().subscribe({
+  allWorkType() {
+    this._ReportsService.getWorkType().subscribe({
       next: (res) => {
-        this.buildingList = res.data
-        console.log(this.buildingList);
+        this.workTypeList = res.data
+        console.log(res);
 
       }
     })
+  }
+
+  reportForm = new FormGroup(
+    {
+      status: new FormControl(0),
+      department_id: new FormControl(null),
+      engineer_id: new FormControl(null),
+      technician_id: new FormControl(null),
+      from_date: new FormControl(null),
+      to_date: new FormControl(null)
+    }
+  );
+
+  onSubmit(data: FormGroup) {
+    // let myData = new FormData();
+    // let myMap = new Map(Object.entries(data.value));
+    // for (const [key, value] of myMap) {
+    //   myData.append(key, data.value[key]);
+    // }
+    // myData.append('from_date', data.value.from_date?.toISOString().slice(0, 10));
+    // myData.append('to_date', data.value.to_date?.toISOString().slice(0, 10));
+    this._ReportsService.addReports(data.value).subscribe({
+      next: (res) => {
+        this.data = res.data
+
+        this._ToastrService.success('Report Added Succesfuly');
+      },
+      error: (err) => {
+        this._ToastrService.error(
+          err.message,
+          'Error in Add  Report'
+        );
+      },
+      complete: () => {
+
+      }
+
+
+    })
+  }
+
+
+  // Status
+  getAllStatus() {
+    this._ReportsService.getStatus().subscribe(
+      (res) => {
+        this.status = res.data
+      }
+    )
+  }
+  // Department
+  getDepartment() {
+    this._LookupsService.getDepartment().subscribe(
+      (res) => {
+        this.departments = res.data
+
+      }
+    )
+  }
+  // Engineers
+  getEngineers() {
+    this._ReportsService.getEngineers().subscribe(
+      (res) => {
+        this.engineers = res.data;
+      }
+    )
+  }
+  // Technicians
+  getTechnicians() {
+    this._ReportsService.getTechnicians().subscribe(
+      (res) => {
+        this.technicians = res.data;
+      }
+    )
   }
 
 }

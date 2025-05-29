@@ -1,159 +1,157 @@
-<section id="print-section">
-    <div>
-        <div [dir]="currentLang =='en' ? 'ltr' : 'rtl'">
-            <img src="../../../../../assets//images/LogInLogo.png" alt="LogInLogo">
-        </div>
-        <div class="my-4" [dir]="currentLang =='en' ? 'ltr' : 'rtl'">
-            <div class="p-4">
-                <form [formGroup]="reportForm" (ngSubmit)="onSubmit(reportForm)">
-                    <div class="my-4">
-                        <div class="container py-5">
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td class="px-2 alone">
-                                            <!--  Status -->
-                                            <div class="">
-                                                <mat-form-field [hideRequiredMarker]="hideRequiredMarker">
-                                                    <mat-label>{{'reports.status' | translate}}</mat-label>
-                                                    <mat-select formControlName="status">
-                                                        <mat-option>None</mat-option>
-                                                        <mat-option *ngFor="let item of status" [value]="item.id">
-                                                            {{item.name}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
-                                            </div>
+<section>
+    <!-- Filter -->
+    <div class="my-4">
+        <div class="p-4">
+            <form [formGroup]="reportForm" (ngSubmit)="onSubmit(reportForm)">
+                <div class="my-4">
+                    <div class="container py-5">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="px-2 alone">
+                                        <!--  Status -->
+                                        <div class="">
+                                            <mat-form-field [hideRequiredMarker]="hideRequiredMarker">
+                                                <mat-label>{{'reports.status' | translate}}</mat-label>
+                                                <mat-select formControlName="status">
+                                                    <mat-option>None</mat-option>
+                                                    <mat-option *ngFor="let item of status" [value]="item.id">
+                                                        {{item.name}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
 
-                                        </td>
-                                        <td class="alone">
-                                            <!--  Department -->
-                                            <div class="">
-                                                <mat-form-field [hideRequiredMarker]="hideRequiredMarker">
-                                                    <mat-label>{{'reports.department' | translate}}</mat-label>
-                                                    <!-- <mat-select (selectionChange)="onselectDepartment()" [(value)]="departmentId" -->
-                                                    <mat-select [(value)]="departmentId"
-                                                        formControlName="department_id">
-                                                        <mat-option>None</mat-option>
-                                                        <mat-option *ngFor="let item of departments" [value]="item.id">
-                                                            {{item.name}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
-                                            </div>
+                                    </td>
+                                    <td class="alone">
+                                        <!--  Department -->
+                                        <div class="">
+                                            <mat-form-field [hideRequiredMarker]="hideRequiredMarker">
+                                                <mat-label>{{'reports.department' | translate}}</mat-label>
+                                                <!-- <mat-select (selectionChange)="onselectDepartment()" [(value)]="departmentId" -->
+                                                <mat-select formControlName="department_id">
+                                                    <mat-option>None</mat-option>
+                                                    <mat-option *ngFor="let item of departments" [value]="item.id">
+                                                        {{item.name}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
 
-                                        </td>
-                                        <td class="alone">
-                                            <!--  Engineer -->
-                                            <div class="">
-                                                <mat-form-field [hideRequiredMarker]="hideRequiredMarker">
-                                                    <mat-label>{{'reports.engineer' | translate}}</mat-label>
-                                                    <mat-select formControlName="engineer_id">
-                                                        <mat-option>None</mat-option>
-                                                        <mat-option *ngFor="let item of engineers" [value]="item.id">
-                                                            {{item.name}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
-                                            </div>
-                                        </td>
+                                    </td>
+                                    <td class="alone">
+                                        <!--  Engineer -->
+                                        <div class="">
+                                            <mat-form-field [hideRequiredMarker]="hideRequiredMarker">
+                                                <mat-label>{{'reports.engineer' | translate}}</mat-label>
+                                                <mat-select formControlName="engineer_id">
+                                                    <mat-option>None</mat-option>
+                                                    <mat-option *ngFor="let item of engineers" [value]="item.id">
+                                                        {{item.name}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </td>
 
-                                    </tr>
-                                    <tr>
-                                        <td class="px-2 alone">
-                                            <!--  Technician -->
-                                            <div class="">
-                                                <mat-form-field [hideRequiredMarker]="hideRequiredMarker">
-                                                    <mat-label>{{'reports.technician' | translate}}</mat-label>
-                                                    <mat-select formControlName="technician_id">
-                                                        <mat-option>None</mat-option>
-                                                        <mat-option *ngFor="let item of technicians" [value]="item.id">
-                                                            {{item.name}}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
-                                            </div>
-                                        </td>
-                                        <td class="alone">
-                                            <!-- start Date -->
-                                            <div class="">
-                                                <mat-form-field appearance="fill" class="example-full-width">
-                                                    <mat-label>{{'reports.start' | translate}}</mat-label>
-                                                    <input formControlName="from_date" matInput
-                                                        [matDatepicker]="picker3">
-                                                    <mat-hint>MM/DD/YYYY</mat-hint>
-                                                    <mat-datepicker-toggle matIconSuffix
-                                                        [for]="picker3"></mat-datepicker-toggle>
-                                                    <mat-datepicker #picker3></mat-datepicker>
-                                                </mat-form-field>
-                                            </div>
-                                        </td>
-                                        <td class="alone">
-                                            <!-- end date -->
-                                            <div class="">
-                                                <mat-form-field appearance="fill" class="example-full-width">
+                                </tr>
+                                <tr>
+                                    <td class="px-2 alone">
+                                        <!--  Technician -->
+                                        <div class="">
+                                            <mat-form-field [hideRequiredMarker]="hideRequiredMarker">
+                                                <mat-label>{{'reports.technician' | translate}}</mat-label>
+                                                <mat-select formControlName="technician_id">
+                                                    <mat-option>None</mat-option>
+                                                    <mat-option *ngFor="let item of technicians" [value]="item.id">
+                                                        {{item.name}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </td>
+                                    <td class="alone">
+                                        <!-- start Date -->
+                                        <div class="">
+                                            <mat-form-field appearance="fill" class="example-full-width">
+                                                <mat-label>{{'reports.start' | translate}}</mat-label>
+                                                <input formControlName="from_date" matInput [matDatepicker]="picker3">
+                                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                                <mat-datepicker-toggle matIconSuffix
+                                                    [for]="picker3"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker3></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+                                    </td>
+                                    <td class="alone">
+                                        <!-- end date -->
+                                        <div class="">
+                                            <mat-form-field appearance="fill" class="example-full-width">
 
-                                                    <mat-label>{{'reports.end' | translate}}</mat-label>
-                                                    <input formControlName="to_date" matInput [matDatepicker]="picker4">
-                                                    <mat-hint>MM/DD/YYYY</mat-hint>
-                                                    <mat-datepicker-toggle matIconSuffix
-                                                        [for]="picker4"></mat-datepicker-toggle>
-                                                    <mat-datepicker #picker4></mat-datepicker>
-                                                </mat-form-field>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                                                <mat-label>{{'reports.end' | translate}}</mat-label>
+                                                <input formControlName="to_date" matInput [matDatepicker]="picker4">
+                                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                                <mat-datepicker-toggle matIconSuffix
+                                                    [for]="picker4"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker4></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="text-start mt-3">
-                        <button class="primary text-center w-25">{{'search'|translate}}</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <!-- Table -->
-        <div class="my-4" [dir]="currentLang =='en' ? 'ltr' : 'rtl'">
-            <div class="table-card container py-5">
-                <div class="page-header shadow-lg">
-                    <h1>{{'reports.reports' | translate}}</h1>
                 </div>
-                <table class="custom-table">
-                    <thead class="text-capitalize">
-                        <th class="alone px-2 ">#</th>
-                        <th class="alone">{{'reports.building' | translate}}</th>
-                        <th class="alone">{{'reports.work_type' | translate}}</th>
-                        <th class="alone">{{'reports.source' | translate}}</th>
-                        <th class="alone">{{'reports.department' | translate}}</th>
-                        <th class="alone">{{'reports.engineer' | translate}}</th>
-                        <th class="alone">{{'reports.technician' | translate}}</th>
-                        <th class="alone">{{'reports.added_by' | translate}}</th>
-                        <th class="alone">{{'reports.status' | translate}}</th>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of data; let isEven = even" [class]="isEven ? '' : 'bg-secondary-subtle'">
-                            <td class="alone px-2"><a
-                                    [routerLink]="['/dashboard/admin/work-orders/view-order', item.id]">{{
-                                    item.id }}</a></td>
-                            <td class="alone">{{ item.building?.name }}</td>
-                            <td class="alone">{{ item.work_type?.name }}</td>
-                            <td class="alone">{{ item.source?.name }}</td>
-                            <td class="alone">{{ item.department?.name }}</td>
-                            <td class="alone">{{ item.engineer?.name }}</td>
-                            <td class="alone">{{ item.technician?.name }}</td>
-                            <td class="alone">{{ item.added_by?.name }}</td>
-                            <td class="alone">{{ item.status?.name }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="text-start mt-3">
+                    <button class="primary text-center w-25">{{'search'|translate}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div id="print-section" class="d-flex align-items-center" [dir]="currentLang =='en' ? 'ltr' : 'rtl'">
+        <div [dir]="currentLang =='en' ? 'rtl' : 'ltr'">
+            <img src="../../../../../assets//images/LogInLogo.png" alt="LogInLogo">
+            <img src="../../../../../assets//images/Logo.jpg" alt="Logo">
+        </div>
+        <div class="table-card container py-5">
+            <div class="page-header shadow-lg" [dir]="currentLang =='en' ? 'ltr' : 'rtl'">
+                <h1>{{'reports.reports' | translate}}</h1>
             </div>
+            <table class="custom-table table-print" [dir]="currentLang =='en' ? 'ltr' : 'rtl'">
+                <thead class="text-capitalize">
+                    <th class="alone p-2">#</th>
+                    <th class="alone">{{'reports.building' | translate}}</th>
+                    <th class="alone">{{'reports.work_type' | translate}}</th>
+                    <th class="alone">{{'reports.source' | translate}}</th>
+                    <th class="alone">{{'reports.department' | translate}}</th>
+                    <th class="alone">{{'reports.engineer' | translate}}</th>
+                    <th class="alone">{{'reports.technician' | translate}}</th>
+                    <th class="alone">{{'reports.added_by' | translate}}</th>
+                    <th class="alone">{{'reports.status' | translate}}</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of data; let isEven = even" [class]="isEven ? '' : 'bg-secondary-subtle'">
+                        <td class="alone p-2"><a [routerLink]="['/dashboard/admin/work-orders/view-order', item.id]">{{
+                                item.id }}</a></td>
+                        <td class="alone">{{ item.building?.name }}</td>
+                        <td class="alone">{{ item.work_type?.name }}</td>
+                        <td class="alone">{{ item.source?.name }}</td>
+                        <td class="alone">{{ item.department?.name }}</td>
+                        <td class="alone">{{ item.engineer?.name }}</td>
+                        <td class="alone">{{ item.technician?.name }}</td>
+                        <td class="alone">{{ item.added_by?.name }}</td>
+                        <td class="alone">{{ item.status?.name }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </section>
 <div class="p-3" [dir]="currentLang =='en' ? 'rtl' : 'ltr'">
-    <button class="primary" [printStyle]="{img : {'width': '10%','text-align':'start','display': 'inline-block'}}"
-        styleSheetFile="../../../../../assets/myStyles/main.scss" printSectionId="print-section"
+    <button class="primary" printTitle="Report"
+        [printStyle]="{img : {'width': '10%','text-align':'start','display': 'inline-block','margin':'0px 10px'}, thead:{'background-color':'#333'}}"
+        styleSheetFile="../../../../../assets/myStyles/print-table.scss" printSectionId="print-section"
         ngxPrint>{{'reports.print' | translate}}</button>
 </div>
