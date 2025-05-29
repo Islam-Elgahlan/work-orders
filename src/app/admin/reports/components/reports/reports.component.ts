@@ -37,7 +37,16 @@ export class ReportsComponent {
   ) { }
 
   ngOnInit() {
-    if(this.isEmptyData == true){
+    // for get all work orders first
+    Object.entries(this.reportForm.value).forEach(([key, value]) => {
+      if (!value) {
+        console.log('no data');
+        this.isEmptyData = true
+        console.log(this.isEmptyData);
+      }
+    })
+
+    if (this.isEmptyData == true) {
       this.onSubmit(this.reportForm)
     }
     this.getDepartment()
@@ -58,13 +67,9 @@ export class ReportsComponent {
   );
 
   onSubmit(data: FormGroup) {
-    Object.entries(data.value).forEach(([key, value]) => {
-      if (!value) {
-        console.log('no data');
-        this.isEmptyData = true
-        console.log(this.isEmptyData);
-        
-         this._ReportsService.addReports(data.value).subscribe({
+
+
+    this._ReportsService.addReports(data.value).subscribe({
       next: (res) => {
         this.data = res.data
 
@@ -79,32 +84,7 @@ export class ReportsComponent {
       complete: () => {
 
       }
-
-
     })
-
-      }
-    }
-    )
-
-    // this._ReportsService.addReports(data.value).subscribe({
-    //   next: (res) => {
-    //     this.data = res.data
-
-    //     this._ToastrService.success('Report Added Succesfuly');
-    //   },
-    //   error: (err) => {
-    //     this._ToastrService.error(
-    //       err.message,
-    //       'Error in Add  Report'
-    //     );
-    //   },
-    //   complete: () => {
-
-    //   }
-
-
-    // })
   }
   // Status
   getAllStatus() {
