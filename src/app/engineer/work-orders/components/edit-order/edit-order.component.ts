@@ -15,19 +15,7 @@ import { AddSpareComponent } from './components/add-spare/add-spare.component';
   styleUrls: ['./edit-order.component.scss']
 })
 export class EditOrderComponent {
-  ngOnInit() {
-    this.getOrderById(this.orderId)
-    this.getOrderMaterial()
-    this.getOrderParts()
-    this.getStatus()
-    // this.getworkType()
-    // this.getBuilding()
-    // this.getEqipment()
-    // this.getSource()
-    // this.getReport()
-    // this.getDepartment()
-
-  }
+  
   constructor(
     private _activateRoute: ActivatedRoute,
     private _WorkOrdersService: WorkOrdersService,
@@ -40,6 +28,20 @@ export class EditOrderComponent {
 
   ) {
     this.orderId = this._activateRoute.snapshot.paramMap.get('id')
+
+  }
+
+  ngOnInit() {
+    this.getOrderById(this.orderId)
+    this.getOrderMaterial()
+    this.getOrderParts()
+    this.getStatus()
+    // this.getworkType()
+    // this.getBuilding()
+    // this.getEqipment()
+    // this.getSource()
+    // this.getReport()
+    // this.getDepartment()
 
   }
 
@@ -105,11 +107,11 @@ export class EditOrderComponent {
   onSubmit(data: FormGroup) {
     if (this.orderId) {
       // Edit Order
-      let myData = new FormData();
-      let myMap = new Map(Object.entries(data.value));
-      for (const [key, value] of myMap) {
-        myData.append(key, data.value[key]);
-      }
+      // let myData = new FormData();
+      // let myMap = new Map(Object.entries(data.value));
+      // for (const [key, value] of myMap) {
+      //   myData.append(key, data.value[key]);
+      // }
 
       this._WorkOrdersService.editOrder(data.value, this.orderId).subscribe({
         next: (res) => {

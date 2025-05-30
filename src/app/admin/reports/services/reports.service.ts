@@ -9,8 +9,8 @@ export class ReportsService {
 
   constructor(private _httpClient: HttpClient) { }
 
-  addReports(data: any): Observable<any> {
-    return this._httpClient.post(`work-orders/custom-filter`, data)
+  addReports(data: any,params:any): Observable<any> {
+    return this._httpClient.post(`work-orders/custom-filter`, data,{params:params})
   }
   // getReports(): Observable<any> {
   //   return this._httpClient.get(`work-orders/custom-filter`)

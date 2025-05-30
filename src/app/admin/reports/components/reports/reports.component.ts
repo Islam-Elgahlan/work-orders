@@ -21,6 +21,10 @@ export class ReportsComponent {
   technicians: any
   start_date: any
   date: any
+  tableResponse: any | undefined;
+  tableData: any[] | undefined = [];
+  pageSize: number | undefined = 5;
+  page: number | undefined = 1;
   isEmptyData: boolean = false
   currentLang = localStorage.getItem('lang')
 
@@ -37,18 +41,16 @@ export class ReportsComponent {
   ) { }
 
   ngOnInit() {
-    // for get all work orders first
-    Object.entries(this.reportForm.value).forEach(([key, value]) => {
-      if (!value) {
-        console.log('no data');
-        this.isEmptyData = true
-        console.log(this.isEmptyData);
-      }
-    })
+    // // for get all work orders first
+    // Object.entries(this.reportForm.value).forEach(([key, value]) => {
+    //   if (!value) {
+    //     this.isEmptyData = true
+    //   }
+    // })
 
-    if (this.isEmptyData == true) {
-      this.onSubmit(this.reportForm)
-    }
+    // if (this.isEmptyData == true) {
+    //   this.onSubmit(this.reportForm)
+    // }
     this.getDepartment()
     this.getAllStatus()
     this.getEngineers()
@@ -67,9 +69,13 @@ export class ReportsComponent {
   );
 
   onSubmit(data: FormGroup) {
+ let params = {
+      page_size: this.pageSize,
+      page: this.page,
+    };
+    // this.spinner.show()
 
-
-    this._ReportsService.addReports(data.value).subscribe({
+    this._ReportsService.addReports(data.value,params).subscribe({
       next: (res) => {
         this.data = res.data
 

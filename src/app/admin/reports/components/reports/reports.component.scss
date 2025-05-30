@@ -1,14 +1,48 @@
+// .custom-table {
+//   width: 100%;
+//   margin: 0p 5px;
+
+//   thead {
+//     font-size: 17px;
+//     height: 60px;
+//     background-color: #00A551;
+//     color: white;
+//   }
+// }
+
+// .status {
+//   border-radius: 16px;
+//   color: white;
+//   padding: 8px 15px;
+
+
+//   &.notActive {
+//     background-color: rgba(239, 155, 40, 0.64);
+//   }
+
+//   &.active {
+//     background-color: #009247;
+//   }
+// }
+
+.page-header {
+  button {
+    background-color: #00A551;
+  }
+}
+
 table {
-    width: 100%;
+  width: 100%;
 }
 
 .mat-date-range-input-inner {
-    color: #000;
+  color: #000;
 }
 
 .mat-mdc-form-field:not(.mat-form-field-no-animations) .mdc-text-field__input {
-    color: black !important;
+  color: black !important;
 }
+
 
 img{
     width: 10%;
