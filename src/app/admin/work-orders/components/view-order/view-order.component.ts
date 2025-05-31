@@ -27,10 +27,8 @@ export class ViewOrderComponent {
     this.getSource()
     this.getReport()
     this.getDepartment()
-
     this.orderForm.disable()
-
-    this.getOrderMaterial()
+     this.getOrderMaterial()
     this.getOrderParts()
     this.getStatus()
   }

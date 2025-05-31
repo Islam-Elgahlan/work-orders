@@ -167,7 +167,6 @@ export class EditOrderComponent {
             // holding_reason: this.currentOrder?.holding_reason,
           })
 
-        }
       }
     })
   }
@@ -183,6 +182,13 @@ export class EditOrderComponent {
     } else {
 
       (this.updateOrderForm as FormGroup).addControl('holding_reason', new FormControl(null, [Validators.required]))
+      (this.updateOrderForm as FormGroup).addControl('holding_reason',new FormControl(null, [Validators.required]))
+    }else{
+      // this._WorkOrdersService.updateStatus(this.orderId,data.value).subscribe(
+      //   (res)=>{
+      //     this._ToastrService.success('Status Updated Succesfuly');
+      //   }
+      // )
     }
   }
   onupdate(data: FormGroup) {
