@@ -1,12 +1,17 @@
-.mat-mdc-form-field:not(.mat-form-field-no-animations) .mdc-text-field__input{
-    color: black !important;
-  }  
+.mat-mdc-form-field:not(.mat-form-field-no-animations) .mdc-text-field__input {
+  color: black !important;
+}
 
-  
-  .example-full-width {
-    width: 100%;
-  }
-  textarea{
-    min-height: 150px;
-  }
-  
+
+.example-full-width {
+  width: 100%;
+}
+
+textarea {
+  min-height: 150px;
+}
+
+img {
+  width: 10%;
+  display: none;
+}

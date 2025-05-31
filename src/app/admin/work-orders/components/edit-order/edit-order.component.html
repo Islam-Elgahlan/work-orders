@@ -29,7 +29,8 @@
                             <div class="col-md-4">
                                 <mat-form-field class="w-100" [hideRequiredMarker]="hideRequiredMarker">
                                     <mat-label>{{'orders.department' | translate}}</mat-label>
-                                    <mat-select (selectionChange)="onselectDepartment()" [(value)]="departmentId" formControlName="department_id">
+                                    <mat-select (selectionChange)="onselectDepartment()" [(value)]="departmentId"
+                                        formControlName="department_id">
                                         <mat-option *ngFor="let item of departments" [value]="item.id">
                                             {{item.name}}
                                         </mat-option>
@@ -150,15 +151,73 @@
                                     </mat-select>
                                 </mat-form-field>
                             </div>
+                            <!-- status -->
+                            <div class="col-md-4">
+                                <mat-form-field class="w-100" [hideRequiredMarker]="hideRequiredMarker">
+                                    <mat-label>{{'orders.status' | translate}}</mat-label>
+                                    <mat-select formControlName="status">
+                                        <mat-option *ngFor="let item of status" [value]="item.id">
+                                            {{item.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <!-- technician report -->
+                            <div class="col-md-8">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>{{'orders.tech_report'|translate}}</mat-label>
+                                    <textarea formControlName="technician_report" matInput
+                                        placeholder="Ex. It makes me feel..."></textarea>
+                                    <!-- <mat-error *ngIf="updateOrderForm.controls.technician_report.hasError('required')">
+                                            {{'orders.tech_report' | translate}} {{'required' | translate}}
+                                        </mat-error> -->
+                                </mat-form-field>
+                            </div>
                             <!-- Description -->
                             <div class="row">
-                                <div class="col-md-8">
-                                    <mat-form-field class="example-full-width">
-                                        <mat-label>{{'orders.description'|translate}}</mat-label>
-                                        <textarea formControlName="description" matInput
-                                            placeholder="Ex. It makes me feel..."></textarea>
-                                    </mat-form-field>
-                                </div>
+
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>{{'orders.description'|translate}}</mat-label>
+                                    <textarea formControlName="description" matInput
+                                        placeholder="Ex. It makes me feel..."></textarea>
+                                </mat-form-field>
+
+                            </div>
+                            <!-- strat Add material -->
+                            <h1>{{'orders.update.material' | translate}}</h1>
+                            <table class="custom-table">
+                                <thead class="text-capitalize">
+                                    <th class="alone">{{'orders.update.name' | translate}}</th>
+                                    <th class="alone">{{'orders.update.description' | translate}}</th>
+                                    <th class="alone">{{'orders.update.quantity' | translate}}</th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of materialTableData; let isEven = even"
+                                        [class]="isEven ? '' : 'bg-secondary-subtle'">
+                                        <td>{{ item.name }}</td>
+                                        <td>{{ item.description }}</td>
+                                        <td>{{ item.quantity }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- Start Spare Parts -->
+                            <div class="py-4">
+                                <h1>{{'orders.update.parts' | translate}}</h1>
+                                <table class="custom-table">
+                                    <thead class="text-capitalize">
+                                        <th class="alone">{{'orders.update.name' | translate}}</th>
+                                        <th class="alone">{{'orders.update.description' | translate}}</th>
+                                        <th class="alone">{{'orders.update.quantity' | translate}}</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of spareTableData; let isEven = even"
+                                            [class]="isEven ? '' : 'bg-secondary-subtle'">
+                                            <td>{{ item.name }}</td>
+                                            <td>{{ item.description }}</td>
+                                            <td>{{ item.quantity }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                             <!-- strat Add material -->
                     <h1>{{'orders.update.material' | translate}}</h1>

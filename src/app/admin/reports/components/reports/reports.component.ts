@@ -21,6 +21,12 @@ export class ReportsComponent {
   technicians: any
   start_date: any
   date: any
+  tableResponse: any | undefined;
+  tableData: any[] | undefined = [];
+  pageSize: number | undefined = 5;
+  page: number | undefined = 1;
+  isEmptyData: boolean = false
+  currentLang = localStorage.getItem('lang')
 
   hide: boolean = true;
   confirmHide: boolean = true;
@@ -35,6 +41,16 @@ export class ReportsComponent {
   ) { }
 
   ngOnInit() {
+    // // for get all work orders first
+    // Object.entries(this.reportForm.value).forEach(([key, value]) => {
+    //   if (!value) {
+    //     this.isEmptyData = true
+    //   }
+    // })
+
+    // if (this.isEmptyData == true) {
+    //   this.onSubmit(this.reportForm)
+    // }
     this.getDepartment()
     this.getAllStatus()
     this.getEngineers()
@@ -53,16 +69,16 @@ export class ReportsComponent {
   );
 
   onSubmit(data: FormGroup) {
-    // let myData = new FormData();
-    // let myMap = new Map(Object.entries(data.value));
-    // for (const [key, value] of myMap) {
-    //   myData.append(key, data.value[key]);
-    // }
-    // myData.append('from_date', data.value.from_date?.toISOString().slice(0, 10));
-    // myData.append('to_date', data.value.to_date?.toISOString().slice(0, 10));
-    this._ReportsService.addReports(data.value).subscribe({
+ let params = {
+      page_size: this.pageSize,
+      page: this.page,
+    };
+    // this.spinner.show()
+
+    this._ReportsService.addReports(data.value,params).subscribe({
       next: (res) => {
         this.data = res.data
+
         this._ToastrService.success('Report Added Succesfuly');
       },
       error: (err) => {
@@ -74,8 +90,6 @@ export class ReportsComponent {
       complete: () => {
 
       }
-
-
     })
   }
   // Status
@@ -83,7 +97,6 @@ export class ReportsComponent {
     this._ReportsService.getStatus().subscribe(
       (res) => {
         this.status = res.data
-
       }
     )
   }
@@ -101,8 +114,6 @@ export class ReportsComponent {
     this._ReportsService.getEngineers().subscribe(
       (res) => {
         this.engineers = res.data;
-        console.log(this.engineers);
-
       }
     )
   }
@@ -111,8 +122,6 @@ export class ReportsComponent {
     this._ReportsService.getTechnicians().subscribe(
       (res) => {
         this.technicians = res.data;
-        console.log(this.technicians);
-
       }
     )
   }

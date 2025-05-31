@@ -45,6 +45,13 @@ const routes: Routes = [
         (m) => m.WorkOrdersModule
       ),
   },
+  {
+    path: 'reports',
+    loadChildren: () =>
+      import('./reports/reports.module').then(
+        (m) => m.ReportsModule
+      ),
+  },
 
 ];
 

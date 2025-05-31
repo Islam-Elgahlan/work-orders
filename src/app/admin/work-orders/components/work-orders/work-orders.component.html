@@ -1,62 +1,179 @@
 <section>
-    <div class=" container py-5">
-      <div class="page-header shadow-lg">
-        <h1>{{'orders.orders' | translate}}</h1>
-        <button routerLink="add-edit-order" class="primary px-3">
-          <span class="fa-solid fa-plus mx-2"></span>
-          <span>{{'addnew'|translate}}</span>
+  <div class="container py-5">
+    <div class="page-header">
+      <h1>{{'orders.orders' | translate}}</h1>
+      <button routerLink="add-edit-order" class="primary px-3">
+        <span class="fa-solid fa-plus mx-2"></span>
+        <span>{{'addnew'|translate}}</span>
       </button>
-      </div>
-  
-      <table class="custom-table">
-        <thead class="text-capitalize">
-          <th class="alone">#</th>
-          <th class="alone">{{'orders.workType' | translate}}</th>
-          <th class="alone">{{'orders.building' | translate}}</th>
-          <th class="alone">{{'orders.floor' | translate}}</th>
-          <th class="alone">{{'orders.room' | translate}}</th>
-          <th class="alone">{{'orders.requestername' | translate}}</th>
-          <th class="alone">{{'orders.date' | translate}}</th>
-          <th class="alone">{{'orders.actions' | translate}}</th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of tableData; let isEven = even" [class]="isEven ? '' : 'bg-secondary-subtle'">
-            <td class="px-2"><a [routerLink]="['view-order', item.id]">{{ item.id }}</a></td>
-            <td>{{ item.work_type.name }}</td>
-            <td>{{ item.building.name }}</td>
-            <td>{{ item.floor_no }}</td>
-            <td>{{ item.room_no }}</td>
-            <td>{{item.customer_name}}</td>
-        
-            <td>{{ item.start_date | date : "dd-MM-yyyy , hh:mm a" }}</td>
+    </div>
+    <!-- Filter -->
+    <div class="page-header">
+      <form [formGroup]="reportForm" (ngSubmit)="onSubmit(reportForm)">
+        <div class="row">
+          <!--  Status -->
+          <div class="col-md-4">
+            <div class="">
+              <mat-form-field [hideRequiredMarker]="hideRequiredMarker">
+                <mat-label>{{'orders.status' | translate}}</mat-label>
+                <mat-select formControlName="status">
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let item of status" [value]="item.id">
+                    {{item.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <!--  Department -->
+          <div class="col-md-4">
+            <div class="">
+              <mat-form-field [hideRequiredMarker]="hideRequiredMarker">
+                <mat-label>{{'orders.department' | translate}}</mat-label>
+                <!-- <mat-select (selectionChange)="onselectDepartment()" [(value)]="departmentId" -->
+                <mat-select formControlName="department_id">
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let item of departments" [value]="item.id">
+                    {{item.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <!--  Engineer -->
+          <div class="col-md-4">
+            <div class="">
+              <mat-form-field [hideRequiredMarker]="hideRequiredMarker">
+                <mat-label>{{'orders.engineer' | translate}}</mat-label>
+                <mat-select formControlName="engineer_id">
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let item of engineers" [value]="item.id">
+                    {{item.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <!--  Technician -->
+          <div class="col-md-4">
+            <div class="">
+              <mat-form-field [hideRequiredMarker]="hideRequiredMarker">
+                <mat-label>{{'orders.technician' | translate}}</mat-label>
+                <mat-select formControlName="technician_id">
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let item of technicians" [value]="item.id">
+                    {{item.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <!--  buildings -->
+          <div class="col-md-4">
+            <div class="">
+              <mat-form-field [hideRequiredMarker]="hideRequiredMarker">
+                <mat-label>{{'orders.building' | translate}}</mat-label>
+                <mat-select formControlName="building_id">
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let item of buildingsList" [value]="item.id">
+                    <span *ngIf="currentLang == 'ar'">{{item.name_ar}}</span>
+                    <span *ngIf="currentLang == 'en'">{{item.name_en}}</span>
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <!--  workType -->
+          <div class="col-md-4">
+            <div class="">
+              <mat-form-field [hideRequiredMarker]="hideRequiredMarker">
+                <mat-label>{{'orders.workType' | translate}}</mat-label>
+                <mat-select formControlName="work_type_id">
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let item of workTypeList" [value]="item.id">
+                    <span *ngIf="currentLang == 'ar'">{{item.name_ar}}</span>
+                    <span *ngIf="currentLang == 'en'">{{item.name_en}}</span>
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- start Date -->
+          <div class="col-md-4">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>{{'reports.start' | translate}}</mat-label>
+              <input formControlName="from_date" matInput [matDatepicker]="picker3">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+              <mat-datepicker #picker3></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <!-- end date -->
+          <div class="col-md-4">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>{{'reports.end' | translate}}</mat-label>
+              <input formControlName="to_date" matInput [matDatepicker]="picker4">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="picker4"></mat-datepicker-toggle>
+              <mat-datepicker #picker4></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="text-start mt-3">
+          <button class="primary text-center w-25">{{'search'|translate}}</button>
+        </div>
+      </form>
+    </div>
 
-            <td class="text-center">
-              <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                <mat-icon>more_vert</mat-icon>
+    <table class="custom-table">
+      <thead class="text-capitalize">
+        <th class="alone">#</th>
+        <th class="alone">{{'orders.workType' | translate}}</th>
+        <th class="alone">{{'orders.building' | translate}}</th>
+        <th class="alone">{{'orders.floor' | translate}}</th>
+        <th class="alone">{{'orders.room' | translate}}</th>
+        <th class="alone">{{'orders.requestername' | translate}}</th>
+        <th class="alone">{{'orders.date' | translate}}</th>
+        <th class="alone">{{'orders.actions' | translate}}</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of tableData; let isEven = even" [class]="isEven ? '' : 'bg-secondary-subtle'">
+          <td class="p-2"><a [routerLink]="['view-order', item.id]">{{ item.id }}</a></td>
+          <td>{{ item.work_type.name }}</td>
+          <td>{{ item.building.name }}</td>
+          <td>{{ item.floor_no }}</td>
+          <td>{{ item.room_no }}</td>
+          <td>{{item.customer_name}}</td>
+
+          <td>{{ item.start_date | date : "dd-MM-yyyy , hh:mm a" }}</td>
+
+          <td class="text-center">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button [routerLink]="['view-order', item.id]" mat-menu-item>
+                <mat-icon>visibility</mat-icon>
+                <span>{{'users.view' | translate}}</span>
               </button>
-              <mat-menu #menu="matMenu">
-                <button [routerLink]="['view-order', item.id]" mat-menu-item>
-                  <mat-icon>visibility</mat-icon>
-                  <span>{{'users.view' | translate}}</span>
-                </button>
-                <button [routerLink]="['edit-order',item.id]" mat-menu-item >
-                  <mat-icon>edit_square</mat-icon>
-                  <span>{{'edit'|translate}}</span>
-                </button>
-                <button mat-menu-item (click)="deleteDialog(item)">
-                  <mat-icon>delete</mat-icon>
-                  <span>{{'delete'|translate}}</span>
-                </button>
-              </mat-menu>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="bg-info">
-      <mat-paginator #paginator class="demo-paginator" (page)="handlePageEvent($event)"
-        [length]="tableResponse?.total" [pageSize]="tableResponse?.pageSize"
-        [pageSizeOptions]="[5, 10, 15, 20, 40, 100]" [pageIndex]="pageIndex" aria-label="Select page">
-      </mat-paginator>
-    </div>
-  </section>
+              <button [routerLink]="['edit-order',item.id]" mat-menu-item>
+                <mat-icon>edit_square</mat-icon>
+                <span>{{'edit'|translate}}</span>
+              </button>
+              <button mat-menu-item (click)="deleteDialog(item)">
+                <mat-icon>delete</mat-icon>
+                <span>{{'delete'|translate}}</span>
+              </button>
+            </mat-menu>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="bg-info">
+    <mat-paginator #paginator class="demo-paginator" (page)="handlePageEvent($event)" [length]="tableResponse?.total"
+      [pageSize]="tableResponse?.pageSize" [pageSizeOptions]="[5, 10, 15, 20, 40, 100]" [pageIndex]="pageIndex"
+      aria-label="Select page">
+    </mat-paginator>
+  </div>
+</section>

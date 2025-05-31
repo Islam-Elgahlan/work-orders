@@ -6,11 +6,11 @@ import { AddOrderComponent } from './components/add-order/add-order.component';
 import { EditOrderComponent } from './components/edit-order/edit-order.component';
 
 const routes: Routes = [
-    {path:'' , component:WorkOrdersComponent},
-    {path:'work-orders' , component:WorkOrdersComponent},
-    {path:'view-order/:id' , component:ViewOrderComponent},
-    {path:'add-order' , component:AddOrderComponent},
-    {path:'edit-order/:id' , component:EditOrderComponent},
+  { path: '', component: WorkOrdersComponent },
+  { path: 'work-orders', component: WorkOrdersComponent },
+  { path: 'view-order/:id', component: ViewOrderComponent },
+  { path: 'add-order', component: AddOrderComponent },
+  { path: 'edit-order/:id', component: EditOrderComponent },
 ];
 
 @NgModule({

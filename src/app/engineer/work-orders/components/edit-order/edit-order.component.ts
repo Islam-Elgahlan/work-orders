@@ -15,19 +15,7 @@ import { AddSpareComponent } from './components/add-spare/add-spare.component';
   styleUrls: ['./edit-order.component.scss']
 })
 export class EditOrderComponent {
-  ngOnInit() {
-    this.getOrderById(this.orderId)
-    this.getOrderMaterial()
-    this.getOrderParts()
-    this.getStatus()
-    // this.getworkType()
-    // this.getBuilding()
-    // this.getEqipment()
-    // this.getSource()
-    // this.getReport()
-    // this.getDepartment()
-
-  }
+  
   constructor(
     private _activateRoute: ActivatedRoute,
     private _WorkOrdersService: WorkOrdersService,
@@ -40,6 +28,20 @@ export class EditOrderComponent {
 
   ) {
     this.orderId = this._activateRoute.snapshot.paramMap.get('id')
+
+  }
+
+  ngOnInit() {
+    this.getOrderById(this.orderId)
+    this.getOrderMaterial()
+    this.getOrderParts()
+    this.getStatus()
+    // this.getworkType()
+    // this.getBuilding()
+    // this.getEqipment()
+    // this.getSource()
+    // this.getReport()
+    // this.getDepartment()
 
   }
 
@@ -67,35 +69,35 @@ export class EditOrderComponent {
   materialTableData: any;
   spareTableData: any;
 
-  status:any
-  statusId:any
-  isHold:boolean = false
+  status: any
+  statusId: any
+  isHold: boolean = false
 
   orderForm = new FormGroup(
     {
-      start_date: new FormControl({ value: '', disabled: true }),
+      start_date: new FormControl(null, [Validators.required]),
       start_time: new FormControl(new Date().toTimeString().split(' ')[0], [Validators.required]),
-      department_id: new FormControl({ value: '', disabled: true }, [Validators.required]),
-      engineer_id: new FormControl({ value: '', disabled: true }),
-      technician_id: new FormControl({ value: '', disabled: true },),
-      work_type_id: new FormControl({ value: '', disabled: true }, [Validators.required]),
-      building_id: new FormControl({ value: '', disabled: true }, [Validators.required]),
-      floor_no: new FormControl({ value: '', disabled: true }, [Validators.required]),
-      room_no: new FormControl({ value: '', disabled: true }, [Validators.required]),
-      source_id: new FormControl({ value: '', disabled: true }, [Validators.required]),
-      customer_name: new FormControl({ value: '', disabled: true }, [Validators.required]),
-      customer_phone: new FormControl({ value: '', disabled: true }, [Validators.required]),
-      equipment_id: new FormControl({ value: '', disabled: true }, [Validators.required]),
-      description: new FormControl({ value: '', disabled: true }, [Validators.required]),
-      priority: new FormControl({ value: '', disabled: true }, [Validators.required]),
-      type: new FormControl({ value: '', disabled: true },),
+      department_id: new FormControl(null, [Validators.required]),
+      engineer_id: new FormControl(null, [Validators.required]),
+      technician_id: new FormControl(null,),
+      work_type_id: new FormControl(null, [Validators.required]),
+      building_id: new FormControl(null, [Validators.required]),
+      floor_no: new FormControl(null, [Validators.required]),
+      room_no: new FormControl(null, [Validators.required]),
+      source_id: new FormControl(null, [Validators.required]),
+      customer_name: new FormControl(null, [Validators.required]),
+      customer_phone: new FormControl(null, [Validators.required]),
+      equipment_id: new FormControl(null, [Validators.required]),
+      description: new FormControl(null, [Validators.required]),
+      priority: new FormControl(null, [Validators.required]),
+      type: new FormControl(null,),
       // status: new FormControl(null,[Validators.required])
 
     }
   );
   updateOrderForm = new FormGroup({
-    status: new FormControl(null,[Validators.required]),
-    technician_report: new FormControl(null,[Validators.required]),
+    status: new FormControl(null, [Validators.required]),
+    technician_report: new FormControl(null, [Validators.required]),
     // holding_reason: new FormControl(null,[Validators.required]),
 
     // used_items_descriptions: new FormControl(null,[Validators.required]),
@@ -105,11 +107,11 @@ export class EditOrderComponent {
   onSubmit(data: FormGroup) {
     if (this.orderId) {
       // Edit Order
-      let myData = new FormData();
-      let myMap = new Map(Object.entries(data.value));
-      for (const [key, value] of myMap) {
-        myData.append(key, data.value[key]);
-      }
+      // let myData = new FormData();
+      // let myMap = new Map(Object.entries(data.value));
+      // for (const [key, value] of myMap) {
+      //   myData.append(key, data.value[key]);
+      // }
 
       this._WorkOrdersService.editOrder(data.value, this.orderId).subscribe({
         next: (res) => {
@@ -129,52 +131,57 @@ export class EditOrderComponent {
 
 
   getOrderById(id: number) {
-    this._WorkOrdersService.getOrder(id).subscribe(
-      (res) => {
+    this._WorkOrdersService.getOrder(id).subscribe({
+      next: (res) => {
         this.currentOrder = res.data
-        if(this.currentOrder.status.id == 4){
-          this.isHold = true;
-      (this.updateOrderForm as FormGroup).addControl('holding_reason',new FormControl(null , [Validators.required]))
-          this.updateOrderForm.patchValue({ holding_reason: this.currentOrder.holding_reason } as any);
+        if (this.currentOrder.status == 4) {
+          if (this.currentOrder.status.id == 4) {
+            this.isHold = true;
+            (this.updateOrderForm as FormGroup).addControl('holding_reason', new FormControl(null, [Validators.required]))
+            this.updateOrderForm.patchValue({ holding_reason: this.currentOrder.holding_reason } as any);
 
-        }
-        // this.getengineers(this.currentOrder?.department.id)
-        // this.gettechnicians(this.currentOrder?.department.id)
+          }
+          // this.getengineers(this.currentOrder?.department.id)
+          // this.gettechnicians(this.currentOrder?.department.id)
 
-        this.orderForm.patchValue({
-          start_date: this.currentOrder?.start_date,
-          department_id: this.currentOrder?.department?.name,
-          engineer_id: this.currentOrder?.engineer?.name,
-          technician_id: this.currentOrder?.technician?.name,
-          work_type_id: this.currentOrder?.work_type.name,
-          building_id: this.currentOrder?.building.name,
-          floor_no: this.currentOrder?.floor_no,
-          room_no: this.currentOrder?.room_no,
-          customer_name: this.currentOrder?.customer_name,
-          customer_phone: this.currentOrder?.customer_phone,
-          equipment_id: this.currentOrder?.equipment.name,
-          source_id: this.currentOrder?.source.name,
-          description: this.currentOrder?.description,
+          this.orderForm.patchValue({
+            start_date: this.currentOrder?.start_date,
+            department_id: this.currentOrder?.department?.name,
+            engineer_id: this.currentOrder?.engineer?.name,
+            technician_id: this.currentOrder?.technician?.name,
+            work_type_id: this.currentOrder?.work_type.name,
+            building_id: this.currentOrder?.building.name,
+            floor_no: this.currentOrder?.floor_no,
+            room_no: this.currentOrder?.room_no,
+            customer_name: this.currentOrder?.customer_name,
+            customer_phone: this.currentOrder?.customer_phone,
+            equipment_id: this.currentOrder?.equipment.name,
+            source_id: this.currentOrder?.source.name,
+            description: this.currentOrder?.description,
 
-        })
+          })
 
-        this.updateOrderForm.patchValue({
-          status: this.currentOrder?.status.id,
-          technician_report: this.currentOrder?.technician_report,
-          // holding_reason: this.currentOrder?.holding_reason,
-        })
+          this.updateOrderForm.patchValue({
+            status: this.currentOrder?.status.id,
+            technician_report: this.currentOrder?.technician_report,
+            // holding_reason: this.currentOrder?.holding_reason,
+          })
 
       }
-    )
+    })
   }
 
   // Update Status
 
-  onselectStatus(data:FormGroup){
+  onselectStatus(data: FormGroup) {
     // console.log(data.value.status)
     this.isHold = false
-    if(data.value.status == 4){
+    if (data.value.status == 4) {
       this.isHold = true;
+      (this.updateOrderForm as FormGroup).addControl('holding_reason', new FormControl(null, [Validators.required]))
+    } else {
+
+      (this.updateOrderForm as FormGroup).addControl('holding_reason', new FormControl(null, [Validators.required]))
       (this.updateOrderForm as FormGroup).addControl('holding_reason',new FormControl(null, [Validators.required]))
     }else{
       // this._WorkOrdersService.updateStatus(this.orderId,data.value).subscribe(
@@ -184,22 +191,22 @@ export class EditOrderComponent {
       // )
     }
   }
-  onupdate(data:FormGroup){
+  onupdate(data: FormGroup) {
     // console.log(data.value);
     let myData = new FormData();
     let myMap = new Map(Object.entries(data.value));
     for (const [key, value] of myMap) {
       myData.append(key, data.value[key]);
     }
-    this._WorkOrdersService.updateOrder(this.orderId,data.value).subscribe(
-      (res)=>{
-          this._ToastrService.success('Order Updated Succesfuly');
+    this._WorkOrdersService.updateOrder(this.orderId, data.value).subscribe({
+      next: (res) => {
+        this._ToastrService.success('Order Updated Succesfuly');
       },
-      (err)=>{
-        this._ToastrService.error(err.message ,'Error in Update')
+      error: (err) => {
+        this._ToastrService.error(err.message, 'Error in Update')
       }
-    )
-    
+    })
+
   }
   // start Material 
 
@@ -226,6 +233,7 @@ export class EditOrderComponent {
     }
     this._WorkOrdersService.addMaterial(myData).subscribe({
       next: (res) => {
+        this.getOrderMaterial()
         this._ToastrService.success(res.message, 'Work Order Added Succesfuly');
       },
       error: (err) => {
@@ -254,82 +262,82 @@ export class EditOrderComponent {
     })
   }
   getOrderMaterial() {
-    this._WorkOrdersService.getMaterialByOrderId(this.orderId).subscribe(
-      (res) => {
+    this._WorkOrdersService.getMaterialByOrderId(this.orderId).subscribe({
+      next: (res) => {
         this.materialTableData = res.data
+
       }
-    )
+    })
   }
 
+  // start parts 
+  openPartsDialog() {
+    const dialogRef = this.dialog.open(AddSpareComponent, {
+      data: this.orderId,
+    });
 
-    // start parts 
 
-    openPartsDialog() {
-      const dialogRef = this.dialog.open(AddSpareComponent, {
-        data: this.orderId,
-      });
-  
-  
-      dialogRef.afterClosed().subscribe((result) => {
-        console.log('The dialog was closed', result);
-        if (result) {
-          this.addParts(result)
-          this.getOrderParts()
-        }
-      });
-    }
-  
-    addParts(data: FormGroup) {
-      let myData = new FormData();
-      let myMap = new Map(Object.entries(data.value));
-      for (const [key, value] of myMap) {
-        myData.append(key, data.value[key]);
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed', result);
+      if (result) {
+        this.addParts(result)
+        this.getOrderParts()
       }
-      this._WorkOrdersService.addParts(myData).subscribe({
-        next: (res) => {
-          this._ToastrService.success(res.message, 'Work Order Added Succesfuly');
-        },
-        error: (err) => {
-          this._ToastrService.error(err.message, 'Error in Update Order');
-        },
-        complete: () => {
-  
-        }
-  
-      })
-    }
-  
-    deletePartsById(id: number) {
-      this._WorkOrdersService.deleteParts(id).subscribe({
-        next: (res) => {
-          this.getOrderParts()
-          this._ToastrService.success(res.message, 'deleted Succesfuly');
-        },
-        error: (err) => {
-          this._ToastrService.error(err.message, ' Error in delete');
-  
-        },
-        complete: () => {
-        }
-  
-      })
-    }
-    getOrderParts() {
-      this._WorkOrdersService.getPartsByOrderId(this.orderId).subscribe(
-        (res) => {
-          this.spareTableData = res.data
-        }
-      )
-    }
+    });
+  }
 
-// lookups
-
-getStatus(){
-  this._LookupsService.getStatus().subscribe(
-    (res) =>{
-      this.status = res.data
+  addParts(data: FormGroup) {
+    let myData = new FormData();
+    let myMap = new Map(Object.entries(data.value));
+    for (const [key, value] of myMap) {
+      myData.append(key, data.value[key]);
     }
-  )
-}
+    this._WorkOrdersService.addParts(myData).subscribe({
+      next: (res) => {
+        this._ToastrService.success(res.message, 'Work Order Added Succesfuly');
+        this.getOrderParts()
+      },
+      error: (err) => {
+        this._ToastrService.error(err.message, 'Error in Update Order');
+      },
+      complete: () => {
+
+      }
+
+    })
+  }
+
+  deletePartsById(id: number) {
+    this._WorkOrdersService.deleteParts(id).subscribe({
+      next: (res) => {
+        this.getOrderParts()
+        this._ToastrService.success(res.message, 'deleted Succesfuly');
+      },
+      error: (err) => {
+        this._ToastrService.error(err.message, ' Error in delete');
+
+      },
+      complete: () => {
+      }
+
+    })
+  }
+  getOrderParts() {
+    this._WorkOrdersService.getPartsByOrderId(this.orderId).subscribe({
+      next: (res) => {
+        this.spareTableData = res.data
+      }
+    })
+  }
+
+  // lookups
+
+  getStatus() {
+    this._LookupsService.getStatus().subscribe({
+      next: (res) => {
+        this.status = res.data
+      }
+    })
+  }
 
 }

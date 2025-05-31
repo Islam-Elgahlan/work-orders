@@ -7,6 +7,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AddEditWorkOrdersComponent } from './components/add-edit-work-orders/add-edit-work-orders.component';
 import { ViewOrderComponent } from './components/view-order/view-order.component';
 import { EditOrderComponent } from './components/edit-order/edit-order.component';
+import { NgxPrintModule } from 'ngx-print';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { EditOrderComponent } from './components/edit-order/edit-order.component
   imports: [
     CommonModule,
     WorkOrdersRoutingModule,
-    SharedModule
+    SharedModule,
+    NgxPrintModule
   ]
 })
 export class WorkOrdersModule { }

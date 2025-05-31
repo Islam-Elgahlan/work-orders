@@ -95,6 +95,8 @@
         "editOrder": "Edit Order",
         "engineer": "Engineer",
         "technician": "Technician",
+        "add_new_material":"add new material",
+        "add_new_part":"add new part",
         "update": {
             "material": "Material Details",
             "parts": "Spare Parts",
@@ -175,7 +177,8 @@
         "customer": "customer name",
         "phone": "customer phone",
         "start":"Start Date",
-        "end":"End Date"
+        "end":"End Date",
+        "print":"print"
     }
 }
 

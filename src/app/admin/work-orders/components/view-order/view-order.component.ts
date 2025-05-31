@@ -27,6 +27,7 @@ export class ViewOrderComponent {
     this.getSource()
     this.getReport()
     this.getDepartment()
+    this.orderForm.disable()
      this.getOrderMaterial()
     this.getOrderParts()
     this.getStatus()
@@ -41,6 +42,8 @@ export class ViewOrderComponent {
   source: any
   report: any
   department: any
+  currentLang = localStorage.getItem('lang')
+
 
 
   hide: boolean = true;

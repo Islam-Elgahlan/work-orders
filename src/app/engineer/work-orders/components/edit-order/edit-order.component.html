@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-10">
                 <div class="p-4">
-                    <form [formGroup]="orderForm">
+                    <form [formGroup]="orderForm" (ngSubmit)="onSubmit(orderForm)">
                         <div class="row align-items-center">
                             <div class="col-md-6">
                                 <div class="title mb-2">
@@ -154,14 +154,14 @@
                                         <mat-icon>more_vert</mat-icon>
                                     </button>
                                     <mat-menu #menu="matMenu">
-                                        <button [routerLink]="['view-order', item.id]" mat-menu-item>
+                                        <!-- <button [routerLink]="['view-order', item.id]" mat-menu-item>
                                             <mat-icon>visibility</mat-icon>
                                             <span>{{'users.view' | translate}}</span>
                                         </button>
                                         <button [routerLink]="['edit-order',item.id]" mat-menu-item>
                                             <mat-icon>edit_square</mat-icon>
                                             <span>{{'edit'|translate}}</span>
-                                        </button>
+                                        </button> -->
                                         <button mat-menu-item (click)="deleteMaterialById(item.id)">
                                             <mat-icon>delete</mat-icon>
                                             <span>{{'delete'|translate}}</span>
@@ -197,14 +197,14 @@
                                         <mat-icon>more_vert</mat-icon>
                                     </button>
                                     <mat-menu #menu="matMenu">
-                                        <button [routerLink]="['view-order', item.id]" mat-menu-item>
+                                        <!-- <button [routerLink]="['view-order', item.id]" mat-menu-item>
                                             <mat-icon>visibility</mat-icon>
                                             <span>{{'users.view' | translate}}</span>
                                         </button>
                                         <button [routerLink]="['edit-order',item.id]" mat-menu-item>
                                             <mat-icon>edit_square</mat-icon>
                                             <span>{{'edit'|translate}}</span>
-                                        </button>
+                                        </button> -->
                                         <button mat-menu-item (click)="deletePartsById(item.id)">
                                             <mat-icon>delete</mat-icon>
                                             <span>{{'delete'|translate}}</span>
