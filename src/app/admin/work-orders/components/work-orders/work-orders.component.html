@@ -133,6 +133,7 @@
         <th class="alone">{{'orders.floor' | translate}}</th>
         <th class="alone">{{'orders.room' | translate}}</th>
         <th class="alone">{{'orders.requestername' | translate}}</th>
+        <!-- <th class="alone">{{'orders.status' | translate}}</th> -->
         <th class="alone">{{'orders.date' | translate}}</th>
         <th class="alone">{{'orders.actions' | translate}}</th>
       </thead>
@@ -144,6 +145,7 @@
           <td>{{ item.floor_no }}</td>
           <td>{{ item.room_no }}</td>
           <td>{{item.customer_name}}</td>
+          <!-- <td>{{item?.status.name}}</td> -->
 
           <td>{{ item.start_date | date : "dd-MM-yyyy , hh:mm a" }}</td>
 

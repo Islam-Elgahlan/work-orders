@@ -85,25 +85,21 @@ export class EditOrderComponent {
       type: new FormControl("maintenance", [Validators.required]),
       status: new FormControl(null, [Validators.required]),
       technician_report: new FormControl(null, [Validators.required]),
-    }
-
-  );
+    });
   //  updateOrderForm = new FormGroup({
   //   status: new FormControl(null,[Validators.required]),
   //   technician_report: new FormControl(null,[Validators.required]),
   //   // holding_reason: new FormControl(null,[Validators.required]),
-
-  //   // used_items_descriptions: new FormControl(null,[Validators.required]),
   // })
 
   onSubmit(data: FormGroup) {
     if (this.orderId) {
       // Edit Order
-      let myData = new FormData();
-      let myMap = new Map(Object.entries(data.value));
-      for (const [key, value] of myMap) {
-        myData.append(key, data.value[key]);
-      }
+      // let myData = new FormData();
+      // let myMap = new Map(Object.entries(data.value));
+      // for (const [key, value] of myMap) {
+      //   myData.append(key, data.value[key]);
+      // }
 
       this._WorkOrdersService.editOrder(data.value, this.orderId).subscribe({
         next: (res) => {
@@ -127,16 +123,11 @@ export class EditOrderComponent {
       (res) => {
         this.currentOrder = res.data
 
-        // if (this.currentOrder.status.id == 4) {
-        //   this.isHold = true;
-        //   (this.updateOrderForm as FormGroup).addControl('holding_reason', new FormControl(null, [Validators.required]))
-        //   this.updateOrderForm.patchValue({ holding_reason: this.currentOrder.holding_reason } as any);
-
-        // }
-        
-        // console.log(this.currentOrder.department.id)
-        this.getengineers(this.currentOrder?.department.id)
-        this.gettechnicians(this.currentOrder?.department.id)
+        if (this.currentOrder.status.id == 4) {
+          this.isHold = true;
+          (this.orderForm as FormGroup).addControl('holding_reason', new FormControl(null, [Validators.required]))
+          this.orderForm.patchValue({ holding_reason: this.currentOrder.holding_reason } as any);
+        }
 
         this.orderForm.patchValue({
           start_date: this.currentOrder?.start_date,
@@ -152,7 +143,7 @@ export class EditOrderComponent {
           equipment_id: this.currentOrder?.equipment.id,
           source_id: this.currentOrder?.source.id,
           description: this.currentOrder?.description,
-          status: this.currentOrder?.status.id,
+          status: this.currentOrder?.status.name,
           technician_report: this.currentOrder?.technician_report,
 
         })
@@ -169,7 +160,34 @@ export class EditOrderComponent {
 
   // Update Status
 
-  // onselectStatus(data: FormGroup) {
+  onselectStatus(data: FormGroup) {
+    // console.log(data.value.status)
+    this.isHold = false
+    if (data.value.status == 4) {
+      this.isHold = true;
+      (this.orderForm as FormGroup).addControl('holding_reason', new FormControl(null, [Validators.required]))
+    } else {
+      // this._WorkOrdersService.updateStatus(this.orderId,data.value).subscribe(
+      //   (res)=>{
+      //     this._ToastrService.success('Status Updated Succesfuly');
+      //   }
+      // )
+    }
+  }
+
+  // onupdate(data: FormGroup) {
+  //   this.updateOrderForm.patchValue({
+  //     status: this.currentOrder?.status.id,
+  //     technician_report: this.currentOrder?.technician_report,
+  //     // holding_reason: this.currentOrder?.holding_reason,
+  //   })
+
+  // }
+
+
+  // Update Status
+
+  // onselectStatus(data: FormGroup){
   //   // console.log(data.value.status)
   //   this.isHold = false
   //   if (data.value.status == 4) {
@@ -183,52 +201,24 @@ export class EditOrderComponent {
   //     // )
   //   }
   // }
-  
-  onupdate(data: FormGroup) {
-        this.updateOrderForm.patchValue({
-          status: this.currentOrder?.status.id,
-          technician_report: this.currentOrder?.technician_report,
-          // holding_reason: this.currentOrder?.holding_reason,
-        })
 
-      }
-    )
-  }
+  // onupdate(data: FormGroup){
+  //   // console.log(data.value);
+  //   let myData = new FormData();
+  //   let myMap = new Map(Object.entries(data.value));
+  //   for (const [key, value] of myMap) {
+  //     myData.append(key, data.value[key]);
+  //   }
 
-    // Update Status
-
-  onselectStatus(data:FormGroup){
-    // console.log(data.value.status)
-    this.isHold = false
-    if(data.value.status == 4){
-      this.isHold = true;
-      (this.updateOrderForm as FormGroup).addControl('holding_reason',new FormControl(null, [Validators.required]))
-    }else{
-      // this._WorkOrdersService.updateStatus(this.orderId,data.value).subscribe(
-      //   (res)=>{
-      //     this._ToastrService.success('Status Updated Succesfuly');
-      //   }
-      // )
-    }
-  }
-
-  onupdate(data:FormGroup){
-    // console.log(data.value);
-    let myData = new FormData();
-    let myMap = new Map(Object.entries(data.value));
-    for (const [key, value] of myMap) {
-      myData.append(key, data.value[key]);
-    }
-
-    this._WorkOrdersService.updateOrder(this.orderId, data.value).subscribe(
-      (res) => {
-        this._ToastrService.success('Order Updated Succesfuly');
-      },
-      (err) => {
-        this._ToastrService.error(err.message, 'Error in Update')
-      }
-    )
-  }
+  //   this._WorkOrdersService.updateOrder(this.orderId, data.value).subscribe(
+  //     (res) => {
+  //       this._ToastrService.success('Order Updated Succesfuly');
+  //     },
+  //     (err) => {
+  //       this._ToastrService.error(err.message, 'Error in Update')
+  //     }
+  //   )
+  // }
   getOrderMaterial() {
     this._WorkOrdersService.getMaterialByOrderId(this.orderId).subscribe(
       (res) => {

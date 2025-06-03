@@ -155,7 +155,7 @@
                             <div class="col-md-4">
                                 <mat-form-field class="w-100" [hideRequiredMarker]="hideRequiredMarker">
                                     <mat-label>{{'orders.status' | translate}}</mat-label>
-                                    <mat-select formControlName="status">
+                                    <mat-select [(value)]="statusId" formControlName="status">
                                         <mat-option *ngFor="let item of status" [value]="item.id">
                                             {{item.name}}
                                         </mat-option>
@@ -219,43 +219,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- strat Add material -->
-                    <h1>{{'orders.update.material' | translate}}</h1>
-                    <table class="custom-table">
-                        <thead class="text-capitalize">
-                            <th class="alone">{{'orders.update.name' | translate}}</th>
-                            <th class="alone">{{'orders.update.description' | translate}}</th>
-                            <th class="alone">{{'orders.update.quantity' | translate}}</th>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let item of materialTableData; let isEven = even"
-                                [class]="isEven ? '' : 'bg-secondary-subtle'">
-                                <td>{{ item.name }}</td>
-                                <td>{{ item.description }}</td>
-                                <td>{{ item.quantity }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <!-- Start Spare Parts -->
-                    <div class="py-4">
-                        <h1>{{'orders.update.parts' | translate}}</h1>
-                        <table class="custom-table">
-                            <thead class="text-capitalize">
-                                <th class="alone">{{'orders.update.name' | translate}}</th>
-                                <th class="alone">{{'orders.update.description' | translate}}</th>
-                                <th class="alone">{{'orders.update.quantity' | translate}}</th>
-                                <th class="alone">{{'orders.actions' | translate}}</th>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let item of spareTableData; let isEven = even"
-                                    [class]="isEven ? '' : 'bg-secondary-subtle'">
-                                    <td>{{ item.name }}</td>
-                                    <td>{{ item.description }}</td>
-                                    <td>{{ item.quantity }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
                         </div>
                         <div class="text-center mt-3 d-flex justify-content-between">
                             <button type="button" class="outline-secondary w-25"
