@@ -5,6 +5,9 @@
       <img src="../../../assets/images/logos.png" alt="Logo" class="logo-img me-3" />
     </div>
 
+    <div class="system-name-card">
+       {{ 'navbartitle' | translate }} 🛠️
+      </div>
     <!-- Right side: Language + Profile + Notifications -->
     <div class="d-flex align-items-center gap-3">
       <!-- Language Switcher -->
@@ -34,7 +37,7 @@
           <button mat-icon-button class="close-btn" (click)="toggleBadgeVisibility()">
             <mat-icon>close</mat-icon>
           </button>
-          <span class="header-title">الإشعارات</span>
+          <span class="header-title">{{ 'notifications' | translate }}</span>
         </div>
         <mat-divider></mat-divider>
 
@@ -51,12 +54,12 @@
             </div>
             <div class="status-dot"></div>
           </div>
-          <button mat-button class="view-all-btn" routerLink="/dashboard/admin/notification">عرض الكل</button>
+          <button mat-button class="view-all-btn" routerLink="/dashboard/admin/notification"> {{ 'viewall' | translate }}</button>
         </ng-container>
 
         <!-- No Notifications Message -->
         <ng-template #noNotifications>
-          <div class="no-notifications">لا توجد إشعارات جديدة</div>
+          <div class="no-notifications">{{ 'no-notifications' | translate }}</div>
         </ng-template>
       </div>
 

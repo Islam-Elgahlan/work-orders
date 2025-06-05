@@ -3,6 +3,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { HelperService } from 'src/app/services/helper.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navbar',
@@ -29,7 +30,9 @@ export class NavbarComponent {
   constructor(
     private _Router: Router,
     public dialog: MatDialog,
-    public _HelperService: HelperService
+    public _HelperService: HelperService,
+    public translate: TranslateService,
+    
   ) {}
 
   toggleLang() {

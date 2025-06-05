@@ -54,6 +54,10 @@
         "password_pattern": "A password must contains at least eight characters, including at least one number and includes both lower and uppercase letters and special characters",
         "match": "Password not Matched "
     },
+    "notifications": "Notifications ",
+    "viewall": "View All",
+    "navbartitle": "Work Orders Management System",
+    "no-notifications": "There are no notifications at the moment",
     "welcome": "Welcome To Work Orders System",
     "cancel": "Cancel",
     "logOut": "Logout",
@@ -155,6 +159,6 @@
         "name_en": "English Name",
         "name_ar": "Arabic Name",
         "actions": "Actions"
-        
+
     }
 }
