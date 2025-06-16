@@ -106,7 +106,8 @@
         },
         "status": "Status",
         "tech_report": "Technical Report",
-        "holding_reason": "Holding Reason"
+        "holding_reason": "Holding Reason",
+        "orderReport" : "Work Order Report"
     },
     "department": {
         "department": "Departments",

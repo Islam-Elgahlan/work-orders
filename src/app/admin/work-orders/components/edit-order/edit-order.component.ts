@@ -24,6 +24,10 @@ export class EditOrderComponent {
     this.getOrderMaterial()
     this.getOrderParts()
     this.getStatus()
+    // this.onselectDepartment()
+    // this.getengineers(this.currentOrder.department.id)
+    // this.gettechnicians(this.currentOrder.department.id)
+    
   }
   constructor(
     private _activateRoute: ActivatedRoute,
@@ -122,6 +126,8 @@ export class EditOrderComponent {
     this._WorkOrdersService.getOrder(id).subscribe(
       (res) => {
         this.currentOrder = res.data
+        console.log(this.currentOrder);
+        
 
         if (this.currentOrder.status.id == 4) {
           this.isHold = true;
@@ -132,7 +138,7 @@ export class EditOrderComponent {
         this.orderForm.patchValue({
           start_date: this.currentOrder?.start_date,
           department_id: this.currentOrder?.department.id,
-          engineer_id: this.currentOrder?.engineer?.id,
+          engineer_id: this.currentOrder?.engineer.id,
           technician_id: this.currentOrder?.technician?.id,
           work_type_id: this.currentOrder?.work_type.id,
           building_id: this.currentOrder?.building.id,
@@ -279,13 +285,13 @@ export class EditOrderComponent {
     )
   }
   onselectDepartment() {
-    this.getengineers(this.departmentId)
-    this.gettechnicians(this.departmentId)
+    this.getengineers(this.currentOrder?.department.id)
+    this.gettechnicians(this.currentOrder?.department.id)
   }
   getengineers(id: number) {
     this._HelperService.getEngineers(id).subscribe(
       (res) => {
-        console.log(res.data)
+        // console.log(res.data)
         // console.log(this.departmentId)
 
         this.engineers = res.data;
@@ -295,7 +301,7 @@ export class EditOrderComponent {
   gettechnicians(id: number) {
     this._HelperService.getTechnicians(id).subscribe(
       (res) => {
-        console.log(res.data)
+        // console.log(res.data)
         this.technicians = res.data;
       }
     )

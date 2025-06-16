@@ -106,7 +106,8 @@
     },
     "status": "الحالة",
     "tech_report": "التقرير الفني",
-    "holding_reason": "سبب التعليق "
+    "holding_reason": "سبب التعليق ",
+    "orderReport" : "تقرير أمر عمل"
   },
   "department": {
     "department": "الأقسام",

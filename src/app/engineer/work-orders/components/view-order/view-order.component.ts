@@ -16,6 +16,7 @@ import { AddSpareComponent } from '../edit-order/components/add-spare/add-spare.
 })
 export class ViewOrderComponent {
   ngOnInit() {
+    
     this.getOrderById(this.orderId)
     this.getOrderMaterial()
     this.getOrderParts()
@@ -40,9 +41,6 @@ export class ViewOrderComponent {
 
   ) {
     this.orderId = this._activateRoute.snapshot.paramMap.get('id')
-
- 
-
   }
 
 
