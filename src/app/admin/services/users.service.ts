@@ -14,6 +14,9 @@ export class UsersService {
   getAllUsers(params: any): Observable<any> {
     return this._HttpClient.get('auth/get_all_users', { params: params });
   }
+  deleteUser(id: number): Observable<any> {
+    return this._HttpClient.delete(`auth/delete/${id}`);
+  }
   getUser(id: number): Observable<any> {
     return this._HttpClient.get(`profile/get_user_by_id/${id}`);
   }

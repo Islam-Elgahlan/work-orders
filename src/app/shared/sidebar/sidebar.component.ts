@@ -54,7 +54,16 @@ export class SidebarComponent implements OnInit {
   }
 
   isAdmin(): boolean {
-    return this._AuthService.title === 'Admin';
+    return (
+      this._AuthService.title === 'Admin' ||
+      this._AuthService.title === 'Supervisor' ||
+      this._AuthService.title === 'Project Manager' ||
+      this._AuthService.title === 'Operations Manager' ||
+      this._AuthService.title === 'Maintenance Manager' 
+
+      
+    )
+    
   }
 
   isEngineer(): boolean {

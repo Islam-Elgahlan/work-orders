@@ -6,6 +6,7 @@ import { debounceTime, Subject } from 'rxjs';
 import { UsersService } from 'src/app/admin/services/users.service';
 import { BlockUsersComponent } from './block-users/block-users.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { DeleteItemComponent } from 'src/app/shared/delete-item/delete-item.component';
 
 @Component({
   selector: 'app-users',
@@ -102,4 +103,31 @@ export class UsersComponent implements OnInit {
       },
     });
   }
+   // delete User
+    deleteDialog(data: any): void {
+      console.log(data);
+      
+      const dialogRef = this.dialog.open(DeleteItemComponent, {
+        data: data,
+        width: '30%'
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.deleteItem(result.id)
+        }
+      });
+    }
+    deleteItem(id: number) {
+      this._UsersService.deleteUser(id).subscribe({
+        next: (res) => {
+          this._ToastrService.success('User Deleted')
+        },
+        error: (err) => {
+          this._ToastrService.error('Delete User Failed')
+        },
+        complete: () => {
+        this.onGetAllUsers();
+        }
+      })
+    }
 }
